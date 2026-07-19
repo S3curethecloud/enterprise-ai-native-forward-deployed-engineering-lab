@@ -308,13 +308,16 @@ The lab is complete when a learner can:
 | Item | Status |
 |---|---|
 | Repository initialized | Complete |
-| Phase 0A: Tutorial landing page | Complete |
-| Phase 0B: JD requirement map | Complete |
-| Phase 0C: Learning roadmap and gates | Complete |
-| Phase 0D: Client scenario and system boundary | Complete |
-| Phase 0E: Claim, evidence, and authority rules | Complete |
-| Phase 0 documentation foundation | Complete |
-| Phase 1: Client discovery | Next |
+| Phase 0: JD-aligned tutorial foundation | Complete |
+| Phase 1A: Current-state workflow | Complete |
+| Phase 1B: Stakeholder map | Complete |
+| Phase 1C: Data-source inventory | Complete |
+| Phase 1D: Decision decomposition | Complete |
+| Phase 1E: Risk and authority matrix | Complete |
+| Phase 1F: Assumption register | Complete |
+| Phase 1G: Success measures | Complete |
+| Phase 1 discovery package | Complete |
+| Phase 2: Thin vertical slice | Next |
 | Runtime implementation | Not started |
 | Model-provider integration | Not started |
 | Tool execution | Not authorized |
@@ -338,10 +341,10 @@ It has:
 ## Next Authorized Phase
 
 ```text
-Phase 1 — Client Discovery Under Ambiguity
-```
+Phase 2 — Thin Vertical Slice
 
-Phase 1 authorizes discovery artifacts only. It does not authorize application runtime, model integration, tool execution, infrastructure mutation, or production deployment.
+Phase 2 authorizes requirements, scope, contracts, acceptance criteria, and threat-boundary design for the recommendation-only vertical slice. It does not authorize runtime implementation, external model calls, tool execution, infrastructure mutation, or production deployment.
+```
 
 ## Independent Project Notice
 

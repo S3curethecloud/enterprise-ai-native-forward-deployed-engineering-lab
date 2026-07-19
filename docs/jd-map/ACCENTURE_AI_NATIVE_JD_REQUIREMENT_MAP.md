@@ -52,9 +52,9 @@ The role combines five responsibilities:
 
 | ID | JD capability | Lab phase | Required implementation | Required validation | Required evidence | Initial status |
 |---|---|---:|---|---|---|---|
-| JD-01 | Operate under ambiguous client requirements | 1 | Structured discovery workflow | Workshop-output review | Discovery package | Planned |
+| JD-01 | Operate under ambiguous client requirements | 1 | Structured discovery workflow | Workshop-output review | Discovery package | Documented |
 | JD-02 | Embed with clients as technologist and advisor | 1, 12 | Stakeholder and code-with exercises | Facilitation checklist | Workshop and code-with records | Planned |
-| JD-03 | Define high-value agent use cases | 1, 2 | Use-case prioritization matrix | Scope review | Prioritized use case | Planned |
+| JD-03 | Define high-value agent use cases | 1, 2 | Use-case prioritization matrix | Scope review | Prioritized use case | Documented |
 | JD-04 | Rapidly prototype an agent workflow | 2, 3 | Thin vertical-slice API | Acceptance tests | Prototype evidence | Planned |
 | JD-05 | Design enterprise-ready agents | 4 | Explicit runtime state and execution graph | State-transition tests | Runtime decision trace | Planned |
 | JD-06 | Implement retrieval and context engineering | 5 | Permission-aware RAG pipeline | Retrieval and ACL tests | Retrieval evidence | Planned |
@@ -74,7 +74,7 @@ The role combines five responsibilities:
 | JD-20 | Use infrastructure as code | 13 | Terraform and Helm | Validate and plan checks | IaC evidence | Planned |
 | JD-21 | Monitor and debug production behavior | 11, 14 | Diagnostic dashboard and runbook | Failure-injection exercise | Incident evidence package | Planned |
 | JD-22 | Tailor workflows to enterprise domains | 17 | Healthcare, finance, and retail packs | Domain-boundary tests | Domain design records | Planned |
-| JD-23 | Lead technical workshops | 1 | Guided discovery workshop | Workshop rubric | Workshop output | Planned |
+| JD-23 | Lead technical workshops | 1 | Guided discovery workshop | Workshop rubric | Workshop output | Documented |
 | JD-24 | Conduct POCs | 2, 3 | Thin vertical-slice prototype | Acceptance criteria | POC decision report | Planned |
 | JD-25 | Conduct code-with sessions | 12 | Guided typed-tool extension | Pairing exercise validation | Code-with artifact | Planned |
 | JD-26 | Measure agent accuracy | 10 | Task and component evaluators | Golden dataset | Accuracy evidence | Planned |
@@ -83,7 +83,7 @@ The role combines five responsibilities:
 | JD-29 | Measure cost effectiveness | 6, 10, 11 | Token and task-cost accounting | Provider/workflow comparison | Cost-per-successful-task report | Planned |
 | JD-30 | Create reusable patterns | 16 | Pattern packages | Pattern completeness review | Reusable pattern catalog | Planned |
 | JD-31 | Produce technical documentation | All | Phase tutorials and decision records | Documentation checks | Versioned documentation | Planned |
-| JD-32 | Influence client roadmaps | 1, 16 | Phased delivery and adoption roadmap | Roadmap review | Client-style roadmap | Planned |
+| JD-32 | Influence client roadmaps | 1, 16 | Phased delivery and adoption roadmap | Roadmap review | Client-style roadmap | Documented |
 | JD-33 | Design compound AI systems | 4–11 | Runtime, RAG, model, tool, policy, and evidence layers | End-to-end system tests | Compound-system trace | Planned |
 | JD-34 | Use orchestration or registry patterns | 4, 7 | Runtime graph and tool registry | Registration and routing tests | Registry evidence | Planned |
 | JD-35 | Optimize modularity and efficiency | 3, 6, 10 | Replaceable adapters and bounded workflows | Performance comparison | Architecture decision record | Planned |
@@ -386,12 +386,17 @@ A requirement may not be marked Complete based only on:
 
 | Deliverable | Status |
 |---|---|
-| Phase 0A tutorial landing page | Complete |
-| Phase 0B JD requirement map | Complete |
-| Phase 0C learning roadmap and gates | Complete |
-| Phase 0D client scenario and boundary | Complete |
-| Phase 0E claim, evidence, and authority rules | Complete |
+| Phase 0 JD-aligned tutorial foundation | Complete |
+| Phase 1A current-state workflow | Complete |
+| Phase 1B stakeholder map | Complete |
+| Phase 1C data-source inventory | Complete |
+| Phase 1D decision decomposition | Complete |
+| Phase 1E risk and authority matrix | Complete |
+| Phase 1F assumption register | Complete |
+| Phase 1G success measures | Complete |
+| Phase 1 discovery package | Complete |
 | JD requirements mapped | 36 of 36 |
+| JD requirements documented | 4 of 36 |
 | JD requirements implemented | 0 of 36 |
 | JD requirements complete | 0 of 36 |
 | Runtime authority | None |
@@ -402,7 +407,7 @@ A requirement may not be marked Complete based only on:
 ## Next Phase
 
 ```text
-Phase 1 — Client Discovery Under Ambiguity
+Phase 2 — Thin Vertical Slice
 
-Phase 1 will create discovery artifacts for the simulated client scenario. It will not implement the application runtime.
+Phase 2 will define the recommendation-only use case, requirements, contracts, acceptance criteria, exclusions, and threat boundary. It will not implement the application runtime.
 ```

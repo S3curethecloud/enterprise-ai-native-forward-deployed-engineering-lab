@@ -597,19 +597,22 @@ Every implementation phase must end with:
 
 | Phase | Status |
 |---:|---|
-| 0A — Tutorial landing page | Complete |
-| 0B — JD requirement map | Complete |
-| 0C — Learning roadmap and gates | Complete |
-| 0D — Client scenario and boundary | Complete |
-| 0E — Claim, evidence, and authority rules | Complete |
-| Phase 0 documentation foundation | Complete |
-| Phase 1 — Client discovery | Next |
-| Phases 2–17 | Not started |
+| Phase 0 — JD-aligned tutorial foundation | Complete |
+| Phase 1A — Current-state workflow | Complete |
+| Phase 1B — Stakeholder map | Complete |
+| Phase 1C — Data-source inventory | Complete |
+| Phase 1D — Decision decomposition | Complete |
+| Phase 1E — Risk and authority matrix | Complete |
+| Phase 1F — Assumption register | Complete |
+| Phase 1G — Success measures | Complete |
+| Phase 1 discovery package | Complete |
+| Phase 2 — Thin vertical slice | Next |
+| Phases 3–17 | Not started |
 
 ## Next Authorized Work
 
 ```text
-Phase 1 — Client Discovery Under Ambiguity
+Phase 2 — Thin Vertical Slice
 
-Phase 1 authorizes discovery artifacts only. It does not authorize application runtime, model integration, tool execution, infrastructure mutation, or production deployment.
+Phase 2 authorizes requirements, scope, contracts, acceptance criteria, and threat-boundary design only. Application runtime, external providers, tool execution, infrastructure mutation, and production deployment remain unauthorized.
 ```
