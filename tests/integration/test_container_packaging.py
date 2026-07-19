@@ -10,10 +10,10 @@ DOCKERFILE_PATH = REPOSITORY_ROOT / "Dockerfile"
 COMPOSE_PATH = REPOSITORY_ROOT / "compose.yaml"
 
 EXPECTED_SERVICES = {"gateway", "runtime", "evidence"}
-EXPECTED_PORTS = {
-    "gateway": "127.0.0.1:8000:8000",
-    "runtime": "127.0.0.1:8001:8001",
-    "evidence": "127.0.0.1:8002:8002",
+EXPECTED_EXPOSED_PORTS = {
+    "gateway": "8000",
+    "runtime": "8001",
+    "evidence": "8002",
 }
 PROHIBITED_CAPABILITIES = {
     "EXTERNAL_MODEL_ENABLED",
@@ -63,11 +63,14 @@ def test_compose_defines_only_bounded_services() -> None:
     assert set(services) == EXPECTED_SERVICES
 
 
-def test_compose_ports_are_bound_to_loopback() -> None:
+def test_compose_ports_are_internal_only() -> None:
     services = load_compose()["services"]
 
-    for service_name, expected_port in EXPECTED_PORTS.items():
-        assert services[service_name]["ports"] == [expected_port]
+    for service_name, expected_port in EXPECTED_EXPOSED_PORTS.items():
+        service = services[service_name]
+
+        assert service["expose"] == [expected_port]
+        assert "ports" not in service
 
 
 def test_compose_services_use_restricted_runtime_controls() -> None:
@@ -104,8 +107,7 @@ def test_compose_uses_an_internal_network() -> None:
 def test_compose_health_checks_are_service_specific() -> None:
     services = load_compose()["services"]
 
-    for service_name, port_mapping in EXPECTED_PORTS.items():
-        container_port = port_mapping.rsplit(":", maxsplit=1)[1]
+    for service_name, container_port in EXPECTED_EXPOSED_PORTS.items():
         health_command = " ".join(services[service_name]["healthcheck"]["test"])
 
         assert f"127.0.0.1:{container_port}/health" in health_command

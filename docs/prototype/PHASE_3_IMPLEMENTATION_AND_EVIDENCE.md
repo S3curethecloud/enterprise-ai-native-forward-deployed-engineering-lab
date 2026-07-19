@@ -1140,7 +1140,8 @@ The Compose definition:
 
 - Defines gateway, runtime, and evidence.
 - Uses ports 8000, 8001, and 8002.
-- Publishes ports only on `127.0.0.1`.
+- Exposes service ports only inside the isolated Compose network.
+- Publishes no container ports to the host.
 - Uses a read-only root filesystem.
 - Drops all Linux capabilities.
 - Enables `no-new-privileges`.
@@ -1177,13 +1178,35 @@ docker compose up \
 docker compose ps
 ```
 
-### 27.7 Test endpoints
+### 27.7 Test health inside the isolated containers
+
+The Compose topology intentionally publishes no host ports. Test each service from inside its own container:
 
 ```bash
-curl --fail http://127.0.0.1:8000/health
-curl --fail http://127.0.0.1:8001/health
-curl --fail http://127.0.0.1:8002/health
+docker compose exec --no-TTY gateway \
+  python -c "import urllib.request; response = urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=2); raise SystemExit(0 if response.status == 200 else 1)"
+
+docker compose exec --no-TTY runtime \
+  python -c "import urllib.request; response = urllib.request.urlopen('http://127.0.0.1:8001/health', timeout=2); raise SystemExit(0 if response.status == 200 else 1)"
+
+docker compose exec --no-TTY evidence \
+  python -c "import urllib.request; response = urllib.request.urlopen('http://127.0.0.1:8002/health', timeout=2); raise SystemExit(0 if response.status == 200 else 1)"
 ```
+
+Test readiness inside the same isolated container boundary:
+
+```bash
+docker compose exec --no-TTY gateway \
+  python -c "import urllib.request; response = urllib.request.urlopen('http://127.0.0.1:8000/ready', timeout=2); raise SystemExit(0 if response.status == 200 else 1)"
+
+docker compose exec --no-TTY runtime \
+  python -c "import urllib.request; response = urllib.request.urlopen('http://127.0.0.1:8001/ready', timeout=2); raise SystemExit(0 if response.status == 200 else 1)"
+
+docker compose exec --no-TTY evidence \
+  python -c "import urllib.request; response = urllib.request.urlopen('http://127.0.0.1:8002/ready', timeout=2); raise SystemExit(0 if response.status == 200 else 1)"
+```
+
+These checks prove service behavior inside the container boundary without publishing host ports or weakening network isolation.
 
 ### 27.8 Tear down
 
@@ -1223,11 +1246,14 @@ The container job:
 3. Builds the container image.
 4. Starts all three services.
 5. Waits for service health.
-6. Calls health endpoints.
-7. Calls readiness endpoints.
-8. Records service status.
-9. Records logs.
-10. Tears down the environment.
+6. Verifies that no host ports are published.
+7. Verifies that the Docker network is internal.
+8. Inspects non-root, read-only, capability-drop, and `no-new-privileges` controls.
+9. Calls health endpoints from inside each container.
+10. Calls readiness endpoints from inside each container.
+11. Records service status.
+12. Records logs.
+13. Tears down the environment.
 
 A workflow file is only a configured control. It becomes execution evidence only after GitHub reports a successful run.
 

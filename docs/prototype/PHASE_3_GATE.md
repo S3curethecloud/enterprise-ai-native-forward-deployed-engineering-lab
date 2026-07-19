@@ -261,8 +261,8 @@ PASS — dependency resolution is bounded and reproducible
 | Read-only root filesystem | Passed | Not inspected at runtime |
 | Linux capabilities dropped | Passed | Not inspected at runtime |
 | `no-new-privileges` enabled | Passed | Not inspected at runtime |
-| Loopback-only published ports | Passed | Not bound locally |
-| Internal Compose network | Passed | Not created locally |
+| No host-published container ports | Passed | Confirmed by first CI run |
+| Internal Compose network | Passed | Confirmed by first CI run |
 | Service-specific health checks | Passed | Not executed locally |
 | Three bounded services | Passed | Not started locally |
 
