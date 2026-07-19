@@ -1,0 +1,110 @@
+name: incident-diagnostic-lab
+
+x-service-defaults: &service-defaults
+  image: incident-diagnostic-api:phase3-local
+  build:
+    context: .
+    dockerfile: Dockerfile
+  restart: "no"
+  init: true
+  read_only: true
+  user: "10001:10001"
+  cap_drop:
+    - ALL
+  security_opt:
+    - no-new-privileges:true
+  tmpfs:
+    - /tmp:size=16m,mode=1777
+  networks:
+    - diagnostic-local
+  environment:
+    EXTERNAL_MODEL_ENABLED: "false"
+    ENTERPRISE_RETRIEVAL_ENABLED: "false"
+    TOOL_EXECUTION_ENABLED: "false"
+    INFRASTRUCTURE_MUTATION_ENABLED: "false"
+    CLOUD_DEPLOYMENT_ENABLED: "false"
+    PRODUCTION_DEPLOYMENT_ENABLED: "false"
+
+services:
+  gateway:
+    <<: *service-defaults
+    command:
+      - uvicorn
+      - incident_diagnostic_api.services.gateway:app
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+    ports:
+      - "127.0.0.1:8000:8000"
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - >-
+          import urllib.request;
+          response = urllib.request.urlopen(
+          'http://127.0.0.1:8000/health', timeout=2);
+          raise SystemExit(0 if response.status == 200 else 1)
+      interval: 10s
+      timeout: 3s
+      start_period: 5s
+      retries: 3
+
+  runtime:
+    <<: *service-defaults
+    command:
+      - uvicorn
+      - incident_diagnostic_api.services.runtime:app
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8001"
+    ports:
+      - "127.0.0.1:8001:8001"
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - >-
+          import urllib.request;
+          response = urllib.request.urlopen(
+          'http://127.0.0.1:8001/health', timeout=2);
+          raise SystemExit(0 if response.status == 200 else 1)
+      interval: 10s
+      timeout: 3s
+      start_period: 5s
+      retries: 3
+
+  evidence:
+    <<: *service-defaults
+    command:
+      - uvicorn
+      - incident_diagnostic_api.services.evidence:app
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8002"
+    ports:
+      - "127.0.0.1:8002:8002"
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - >-
+          import urllib.request;
+          response = urllib.request.urlopen(
+          'http://127.0.0.1:8002/health', timeout=2);
+          raise SystemExit(0 if response.status == 200 else 1)
+      interval: 10s
+      timeout: 3s
+      start_period: 5s
+      retries: 3
+
+networks:
+  diagnostic-local:
+    driver: bridge
+    internal: true

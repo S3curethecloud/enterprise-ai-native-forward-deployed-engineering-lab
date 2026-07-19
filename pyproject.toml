@@ -1,0 +1,86 @@
+[build-system]
+requires = ["setuptools>=75,<81"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "enterprise-ai-native-incident-diagnostic-api"
+version = "0.1.0"
+description = "Local, typed prototype foundation for a recommendation-only incident diagnostic workflow."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = { text = "Educational use" }
+authors = [
+  { name = "S3curethecloud" }
+]
+dependencies = [
+  "fastapi>=0.115,<1",
+  "pydantic>=2.12,<3",
+  "pydantic-settings>=2.7,<3",
+  "uvicorn[standard]>=0.34,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "httpx2>=2.7,<3",
+  "mypy>=1.14,<2",
+  "pip-tools>=7.6,<8",
+  "pytest>=9,<10",
+  "pytest-cov>=6,<8",
+  "ruff>=0.9,<1",
+  "types-PyYAML>=6.0.12,<7",
+]
+
+[project.scripts]
+incident-diagnostic-api = "incident_diagnostic_api.main:run"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = [
+  "--strict-config",
+  "--strict-markers",
+  "--showlocals",
+  "-ra"
+]
+testpaths = ["tests"]
+filterwarnings = ["error"]
+pythonpath = ["src"]
+
+[tool.coverage.run]
+branch = true
+source = ["incident_diagnostic_api"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+fail_under = 90
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+  "E",
+  "F",
+  "I",
+  "B",
+  "UP",
+  "SIM",
+  "RUF"
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["src", "tests"]
+mypy_path = "src"
+warn_unused_configs = true

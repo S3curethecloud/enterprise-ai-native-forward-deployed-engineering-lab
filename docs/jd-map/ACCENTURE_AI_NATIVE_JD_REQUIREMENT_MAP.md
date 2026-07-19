@@ -82,7 +82,7 @@ The role combines five responsibilities:
 | JD-28 | Measure safety | 10 | Adversarial and authorization suite | Safety test execution | Safety report | Planned |
 | JD-29 | Measure cost effectiveness | 6, 10, 11 | Token and task-cost accounting | Provider/workflow comparison | Cost-per-successful-task report | Planned |
 | JD-30 | Create reusable patterns | 16 | Pattern packages | Pattern completeness review | Reusable pattern catalog | Planned |
-| JD-31 | Produce technical documentation | All | Phase tutorials and decision records | Documentation checks | Versioned documentation | Planned |
+| JD-31 | Produce technical documentation | All | Phase tutorials and decision records | Documentation checks | Versioned documentation | Documented |
 | JD-32 | Influence client roadmaps | 1, 16 | Phased delivery and adoption roadmap | Roadmap review | Client-style roadmap | Documented |
 | JD-33 | Design compound AI systems | 4–11 | Runtime, RAG, model, tool, policy, and evidence layers | End-to-end system tests | Compound-system trace | Planned |
 | JD-34 | Use orchestration or registry patterns | 4, 7 | Runtime graph and tool registry | Registration and routing tests | Registry evidence | Planned |
@@ -387,28 +387,36 @@ A requirement may not be marked Complete based only on:
 | Deliverable | Status |
 |---|---|
 | Phase 0 JD-aligned tutorial foundation | Complete |
-| Phase 1A current-state workflow | Complete |
-| Phase 1B stakeholder map | Complete |
-| Phase 1C data-source inventory | Complete |
-| Phase 1D decision decomposition | Complete |
-| Phase 1E risk and authority matrix | Complete |
-| Phase 1F assumption register | Complete |
-| Phase 1G success measures | Complete |
-| Phase 1 discovery package | Complete |
+| Phase 1 client discovery package | Complete |
 | Phase 2 thin vertical-slice package | Complete |
+| Phase 3 Python and FastAPI foundation | Locally complete |
+| Phase 3 executable contracts | 7 of 7 implemented and tested |
+| Phase 3 local quality gates | Passed |
+| Phase 3 dependency integrity | Passed |
+| Phase 3 container definitions | Static validation passed |
+| Phase 3 local container execution | Blocked |
+| Phase 3 CI definition | Implemented |
+| Phase 3 CI execution | Pending |
+| Phase 3 overall | Execution evidence pending |
 | JD requirements mapped | 36 of 36 |
-| JD requirements documented | 6 of 36 |
+| JD requirements documented | 7 of 36 |
 | JD requirements implemented | 0 of 36 |
 | JD requirements complete | 0 of 36 |
-| Runtime authority | None |
+| Local validation runtime authority | Contract validation only |
+| Agent runtime authority | None |
 | External provider access | None |
+| Enterprise retrieval authority | None |
 | Tool execution authority | None |
 | Production infrastructure mutation | None |
+
+JD requirements implemented remains zero because no entire JD requirement has yet satisfied its final evidence gate. Individual Phase 3 components are implemented, but that is different from completing a whole JD capability.
 
 ## Next Phase
 
 ```text
-Phase 3 — Cloud-Native Prototype Foundation
+Phase 3 Evidence Closure
 
-Phase 3 will create the local service foundation and executable contracts derived from Phase 2. It will not authorize external model calls, enterprise retrieval, tool execution, infrastructure mutation, cloud deployment, or production deployment.
+The next authorized work is to commit and push Phase 3, execute its GitHub Actions quality and container jobs, and synchronize the final evidence-backed gate decision.
+
+Phase 4 agent runtime and orchestration work remains unauthorized. External model calls, enterprise retrieval, tool execution, infrastructure mutation, cloud deployment, and production deployment remain unauthorized.
 ```

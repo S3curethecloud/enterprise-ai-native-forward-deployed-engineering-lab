@@ -309,42 +309,64 @@ The lab is complete when a learner can:
 |---|---|
 | Repository initialized | Complete |
 | Phase 0: JD-aligned tutorial foundation | Complete |
-| Phase 1A: Current-state workflow | Complete |
-| Phase 1B: Stakeholder map | Complete |
-| Phase 1C: Data-source inventory | Complete |
-| Phase 1D: Decision decomposition | Complete |
-| Phase 1E: Risk and authority matrix | Complete |
-| Phase 1F: Assumption register | Complete |
-| Phase 1G: Success measures | Complete |
-| Phase 1 discovery package | Complete |
+| Phase 1: Client discovery package | Complete |
 | Phase 2: Thin vertical slice | Complete |
-| Phase 3: Cloud-native prototype foundation | Next |
-| Runtime implementation | Not started |
+| Phase 3: Python and FastAPI foundation | Locally complete |
+| Executable contracts | 7 of 7 implemented and tested |
+| Local test suite | 292 passing |
+| Local quality gates | Passed |
+| Dependency locks | Implemented and hash-validated |
+| Dockerfile and Compose definitions | Implemented and statically tested |
+| Local container execution | Blocked by Docker–WSL integration |
+| Phase 3 CI definition | Implemented and statically validated |
+| Phase 3 CI execution | Pending |
+| Phase 3 overall | Execution evidence pending |
+| Phase 4: Agent runtime and orchestration | Not authorized |
 | Model-provider integration | Not started |
+| Enterprise retrieval | Not started |
 | Tool execution | Not authorized |
-| Production deployment | Not started |
+| Production deployment | Not authorized |
 
 ## Current Safety Posture
 
-This repository currently contains documentation and tutorial architecture only.
+This repository contains an executable local Python and FastAPI prototype foundation.
 
-It has:
+It currently provides:
 
-- No application runtime
-- No provider credentials
+- Strict Pydantic contracts
+- Bounded contract-validation endpoints
+- Controlled validation errors
+- Correlation identifiers
+- Health and readiness endpoints
+- Separate gateway, runtime, and evidence service identities
+- Unit, contract, and integration tests
+- Hash-locked dependencies
+- Statically tested container definitions
+- A CI workflow definition
+
+It currently has:
+
 - No external model calls
+- No enterprise retrieval
+- No provider credentials
 - No production data
+- No agent orchestration
 - No tool execution
 - No infrastructure mutation
 - No autonomous remediation
+- No cloud deployment
 - No production authority
+
+The runtime and evidence services are currently bounded service identities with health and readiness behavior. They do not yet implement agent execution or retrieval.
 
 ## Next Authorized Phase
 
 ```text
-Phase 3 — Cloud-Native Prototype Foundation
+Phase 3 Evidence Closure
 
-Phase 3 authorizes a local service foundation, executable schemas, request and response validation, health endpoints, unit and contract tests, local container packaging, and CI validation. It does not authorize external model calls, enterprise retrieval, tool execution, infrastructure mutation, cloud deployment, or production deployment.
+The next authorized work is to commit and push the Phase 3 artifacts, execute the GitHub Actions quality and container jobs, inspect their evidence, and synchronize the final Phase 3 gate decision.
+
+Phase 4 — Agent Runtime and Orchestration is not yet authorized.
 ```
 
 ## Independent Project Notice

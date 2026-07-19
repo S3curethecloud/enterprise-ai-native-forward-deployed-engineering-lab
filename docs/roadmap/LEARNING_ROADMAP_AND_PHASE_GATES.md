@@ -156,7 +156,7 @@ docs/discovery/
 
 The problem can be explained without mentioning a model, framework, or vector database.
 
-## Phase 3 — Cloud-Native Prototype Foundation
+## Phase 2 — Thin Vertical Slice
 
 ### Objective
 
@@ -189,28 +189,51 @@ The complete slice has written acceptance criteria and requires no production mu
 
 ### Objective
 
-Replace notebook-style experimentation with typed, testable service boundaries.
+Replace notebook-style experimentation with typed, testable, reproducible local service boundaries derived from the approved thin vertical slice.
 
 ### Learn and build
 
-- Python and FastAPI
-- Pydantic contracts
-- REST/OpenAPI
-- Gateway, runtime, and evidence services
-- Configuration and errors
-- Correlation IDs
-- PostgreSQL and Redis
-- Docker Compose
+- Python 3.12 project structure
+- FastAPI service boundaries
+- Strict Pydantic contracts
+- REST and OpenAPI
+- Gateway, runtime, and evidence service identities
+- Deterministic validation and controlled errors
+- Correlation identifiers
+- Fail-closed configuration
+- Runtime and development dependency locks
+- Dockerfile and Docker Compose
 - Unit, contract, and integration tests
+- Coverage gates
+- CI quality and container workflows
+- Implementation tutorial and evidence record
+- Persistence decision record
+
+PostgreSQL and Redis are deferred until a later phase defines a typed persistence or cache consumer, ownership, failure behavior, health semantics, and tests.
 
 ### Gate
 
-- Services start locally.
-- Health and readiness pass.
-- Valid requests succeed.
+- All seven interface contracts are executable and tested.
+- Gateway, runtime, and evidence Python services start locally.
+- Health and readiness pass locally.
+- Valid contract requests succeed.
 - Invalid requests fail deterministically.
-- Correlation IDs are returned.
+- Correlation identifiers are returned.
 - Tests require no external model credentials.
+- Prohibited capabilities remain disabled.
+- Runtime and development locks pass hash-mode validation.
+- Container definitions pass static policy tests.
+- CI quality and container jobs are defined.
+- Container build, startup, health, and readiness pass in CI.
+- Phase 3 claims do not exceed recorded evidence.
+
+### Current gate posture
+
+```text
+Locally complete — container and CI execution evidence pending
+
+The local Docker engine is unavailable because Docker Desktop WSL integration is not enabled. Static container evidence exists, but runtime container success is not yet claimed.
+```
 
 ## Phase 4 — Agent Runtime and Orchestration
 
@@ -598,22 +621,26 @@ Every implementation phase must end with:
 | Phase | Status |
 |---:|---|
 | Phase 0 — JD-aligned tutorial foundation | Complete |
-| Phase 1A — Current-state workflow | Complete |
-| Phase 1B — Stakeholder map | Complete |
-| Phase 1C — Data-source inventory | Complete |
-| Phase 1D — Decision decomposition | Complete |
-| Phase 1E — Risk and authority matrix | Complete |
-| Phase 1F — Assumption register | Complete |
-| Phase 1G — Success measures | Complete |
-| Phase 1 discovery package | Complete |
+| Phase 1 — Client discovery package | Complete |
 | Phase 2 — Thin vertical slice | Complete |
-| Phase 3 — Cloud-native prototype foundation | Next |
-| Phases 4–17 | Not started |
+| Phase 3 — Python and FastAPI foundation | Locally complete |
+| Phase 3 — Dependency integrity | Complete |
+| Phase 3 — Container definitions | Static validation passed |
+| Phase 3 — Local container execution | Blocked by Docker–WSL integration |
+| Phase 3 — CI definition | Complete |
+| Phase 3 — CI execution | Pending |
+| Phase 3 overall | Execution evidence pending |
+| Phase 4 — Agent runtime and orchestration | Not authorized |
+| Phases 5–17 | Not started |
 
 ## Next Authorized Work
 
 ```text
-Phase 3 — Cloud-Native Prototype Foundation
+Phase 3 Evidence Closure
 
-Phase 3 authorizes a local service foundation, executable schemas, request and response validation, health endpoints, unit and contract tests, local container packaging, and CI validation. External model providers, enterprise retrieval, tool execution, infrastructure mutation, cloud deployment, and production deployment remain unauthorized.
+Commit and push the authorized Phase 3 implementation, execute the GitHub Actions quality and container jobs, inspect their evidence, and update the Phase 3 gate.
+
+External model providers, enterprise retrieval, tool execution, infrastructure mutation, cloud deployment, and production deployment remain unauthorized.
+
+Phase 4 — Agent Runtime and Orchestration is not yet authorized.
 ```
