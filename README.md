@@ -311,17 +311,19 @@ The lab is complete when a learner can:
 | Phase 0: JD-aligned tutorial foundation | Complete |
 | Phase 1: Client discovery package | Complete |
 | Phase 2: Thin vertical slice | Complete |
-| Phase 3: Python and FastAPI foundation | Locally complete |
+| Phase 3: Cloud-native prototype foundation | Complete |
 | Executable contracts | 7 of 7 implemented and tested |
 | Local test suite | 292 passing |
 | Local quality gates | Passed |
 | Dependency locks | Implemented and hash-validated |
-| Dockerfile and Compose definitions | Implemented and statically tested |
-| Local container execution | Blocked by Docker–WSL integration |
-| Phase 3 CI definition | Implemented and statically validated |
-| Phase 3 CI execution | Pending |
-| Phase 3 overall | Execution evidence pending |
-| Phase 4: Agent runtime and orchestration | Not authorized |
+| Dockerfile and Compose definitions | Implemented and tested in CI |
+| Local Docker execution | Blocked by Docker–WSL integration |
+| CI container execution | Passed |
+| CI quality execution | Passed |
+| Phase 3 CI run | 29706949782 |
+| Phase 3 evidence commit | f94d90b3b03b70cb5102945e0dc32d3badef15c2 |
+| Phase 3 overall | Complete |
+| Phase 4: Agent runtime and orchestration | Next |
 | Model-provider integration | Not started |
 | Enterprise retrieval | Not started |
 | Tool execution | Not authorized |
@@ -341,8 +343,8 @@ It currently provides:
 - Separate gateway, runtime, and evidence service identities
 - Unit, contract, and integration tests
 - Hash-locked dependencies
-- Statically tested container definitions
-- A CI workflow definition
+- Container definitions tested through GitHub Actions
+- CI-verified image build, isolated service startup, health, readiness, and runtime restrictions
 
 It currently has:
 
@@ -362,12 +364,30 @@ The runtime and evidence services are currently bounded service identities with 
 ## Next Authorized Phase
 
 ```text
-Phase 3 Evidence Closure
-
-The next authorized work is to commit and push the Phase 3 artifacts, execute the GitHub Actions quality and container jobs, inspect their evidence, and synchronize the final Phase 3 gate decision.
-
-Phase 4 — Agent Runtime and Orchestration is not yet authorized.
+Phase 4 — Agent Runtime and Orchestration
 ```
+
+Phase 4 authorizes:
+
+- Typed local workflow state
+- Deterministic state transitions
+- Step and retry budgets
+- Explicit stop conditions
+- Recommendation and abstention terminal states
+- In-memory local checkpoint behavior
+- Runtime trace events
+- Unit, contract, integration, and transition tests
+- Tutorial and gate evidence
+
+Phase 4 does not authorize:
+
+- External model calls
+- Enterprise retrieval
+- Tool execution
+- Human approval execution
+- Infrastructure mutation
+- Cloud deployment
+- Production deployment
 
 ## Independent Project Notice
 

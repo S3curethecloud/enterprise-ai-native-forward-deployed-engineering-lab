@@ -18,22 +18,22 @@ The gate separates:
 ## 2. Gate Decision
 
 ```text
-LOCALLY COMPLETE — CONTAINER EXECUTION EVIDENCE PENDING
+COMPLETE
 ```
 
-The Python application, executable contracts, local service boundaries, tests, dependency locks, static container controls, and CI workflow definition are complete.
+Phase 3 satisfies its implementation, local quality, dependency-integrity, container-security, and CI execution gates.
 
-The following evidence remains pending:
+Authoritative execution evidence:
 
-- Successful container-image build
-- Successful Compose service startup
-- Successful container health and readiness checks
-- Successful GitHub Actions quality job
-- Successful GitHub Actions container job
+```text
+GitHub Actions run: 29706949782
+Evidence commit: f94d90b3b03b70cb5102945e0dc32d3badef15c2
+Workflow conclusion: success
+Python quality and contract tests: success
+Local container build and health verification: success
+```
 
-Phase 4 is not authorized by this gate.
-
-The next authorized action is to synchronize Phase 3 repository status, commit and push the Phase 3 artifacts, and inspect the resulting GitHub Actions evidence.
+Phase 4 — Agent Runtime and Orchestration is authorized next within the explicit scope recorded by this gate.
 
 ---
 
@@ -252,27 +252,30 @@ PASS — dependency resolution is bounded and reproducible
 
 ## 12. Container Definition Gate
 
-| Requirement | Static result | Runtime result |
+| Requirement | Static result | CI runtime result |
 |---|---|---|
-| Python 3.12 slim base | Passed | Not built locally |
-| Hash-locked runtime installation | Passed | Not built locally |
-| Dependency expansion prohibited | Passed | Not built locally |
-| Non-root user | Passed | Not inspected at runtime |
-| Read-only root filesystem | Passed | Not inspected at runtime |
-| Linux capabilities dropped | Passed | Not inspected at runtime |
-| `no-new-privileges` enabled | Passed | Not inspected at runtime |
-| No host-published container ports | Passed | Confirmed by first CI run |
-| Internal Compose network | Passed | Confirmed by first CI run |
-| Service-specific health checks | Passed | Not executed locally |
-| Three bounded services | Passed | Not started locally |
+| Python 3.12 slim base | Passed | Passed |
+| Hash-locked runtime installation | Passed | Passed |
+| Dependency expansion prohibited | Passed | Passed |
+| Non-root user | Passed | Passed |
+| Read-only root filesystem | Passed | Passed |
+| Linux capabilities dropped | Passed | Passed |
+| `no-new-privileges` enabled | Passed | Passed |
+| No host-published container ports | Passed | Passed |
+| Internal Compose network | Passed | Passed |
+| Service-specific health checks | Passed | Passed |
+| Service-specific readiness checks | Passed | Passed |
+| Three bounded services | Passed | Passed |
+| Status and logs recorded | Configured | Passed |
+| Controlled teardown | Configured | Passed |
 
 Result:
 
 ```text
-STATIC PASS — RUNTIME VERIFICATION BLOCKED
+PASS — STATIC AND CI RUNTIME VERIFICATION COMPLETE
 ```
 
-Docker Desktop WSL integration is unavailable in the local environment. This gate does not convert static configuration evidence into runtime evidence.
+Local Docker Desktop WSL integration remains unavailable. Independent GitHub Actions execution supplies the required runtime evidence.
 
 ---
 
@@ -280,29 +283,39 @@ Docker Desktop WSL integration is unavailable in the local environment. This gat
 
 | Requirement | Definition status | Execution status |
 |---|---|---|
-| Read-only repository permission | Configured | Not yet verified |
-| Python 3.12 runner | Configured | Not yet verified |
-| Hash-locked dependency installation | Configured | Not yet verified |
-| Ruff lint gate | Configured | Not yet verified |
-| Formatting gate | Configured | Not yet verified |
-| Strict mypy gate | Configured | Not yet verified |
-| Test and coverage gate | Configured | Not yet verified |
-| Coverage artifact | Configured | Not yet verified |
-| Compose validation | Configured | Not yet verified |
-| Image build | Configured | Not yet verified |
-| Service startup and wait | Configured | Not yet verified |
-| Health checks | Configured | Not yet verified |
-| Readiness checks | Configured | Not yet verified |
-| Status and log recording | Configured | Not yet verified |
-| Cleanup | Configured | Not yet verified |
+| Read-only repository permission | Configured | Passed |
+| Python 3.12 runner | Configured | Passed |
+| Hash-locked dependency installation | Configured | Passed |
+| Clean-environment packaging dependencies | Configured | Passed |
+| Ruff lint gate | Configured | Passed |
+| Formatting gate | Configured | Passed |
+| Strict mypy gate | Configured | Passed |
+| Test and coverage gate | Configured | Passed |
+| Coverage artifact | Configured | Passed |
+| Compose validation | Configured | Passed |
+| Image build | Configured | Passed |
+| Service startup and wait | Configured | Passed |
+| No-host-port verification | Configured | Passed |
+| Internal-network verification | Configured | Passed |
+| Runtime restriction inspection | Configured | Passed |
+| Health checks | Configured | Passed |
+| Readiness checks | Configured | Passed |
+| Status and log recording | Configured | Passed |
+| Cleanup | Configured | Passed |
 
 Result:
 
 ```text
-DEFINITION PASS — EXECUTION EVIDENCE PENDING
+PASS — CI EXECUTION EVIDENCE COMPLETE
 ```
 
-A configured workflow is not a passing workflow.
+Evidence:
+
+```text
+Run: 29706949782
+Commit: f94d90b3b03b70cb5102945e0dc32d3badef15c2
+Conclusion: success
+```
 
 ---
 
@@ -355,37 +368,61 @@ PASS — no decorative infrastructure was added
 
 ---
 
-## 16. Required Evidence Before Closing Phase 3
+## 16. Phase 3 Closure Evidence
 
-Phase 3 may be marked complete only after:
+Phase 3 closure requirements are satisfied:
 
-1. Phase 3 artifacts are staged intentionally.
-2. The staged scope contains only authorized Phase 3 work.
-3. Local quality gates pass after documentation synchronization.
-4. The Phase 3 commit is pushed.
-5. The GitHub Actions quality job passes.
-6. The GitHub Actions container job passes.
-7. Container build and service-health evidence are recorded.
-8. README, roadmap, and JD map status claims match the evidence.
-9. No prohibited capability is represented as implemented.
-10. Local and remote commit identities are synchronized.
+1. Authorized Phase 3 artifacts were staged intentionally.
+2. The staged scope contained only authorized Phase 3 work.
+3. Local quality gates passed.
+4. Runtime and development locks passed hash validation.
+5. The development lock installed in a clean environment.
+6. Phase 3 commits were pushed to `main`.
+7. The GitHub Actions quality job passed.
+8. The GitHub Actions container job passed.
+9. Image build, startup, health, readiness, isolation, and runtime restrictions passed.
+10. README, roadmap, JD map, tutorial, and gate claims were synchronized.
+11. No prohibited capability is represented as implemented.
+12. Local and remote commit identities were synchronized.
+
+Result:
+
+```text
+PASS — PHASE 3 CLOSURE REQUIREMENTS SATISFIED
+```
 
 ---
 
 ## 17. Next Authorized Work
 
 ```text
-Synchronize Phase 3 status documentation, validate the complete staged scope,
-commit and push Phase 3, and inspect GitHub Actions evidence.
-```
-
-Not yet authorized:
-
-```text
 Phase 4 — Agent Runtime and Orchestration
 ```
 
-Phase 4 becomes eligible only after the Phase 3 completion decision is supported by CI execution evidence or an explicitly approved gate exception.
+Phase 4 authorizes:
+
+- Typed local runtime state
+- Deterministic workflow transitions
+- Step budgets
+- Retry budgets
+- Explicit stop conditions
+- Recommendation terminal state
+- Abstention terminal state
+- Failure terminal state
+- Local in-memory checkpoints
+- Runtime trace events
+- Unit, contract, transition, and integration tests
+- Phase 4 tutorial and gate evidence
+
+Phase 4 does not authorize:
+
+- External model calls
+- Enterprise retrieval
+- Tool execution
+- Human approval execution
+- Infrastructure mutation
+- Cloud deployment
+- Production deployment
 
 ---
 
@@ -401,20 +438,19 @@ Phase 4 becomes eligible only after the Phase 3 completion decision is supported
 | Local quality gates | Passed |
 | Dependency integrity | Passed |
 | Container static controls | Passed |
-| Local container execution | Blocked |
-| CI workflow definition | Passed |
-| CI workflow execution | Pending |
-| Phase 3 overall | Locally complete; execution evidence pending |
-| Phase 4 authority | Not granted |
+| Container CI execution | Passed |
+| CI quality execution | Passed |
+| Phase 3 overall | Complete |
+| Phase 4 authority | Granted within bounded local scope |
 
 ---
 
 ## 19. Final Maturity Statement
 
-Phase 3 has produced a locally executable, typed, tested Python and FastAPI prototype foundation.
+Phase 3 produced a locally executable, typed, tested Python and FastAPI prototype foundation with independently verified CI container execution.
 
-The implementation proves contract validation, controlled failures, correlation behavior, service separation, dependency integrity, and static packaging controls.
+The implementation proves contract validation, controlled failures, correlation behavior, service separation, dependency integrity, isolated container packaging, runtime container restrictions, health, readiness, and reproducible CI execution.
 
-It does not yet prove container execution, CI success, model behavior, retrieval, tools, infrastructure mutation, cloud deployment, production readiness, or business outcomes.
+It does not prove model behavior, enterprise retrieval, tool execution, human approval execution, infrastructure mutation, cloud deployment, production readiness, or business outcomes.
 
-No claim may exceed this evidence.
+Phase 4 is authorized only for bounded local runtime orchestration. No other authority is granted.

@@ -1273,33 +1273,61 @@ A workflow file is only a configured control. It becomes execution evidence only
 | Branch coverage | 98.84% |
 | Combined coverage | 99.85% |
 | Dependency consistency | Passed |
-| Runtime lock hashes | Present |
-| Development lock hashes | Present |
+| Runtime lock hashes | Present and validated |
+| Development lock hashes | Present and clean-environment validated |
 | Static Dockerfile controls | Passed |
 | Static Compose controls | Passed |
-| Local Docker image build | Blocked by Docker–WSL integration |
-| Local container startup | Not verified |
-| GitHub Actions workflow definition | Implemented and statically validated |
-| GitHub Actions execution | Not yet verified |
+| Local Docker execution | Blocked by Docker–WSL integration |
+| CI workflow execution | Passed |
+| CI quality job | Passed |
+| CI container job | Passed |
+| CI image build | Passed |
+| CI isolated service startup | Passed |
+| CI health checks | Passed |
+| CI readiness checks | Passed |
+| CI runtime restriction inspection | Passed |
+| CI no-host-port verification | Passed |
+| CI internal-network verification | Passed |
+| GitHub Actions run | `29706949782` |
+| Evidence commit | `f94d90b3b03b70cb5102945e0dc32d3badef15c2` |
 
-Evidence counts are snapshots. If the test suite changes, update this table only after rerunning the complete gate.
+Evidence counts are snapshots. If implementation or test scope changes, rerun the complete gate before updating them.
 
 ---
 
-## 30. Docker Verification Limitation
+## 30. Local Docker Limitation and CI Evidence
 
 Docker Desktop WSL integration is not enabled for the active local distribution.
 
-Therefore:
+Therefore, local Docker commands remain unavailable. This local tooling limitation is preserved in the evidence record.
 
-- The Dockerfile is implemented and statically tested.
-- The Compose definition is implemented and statically tested.
-- Local image-build success is not claimed.
-- Local container-startup success is not claimed.
-- Local container-health success is not claimed.
-- The GitHub Actions container job is configured to provide runtime evidence after push.
+The independent GitHub Actions runner successfully verified:
 
-This limitation must remain visible until executable container evidence exists.
+- Compose configuration
+- Container-image construction
+- Hash-locked runtime dependency installation
+- Startup of gateway, runtime, and evidence containers
+- Container health
+- Service health endpoints
+- Service readiness endpoints
+- Internal Docker networking
+- Absence of host-published ports
+- Non-root container identities
+- Read-only root filesystems
+- Dropped Linux capabilities
+- `no-new-privileges`
+- Container status and log capture
+- Controlled teardown
+
+The successful run was:
+
+```text
+Run: 29706949782
+Commit: f94d90b3b03b70cb5102945e0dc32d3badef15c2
+Conclusion: success
+```
+
+The local Docker limitation no longer blocks Phase 3 closure because independent CI execution evidence now exists.
 
 ---
 
@@ -1477,9 +1505,9 @@ Phase 3 does not prove:
 
 ## 38. Phase 3 Exit Posture
 
-The local Python and FastAPI prototype foundation is implemented and tested.
+Phase 3 is complete.
 
-The phase has:
+The phase produced and verified:
 
 - Executable Pydantic contracts
 - Bounded FastAPI services
@@ -1490,9 +1518,22 @@ The phase has:
 - Fail-closed configuration
 - Unit, contract, and integration tests
 - Hash-locked dependencies
-- Static container security controls
-- A CI workflow definition
+- Non-root container packaging
+- An isolated internal Compose topology
+- No host-published container ports
+- Runtime container restrictions
+- CI quality evidence
+- CI container execution evidence
 
-Local Docker execution remains blocked until Docker Desktop WSL integration is enabled. GitHub Actions execution also remains unverified until the workflow runs after push.
+Authoritative CI evidence:
 
-Phase 4 must not silently override these limitations. Agent-runtime work should begin only after Phase 3 status documents are synchronized and the gate records whether container verification passed in CI.
+```text
+Run: 29706949782
+Commit: f94d90b3b03b70cb5102945e0dc32d3badef15c2
+Quality job: success
+Container job: success
+```
+
+Phase 4 — Agent Runtime and Orchestration is the next authorized phase.
+
+Phase 4 must preserve the existing authority boundary. External models, enterprise retrieval, tool execution, human approval execution, infrastructure mutation, cloud deployment, and production deployment remain unauthorized.

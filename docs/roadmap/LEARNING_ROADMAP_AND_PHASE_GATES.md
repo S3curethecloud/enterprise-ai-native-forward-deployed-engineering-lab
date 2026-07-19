@@ -230,9 +230,23 @@ PostgreSQL and Redis are deferred until a later phase defines a typed persistenc
 ### Current gate posture
 
 ```text
-Locally complete — container and CI execution evidence pending
+Complete
 
-The local Docker engine is unavailable because Docker Desktop WSL integration is not enabled. Static container evidence exists, but runtime container success is not yet claimed.
+Phase 3 execution evidence:
+
+GitHub Actions run: 29706949782
+Evidence commit: f94d90b3b03b70cb5102945e0dc32d3badef15c2
+Python quality and contract job: Passed
+Container build and health job: Passed
+Image build: Passed
+Isolated service startup: Passed
+Health and readiness: Passed
+Non-root and read-only runtime controls: Passed
+Capability-drop and no-new-privileges controls: Passed
+No host-published container ports: Passed
+Internal Docker network: Passed
+
+Local Docker execution remains unavailable because Docker Desktop WSL integration is disabled. CI provides the required independent container-execution evidence.
 ```
 
 ## Phase 4 — Agent Runtime and Orchestration
@@ -623,24 +637,19 @@ Every implementation phase must end with:
 | Phase 0 — JD-aligned tutorial foundation | Complete |
 | Phase 1 — Client discovery package | Complete |
 | Phase 2 — Thin vertical slice | Complete |
-| Phase 3 — Python and FastAPI foundation | Locally complete |
+| Phase 3 — Cloud-native prototype foundation | Complete |
 | Phase 3 — Dependency integrity | Complete |
-| Phase 3 — Container definitions | Static validation passed |
-| Phase 3 — Local container execution | Blocked by Docker–WSL integration |
-| Phase 3 — CI definition | Complete |
-| Phase 3 — CI execution | Pending |
-| Phase 3 overall | Execution evidence pending |
-| Phase 4 — Agent runtime and orchestration | Not authorized |
+| Phase 3 — Container execution | Passed in CI |
+| Phase 3 — Quality execution | Passed in CI |
+| Phase 4 — Agent runtime and orchestration | Next |
 | Phases 5–17 | Not started |
 
 ## Next Authorized Work
 
 ```text
-Phase 3 Evidence Closure
-
-Commit and push the authorized Phase 3 implementation, execute the GitHub Actions quality and container jobs, inspect their evidence, and update the Phase 3 gate.
-
-External model providers, enterprise retrieval, tool execution, infrastructure mutation, cloud deployment, and production deployment remain unauthorized.
-
-Phase 4 — Agent Runtime and Orchestration is not yet authorized.
+Phase 4 — Agent Runtime and Orchestration
 ```
+
+Phase 4 may implement typed local workflow state, deterministic transitions, step and retry budgets, stop conditions, recommendation and abstention terminal states, local checkpoint behavior, and runtime trace evidence.
+
+External model providers, enterprise retrieval, tool execution, human approval execution, infrastructure mutation, cloud deployment, and production deployment remain unauthorized.
