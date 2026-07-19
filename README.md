@@ -317,7 +317,8 @@ The lab is complete when a learner can:
 | Phase 1F: Assumption register | Complete |
 | Phase 1G: Success measures | Complete |
 | Phase 1 discovery package | Complete |
-| Phase 2: Thin vertical slice | Next |
+| Phase 2: Thin vertical slice | Complete |
+| Phase 3: Cloud-native prototype foundation | Next |
 | Runtime implementation | Not started |
 | Model-provider integration | Not started |
 | Tool execution | Not authorized |
@@ -341,9 +342,9 @@ It has:
 ## Next Authorized Phase
 
 ```text
-Phase 2 — Thin Vertical Slice
+Phase 3 — Cloud-Native Prototype Foundation
 
-Phase 2 authorizes requirements, scope, contracts, acceptance criteria, and threat-boundary design for the recommendation-only vertical slice. It does not authorize runtime implementation, external model calls, tool execution, infrastructure mutation, or production deployment.
+Phase 3 authorizes a local service foundation, executable schemas, request and response validation, health endpoints, unit and contract tests, local container packaging, and CI validation. It does not authorize external model calls, enterprise retrieval, tool execution, infrastructure mutation, cloud deployment, or production deployment.
 ```
 
 ## Independent Project Notice

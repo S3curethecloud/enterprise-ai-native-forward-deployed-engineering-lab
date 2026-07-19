@@ -156,7 +156,7 @@ docs/discovery/
 
 The problem can be explained without mentioning a model, framework, or vector database.
 
-## Phase 2 — Thin Vertical Slice
+## Phase 3 — Cloud-Native Prototype Foundation
 
 ### Objective
 
@@ -606,13 +606,14 @@ Every implementation phase must end with:
 | Phase 1F — Assumption register | Complete |
 | Phase 1G — Success measures | Complete |
 | Phase 1 discovery package | Complete |
-| Phase 2 — Thin vertical slice | Next |
-| Phases 3–17 | Not started |
+| Phase 2 — Thin vertical slice | Complete |
+| Phase 3 — Cloud-native prototype foundation | Next |
+| Phases 4–17 | Not started |
 
 ## Next Authorized Work
 
 ```text
-Phase 2 — Thin Vertical Slice
+Phase 3 — Cloud-Native Prototype Foundation
 
-Phase 2 authorizes requirements, scope, contracts, acceptance criteria, and threat-boundary design only. Application runtime, external providers, tool execution, infrastructure mutation, and production deployment remain unauthorized.
+Phase 3 authorizes a local service foundation, executable schemas, request and response validation, health endpoints, unit and contract tests, local container packaging, and CI validation. External model providers, enterprise retrieval, tool execution, infrastructure mutation, cloud deployment, and production deployment remain unauthorized.
 ```

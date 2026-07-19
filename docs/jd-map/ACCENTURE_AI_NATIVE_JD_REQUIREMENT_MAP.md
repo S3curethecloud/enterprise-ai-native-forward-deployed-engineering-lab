@@ -55,7 +55,7 @@ The role combines five responsibilities:
 | JD-01 | Operate under ambiguous client requirements | 1 | Structured discovery workflow | Workshop-output review | Discovery package | Documented |
 | JD-02 | Embed with clients as technologist and advisor | 1, 12 | Stakeholder and code-with exercises | Facilitation checklist | Workshop and code-with records | Planned |
 | JD-03 | Define high-value agent use cases | 1, 2 | Use-case prioritization matrix | Scope review | Prioritized use case | Documented |
-| JD-04 | Rapidly prototype an agent workflow | 2, 3 | Thin vertical-slice API | Acceptance tests | Prototype evidence | Planned |
+| JD-04 | Rapidly prototype an agent workflow | 2, 3 | Thin vertical-slice API | Acceptance tests | Prototype evidence | Documented |
 | JD-05 | Design enterprise-ready agents | 4 | Explicit runtime state and execution graph | State-transition tests | Runtime decision trace | Planned |
 | JD-06 | Implement retrieval and context engineering | 5 | Permission-aware RAG pipeline | Retrieval and ACL tests | Retrieval evidence | Planned |
 | JD-07 | Implement orchestration | 4 | Deterministic state-machine workflow | Transition, retry, and stop tests | Workflow trace | Planned |
@@ -75,7 +75,7 @@ The role combines five responsibilities:
 | JD-21 | Monitor and debug production behavior | 11, 14 | Diagnostic dashboard and runbook | Failure-injection exercise | Incident evidence package | Planned |
 | JD-22 | Tailor workflows to enterprise domains | 17 | Healthcare, finance, and retail packs | Domain-boundary tests | Domain design records | Planned |
 | JD-23 | Lead technical workshops | 1 | Guided discovery workshop | Workshop rubric | Workshop output | Documented |
-| JD-24 | Conduct POCs | 2, 3 | Thin vertical-slice prototype | Acceptance criteria | POC decision report | Planned |
+| JD-24 | Conduct POCs | 2, 3 | Thin vertical-slice prototype | Acceptance criteria | POC decision report | Documented |
 | JD-25 | Conduct code-with sessions | 12 | Guided typed-tool extension | Pairing exercise validation | Code-with artifact | Planned |
 | JD-26 | Measure agent accuracy | 10 | Task and component evaluators | Golden dataset | Accuracy evidence | Planned |
 | JD-27 | Measure latency | 10, 11 | Timing instrumentation | p50 and p95 tests | Latency report | Planned |
@@ -395,8 +395,9 @@ A requirement may not be marked Complete based only on:
 | Phase 1F assumption register | Complete |
 | Phase 1G success measures | Complete |
 | Phase 1 discovery package | Complete |
+| Phase 2 thin vertical-slice package | Complete |
 | JD requirements mapped | 36 of 36 |
-| JD requirements documented | 4 of 36 |
+| JD requirements documented | 6 of 36 |
 | JD requirements implemented | 0 of 36 |
 | JD requirements complete | 0 of 36 |
 | Runtime authority | None |
@@ -407,7 +408,7 @@ A requirement may not be marked Complete based only on:
 ## Next Phase
 
 ```text
-Phase 2 — Thin Vertical Slice
+Phase 3 — Cloud-Native Prototype Foundation
 
-Phase 2 will define the recommendation-only use case, requirements, contracts, acceptance criteria, exclusions, and threat boundary. It will not implement the application runtime.
+Phase 3 will create the local service foundation and executable contracts derived from Phase 2. It will not authorize external model calls, enterprise retrieval, tool execution, infrastructure mutation, cloud deployment, or production deployment.
 ```
