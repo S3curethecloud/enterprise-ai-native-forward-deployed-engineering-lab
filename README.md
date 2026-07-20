@@ -1,6 +1,6 @@
 # Enterprise AI-Native Forward-Deployed Engineering Lab
 
-> From an ambiguous client problem to a secure, evaluated, production-ready agentic workflow.
+> From an ambiguous client problem toward a secure, evaluated agentic workflow and an evidence-based production-readiness path.
 
 ## Lab Purpose
 
@@ -313,7 +313,7 @@ The lab is complete when a learner can:
 | Phase 2: Thin vertical slice | Complete |
 | Phase 3: Cloud-native prototype foundation | Complete |
 | Executable contracts | 7 of 7 implemented and tested |
-| Local test suite | 292 passing |
+| Local test suite | 686 passing |
 | Local quality gates | Passed |
 | Dependency locks | Implemented and hash-validated |
 | Dockerfile and Compose definitions | Implemented and tested in CI |
@@ -323,7 +323,7 @@ The lab is complete when a learner can:
 | Phase 3 CI run | 29706949782 |
 | Phase 3 evidence commit | f94d90b3b03b70cb5102945e0dc32d3badef15c2 |
 | Phase 3 overall | Complete |
-| Phase 4: Agent runtime and orchestration | Next |
+| Phase 4: Deterministic runtime and orchestration | Locally validated; remote CI pending |
 | Model-provider integration | Not started |
 | Enterprise retrieval | Not started |
 | Tool execution | Not authorized |
@@ -352,20 +352,22 @@ It currently has:
 - No enterprise retrieval
 - No provider credentials
 - No production data
-- No agent orchestration
+- No provider-driven or tool-executing agent workflow
 - No tool execution
 - No infrastructure mutation
 - No autonomous remediation
 - No cloud deployment
 - No production authority
 
-The runtime and evidence services are currently bounded service identities with health and readiness behavior. They do not yet implement agent execution or retrieval.
+The runtime service now implements bounded deterministic workflow coordination, checkpoints, replay, budgets, stops, and trace evidence. The evidence service remains a health-and-readiness-only identity. Neither service performs provider calls, enterprise retrieval, tool execution, infrastructure mutation, cloud deployment, or production operations.
 
-## Next Authorized Phase
+## Current Authorized Work
 
 ```text
 Phase 4 — Agent Runtime and Orchestration
 ```
+
+The bounded Phase 4 implementation is locally validated. Remote Phase 4 CI and closure evidence remain pending.
 
 Phase 4 authorizes:
 

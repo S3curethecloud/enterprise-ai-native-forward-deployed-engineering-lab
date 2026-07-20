@@ -1,4 +1,4 @@
-name: Phase 3 CI
+name: Phase 4 CI
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: phase3-ci-${{ github.ref }}
+  group: phase4-ci-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -65,7 +65,7 @@ jobs:
       - name: Upload coverage evidence
         uses: actions/upload-artifact@v6
         with:
-          name: phase3-coverage
+          name: phase4-coverage
           path: coverage.xml
           if-no-files-found: error
           retention-days: 14

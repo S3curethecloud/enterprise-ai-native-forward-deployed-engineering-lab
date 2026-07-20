@@ -182,3 +182,6 @@ class TraceEventName(StrEnum):
     REQUEST_DENIED = "request_denied"
     REQUEST_ABSTAINED = "request_abstained"
     REQUEST_FAILED = "request_failed"
+    RUNTIME_TRANSITION_APPLIED = "runtime_transition_applied"
+    RUNTIME_RETRY_SCHEDULED = "runtime_retry_scheduled"
+    RUNTIME_STOP_ENFORCED = "runtime_stop_enforced"

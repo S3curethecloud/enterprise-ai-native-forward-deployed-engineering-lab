@@ -129,7 +129,7 @@ def test_missing_correlation_id_is_generated_and_returned() -> None:
 
 
 @pytest.mark.parametrize(("service_name", "port"), SERVICE_CASES)
-def test_openapi_contains_only_authorized_phase_3_routes(
+def test_openapi_contains_only_authorized_routes(
     service_name: ServiceName,
     port: int,
 ) -> None:
@@ -145,6 +145,18 @@ def test_openapi_contains_only_authorized_phase_3_routes(
             {
                 "/v1/contracts/diagnostic-request/validate",
                 "/v1/contracts/diagnostic-response/validate",
+            }
+        )
+
+    if service_name == "runtime":
+        expected_paths.update(
+            {
+                "/v1/runtime/workflows",
+                "/v1/runtime/workflows/{workflow_id}",
+                "/v1/runtime/workflows/{workflow_id}/transitions",
+                "/v1/runtime/workflows/{workflow_id}/retries",
+                "/v1/runtime/workflows/{workflow_id}/checkpoints",
+                "/v1/runtime/workflows/{workflow_id}/replay",
             }
         )
 

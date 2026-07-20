@@ -397,25 +397,31 @@ A requirement may not be marked Complete based only on:
 | Phase 3 quality execution | Passed in CI |
 | Phase 3 CI run | 29706949782 |
 | Phase 3 evidence commit | f94d90b3b03b70cb5102945e0dc32d3badef15c2 |
+| Phase 4 deterministic runtime | Locally validated; remote CI pending |
+| Phase 4 runtime states | 13 of 13 classified |
+| Phase 4 authoritative transitions | 25 of 25 implemented and tested |
+| Phase 4 local test suite | 686 passing |
+| Phase 4 line coverage | 96.95% |
+| Phase 4 branch coverage | 94.33% |
 | JD requirements mapped | 36 of 36 |
 | JD requirements documented | 7 of 36 |
 | JD requirements implemented | 0 of 36 |
 | JD requirements complete | 0 of 36 |
-| Local validation runtime authority | Contract validation only |
-| Agent runtime authority | Phase 4 only |
+| Local validation runtime authority | Bounded deterministic coordination only |
+| Agent runtime authority | Local state coordination; no provider, retrieval, or tool authority |
 | External provider access | None |
 | Enterprise retrieval authority | None |
 | Tool execution authority | None |
 | Production infrastructure mutation | None |
 
-JD requirements implemented remains zero because Phase 3 implemented foundation components but did not complete an end-to-end agent workflow, enterprise POC, or other entire JD capability.
+JD requirements implemented remains zero because Phase 4 implements a bounded runtime component but does not yet complete an end-to-end agent workflow, enterprise POC, provider integration, retrieval capability, tool capability, or other entire JD requirement.
 
-## Next Phase
+## Current Authorized Work
 
 ```text
 Phase 4 — Agent Runtime and Orchestration
 ```
 
-Phase 4 authorizes typed local workflow state, deterministic state transitions, step and retry budgets, explicit stop conditions, recommendation and abstention terminal states, local checkpoint behavior, and runtime trace evidence.
+Phase 4 has locally implemented typed workflow state, deterministic transitions, budgets, stops, append-only in-memory checkpoints, optimistic concurrency, deterministic replay, CT-07 runtime traces, and runtime-only FastAPI routes. Remote CI and closure evidence remain pending.
 
 External model calls, enterprise retrieval, tool execution, human approval execution, infrastructure mutation, cloud deployment, and production deployment remain unauthorized.

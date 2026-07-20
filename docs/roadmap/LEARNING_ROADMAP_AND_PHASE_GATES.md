@@ -641,15 +641,15 @@ Every implementation phase must end with:
 | Phase 3 — Dependency integrity | Complete |
 | Phase 3 — Container execution | Passed in CI |
 | Phase 3 — Quality execution | Passed in CI |
-| Phase 4 — Agent runtime and orchestration | Next |
+| Phase 4 — Deterministic runtime and orchestration | Locally validated; remote CI pending |
 | Phases 5–17 | Not started |
 
-## Next Authorized Work
+## Current Authorized Work
 
 ```text
 Phase 4 — Agent Runtime and Orchestration
 ```
 
-Phase 4 may implement typed local workflow state, deterministic transitions, step and retry budgets, stop conditions, recommendation and abstention terminal states, local checkpoint behavior, and runtime trace evidence.
+Phase 4 has locally implemented typed workflow state, deterministic transitions, step and retry budgets, explicit stop conditions, five bounded terminal states, append-only in-memory checkpoints, optimistic concurrency, deterministic replay, CT-07 runtime traces, and runtime-only FastAPI routes. Remote CI and closure evidence remain pending.
 
 External model providers, enterprise retrieval, tool execution, human approval execution, infrastructure mutation, cloud deployment, and production deployment remain unauthorized.
