@@ -4,13 +4,17 @@
 
 | Dimension | Status |
 |---|---|
-| Learning guide | Drafted |
+| Learning guide | Updated from Phase 5A implementation design |
 | Interview review | Pending |
-| Enterprise implementation | Not started |
-| Implementation authority | Not authorized before interview |
+| Enterprise implementation | Design complete; contracts not started |
+| Implementation authority | Phase 5B typed retrieval contracts only |
 
-This document teaches the phase. It does not implement or enable the
-capability.
+Phase 5A completed the permission-aware RAG design and passed exact-commit CI
+in run [`29768908988`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29768908988) against commit `5b7907bf1bf8aa96c163d034baf183de3e600587`.
+
+Executable retrieval, embeddings, reranking, context construction, enterprise
+sources, external providers, tools, cloud deployment, and production
+deployment remain unauthorized.
 
 ## 2. Job-Description Connection
 

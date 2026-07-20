@@ -646,7 +646,12 @@ Every implementation phase must end with:
 | Phase 4 — Container execution | Passed in CI |
 | Phase 4 — CI run | 29724059742 |
 | Phase 4 — Evidence commit | d65a465c57707aac1a144f69b40c2856e5f3d40e |
-| Phases 5–17 | Not started |
+| Phase 5 — Permission-aware RAG | In progress |
+| Phase 5A — Design and authority boundary | Complete |
+| Phase 5A — Evidence commit | 5b7907bf1bf8aa96c163d034baf183de3e600587 |
+| Phase 5A — CI run | [29768908988](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29768908988) |
+| Phase 5B — Typed retrieval contracts | Next authorized subphase |
+| Phases 6–17 | Not started |
 
 ## Phase 4 Closure Evidence
 
@@ -669,9 +674,34 @@ Both required jobs passed:
 Python quality and contract tests
 Local container build and health verification
 Next Authorized Work
-NONE
+PHASE 5B — TYPED RETRIEVAL CONTRACTS ONLY
 
-Phases 5–17 remain unstarted and unauthorized.
+Authorized:
 
-External model providers, enterprise retrieval, tool execution, human approval execution, infrastructure mutation, cloud deployment, and production deployment remain unauthorized.
+Evidence-source contracts
+Evidence-document contracts
+Evidence-chunk contracts
+Citation contracts
+Retrieval-query contracts
+Retrieval-candidate contracts
+Retrieval-result contracts
+Abstention-evidence contracts
+Contract tests
+
+Not authorized:
+
+Corpus ingestion
+Keyword retrieval
+Vector retrieval
+Embeddings
+Hybrid retrieval
+Reranking
+Context construction
+External model providers
+Enterprise sources
+Tool execution
+Human approval execution
+Infrastructure mutation
+Cloud deployment
+Production deployment
 ```

@@ -234,29 +234,37 @@ Phase 5B must not implement:
 
 ## 14. Closure Evidence
 
-Pending:
+Recorded evidence:
 
-- Phase 5A commit
-- Remote synchronization
-- Exact-commit CI run
-- CI conclusion
-- Clean worktree
+- Phase 5A commit: `5b7907bf1bf8aa96c163d034baf183de3e600587`
+- Remote synchronization: Passed
+- Exact-commit CI run: [`29768908988`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29768908988)
+- CI conclusion: Success
+- Python quality and contract tests: Passed
+- Local container build and health verification: Passed
+- CI head SHA matched the Phase 5A commit
+- Worktree before closure update: Clean
 
 ## 15. Current Maturity Statement
 
-Phase 5A has a locally validated design.
+Phase 5A is complete.
+
+Its design, authority boundary, threat model, evaluation plan, and interview
+terminology update passed exact-commit CI.
 
 Phase 5 retrieval is not implemented.
 
-Phase 5B is not authorized until the Phase 5A documentation commit succeeds in
-CI.
+Phase 5B is authorized for typed immutable retrieval contracts and contract
+tests only.
 
 ## 16. Final Gate Posture
 
 Current posture:
 
 - Phase 5A local design gate: Passed
-- Phase 5A remote evidence: Pending
-- Phase 5B: Not yet authorized
+- Phase 5A exact-commit CI: Passed
+- Phase 5A: Complete
+- Phase 5B: Authorized for typed retrieval contracts only
+- Executable retrieval: Not authorized
 - Phase 5 overall: In progress
 - Phase 6 and later implementation: Not authorized
