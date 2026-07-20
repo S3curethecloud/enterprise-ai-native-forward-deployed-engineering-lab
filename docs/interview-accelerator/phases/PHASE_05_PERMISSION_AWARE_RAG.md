@@ -259,3 +259,60 @@ The phase is interview-ready when the learner can:
 | Interview answer drafted | Yes |
 | Enterprise capability implemented | No |
 | Implementation authorized | No |
+
+## Phase 5B Implementation-Derived Concepts
+
+### Outcome Exclusivity
+
+Outcome exclusivity means a retrieval response must represent exactly one
+result shape:
+
+- Authorized, ranked evidence candidates, or
+- An explicit abstention
+
+It cannot represent both simultaneously.
+
+Mental note: a secure retrieval contract should make ambiguous success
+impossible to represent.
+
+### Provenance Alignment
+
+Provenance alignment means a candidate and its citation must identify the
+same:
+
+- Source
+- Document
+- Document version
+- Chunk
+
+The candidate must also preserve the request, trace, and policy-decision
+lineage established by the authorized query.
+
+Mental note: a citation is trustworthy only when its evidence identity and
+authorization lineage remain aligned.
+
+### Contiguous Ranking
+
+Contiguous ranking means candidate ranks are unique, ordered, one-based,
+and have no gaps.
+
+Valid ranking:
+
+```text
+1, 2, 3
+```
+
+Invalid rankings include `2`, `1, 1`, and `1, 3`.
+
+Mental note: retrieval ranking is evidence, so its ordering must be
+deterministic and structurally valid.
+
+### Honest Phase 5B Interview Statement
+
+In Phase 5B, I implemented the immutable contract layer for
+permission-aware retrieval. The contracts enforce source allowlisting,
+live policy lineage, citation provenance, lifecycle integrity, ranked
+candidate results, and explicit abstention.
+
+I did not implement a corpus, embeddings, search execution, reranking,
+context construction, provider calls, or retrieval API routes.
