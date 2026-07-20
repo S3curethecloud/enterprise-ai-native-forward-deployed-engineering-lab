@@ -11,8 +11,8 @@ It does not implement retrieval execution.
 
 ```text
 PHASE 5B LOCAL IMPLEMENTATION: COMPLETE
-REMOTE CI EVIDENCE: PENDING
-PHASE 5B CLOSURE: PENDING
+REMOTE CI EVIDENCE: PASSED
+PHASE 5B CLOSURE: COMPLETE
 ```
 
 ## 3. Authorized Scope
@@ -205,25 +205,27 @@ Phase 5B is fail-closed because:
 - Missing or unsuitable evidence can be represented as abstention.
 - The contract layer has no authority to retrieve or execute anything.
 
-## 15. Remote CI Requirement
+## 15. Remote CI Evidence
 
-Local validation does not close Phase 5B.
+Recorded implementation evidence:
 
-Closure requires:
-
-- A dedicated Phase 5B implementation commit.
-- A successful CI run against that exact commit.
-- Recording the commit and CI run in the phase gate.
-- A separate closure decision.
-- Explicit authorization before Phase 5C begins.
+- Implementation commit: `efd62671b27e725d2936a2c7ae3a1a0d24b06ca6`
+- Exact-commit CI run: [`29780263857`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29780263857)
+- CI conclusion: Success
+- Python quality and contract tests: Passed
+- Local container build and health verification: Passed
+- CI head SHA matched the Phase 5B implementation commit
+- Remote synchronization: Passed
 
 ## 16. Current Exit Posture
 
 ```text
 PHASE 5A: COMPLETE
 PHASE 5B LOCAL IMPLEMENTATION: COMPLETE
-PHASE 5B REMOTE CI: PENDING
-PHASE 5B CLOSURE: PENDING
-PHASE 5C: NOT AUTHORIZED
-EXECUTABLE RETRIEVAL: NOT AUTHORIZED
+PHASE 5B REMOTE CI: PASSED
+PHASE 5B CLOSURE: COMPLETE
+PHASE 5C: AUTHORIZED AFTER CLOSURE-COMMIT CI
+PHASE 5C SCOPE: SYNTHETIC CORPUS AND DETERMINISTIC KEYWORD RETRIEVAL
+ENTERPRISE RETRIEVAL: NOT AUTHORIZED
+VECTOR RETRIEVAL: NOT AUTHORIZED
 ```

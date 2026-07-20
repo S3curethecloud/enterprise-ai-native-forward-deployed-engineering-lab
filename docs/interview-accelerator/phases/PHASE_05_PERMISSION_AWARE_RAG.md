@@ -4,17 +4,20 @@
 
 | Dimension | Status |
 |---|---|
-| Learning guide | Updated from Phase 5A implementation design |
+| Learning guide | Updated through verified Phase 5B contracts |
 | Interview review | Pending |
-| Enterprise implementation | Design complete; contracts not started |
-| Implementation authority | Phase 5B typed retrieval contracts only |
+| Enterprise implementation | Typed contracts complete; retrieval execution not started |
+| Implementation authority | Phase 5C synthetic corpus and deterministic keyword retrieval after closure CI |
 
-Phase 5A completed the permission-aware RAG design and passed exact-commit CI
-in run [`29768908988`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29768908988) against commit `5b7907bf1bf8aa96c163d034baf183de3e600587`.
+Phase 5B implemented immutable retrieval contracts and passed exact-commit CI run [`29780263857`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29780263857) against implementation commit `efd62671b27e725d2936a2c7ae3a1a0d24b06ca6`.
 
-Executable retrieval, embeddings, reranking, context construction, enterprise
-sources, external providers, tools, cloud deployment, and production
-deployment remain unauthorized.
+After the Phase 5B closure commit passes exact-commit CI, Phase 5C may add a
+synthetic local corpus and deterministic read-only keyword retrieval.
+
+Enterprise sources, production data, vector retrieval, embeddings, hybrid
+retrieval, reranking, context construction, external providers, tools,
+retrieval API routes, cloud deployment, and production deployment remain
+unauthorized.
 
 ## 2. Job-Description Connection
 
@@ -316,3 +319,25 @@ candidate results, and explicit abstention.
 
 I did not implement a corpus, embeddings, search execution, reranking,
 context construction, provider calls, or retrieval API routes.
+
+## Phase 5B Verified Evidence
+
+Phase 5B implementation evidence:
+
+- Implementation commit: `efd62671b27e725d2936a2c7ae3a1a0d24b06ca6`
+- Exact-commit CI run: [`29780263857`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29780263857)
+- Retrieval contract tests: 37 passed
+- Complete repository tests: 723 passed
+- CI quality job: Passed
+- CI container job: Passed
+
+Phase 5B implemented and verified the immutable contract layer only.
+
+Next bounded work:
+
+Phase 5C — Synthetic corpus and deterministic keyword retrieval
+
+Phase 5C remains local, synthetic, deterministic, and read-only.
+It does not authorize enterprise sources, vector retrieval,
+embeddings, reranking, provider calls, tools, retrieval API routes,
+cloud deployment, or production deployment.

@@ -650,7 +650,11 @@ Every implementation phase must end with:
 | Phase 5A — Design and authority boundary | Complete |
 | Phase 5A — Evidence commit | 5b7907bf1bf8aa96c163d034baf183de3e600587 |
 | Phase 5A — CI run | [29768908988](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29768908988) |
-| Phase 5B — Typed retrieval contracts | Next authorized subphase |
+| Phase 5B — Typed retrieval contracts | Complete |
+| Phase 5B — Implementation commit | efd62671b27e725d2936a2c7ae3a1a0d24b06ca6 |
+| Phase 5B — CI run | [29780263857](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29780263857) |
+| Phase 5B — Retrieval contract tests | 37 passing |
+| Phase 5C — Synthetic corpus and deterministic keyword retrieval | Next authorized subphase after closure CI |
 | Phases 6–17 | Not started |
 
 ## Phase 4 Closure Evidence
@@ -673,34 +677,33 @@ Both required jobs passed:
 
 Python quality and contract tests
 Local container build and health verification
-Next Authorized Work
-PHASE 5B — TYPED RETRIEVAL CONTRACTS ONLY
+Next Authorized Work After Closure-Commit CI
+PHASE 5C — SYNTHETIC CORPUS AND DETERMINISTIC KEYWORD RETRIEVAL
 
 Authorized:
 
-Evidence-source contracts
-Evidence-document contracts
-Evidence-chunk contracts
-Citation contracts
-Retrieval-query contracts
-Retrieval-candidate contracts
-Retrieval-result contracts
-Abstention-evidence contracts
-Contract tests
+Synthetic local evidence corpus
+Deterministic read-only keyword retrieval
+Existing Phase 5B contracts
+Unit and contract tests
+Implementation evidence
+
+The Phase 5B closure commit must pass exact-commit CI before Phase 5C
+implementation begins.
 
 Not authorized:
 
-Corpus ingestion
-Keyword retrieval
+Enterprise sources
+Production data
 Vector retrieval
 Embeddings
 Hybrid retrieval
 Reranking
 Context construction
 External model providers
-Enterprise sources
 Tool execution
 Human approval execution
+Retrieval API routes
 Infrastructure mutation
 Cloud deployment
 Production deployment

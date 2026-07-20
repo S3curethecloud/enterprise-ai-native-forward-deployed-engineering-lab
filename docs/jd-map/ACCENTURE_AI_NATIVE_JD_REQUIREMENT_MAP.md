@@ -411,8 +411,14 @@ A requirement may not be marked Complete based only on:
 | Phase 5A RAG design | Complete |
 | Phase 5A evidence commit | 5b7907bf1bf8aa96c163d034baf183de3e600587 |
 | Phase 5A CI run | [29768908988](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29768908988) |
-| Phase 5B typed retrieval contracts | Next authorized subphase |
-| Executable retrieval | Not started |
+| Phase 5B typed retrieval contracts | Complete |
+| Phase 5B implementation commit | efd62671b27e725d2936a2c7ae3a1a0d24b06ca6 |
+| Phase 5B CI run | [29780263857](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29780263857) |
+| Phase 5B retrieval contract tests | 37 passing |
+| Complete local test suite | 723 passing |
+| Phase 5C synthetic corpus and deterministic keyword retrieval | Next authorized subphase after closure CI |
+| Enterprise retrieval | Not authorized |
+| Vector retrieval and embeddings | Not authorized |
 | JD requirements mapped | 36 of 36 |
 | JD requirements documented | 7 of 36 |
 | JD requirements implemented | 0 of 36 |
@@ -426,12 +432,14 @@ A requirement may not be marked Complete based only on:
 
 JD requirements implemented remains zero because Phase 4 implements a bounded runtime component but does not yet complete an end-to-end agent workflow, enterprise POC, provider integration, retrieval capability, tool capability, or other entire JD requirement.
 
-## Current Authorized Work
+## Next Authorized Work After Closure-Commit CI
 
 ```text
-Phase 4 — Agent Runtime and Orchestration
+Phase 5C — Synthetic Corpus and Deterministic Keyword Retrieval
 ```
 
-Phase 4 implemented typed workflow state, deterministic transitions, budgets, stops, append-only in-memory checkpoints, optimistic concurrency, deterministic replay, CT-07 runtime traces, and runtime-only FastAPI routes. CI run [`29724059742`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29724059742) passed against exact implementation commit `d65a465c57707aac1a144f69b40c2856e5f3d40e`.
+Phase 5B implemented immutable typed retrieval contracts and passed exact-commit CI run [`29780263857`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29780263857) against implementation commit `efd62671b27e725d2936a2c7ae3a1a0d24b06ca6`.
 
-External model calls, enterprise retrieval, tool execution, human approval execution, infrastructure mutation, cloud deployment, and production deployment remain unauthorized.
+After the Phase 5B closure commit passes exact-commit CI, Phase 5C may implement a synthetic local corpus and deterministic read-only keyword retrieval.
+
+Enterprise sources, production data, vector retrieval, embeddings, hybrid retrieval, reranking, context construction, external providers, tool execution, retrieval API routes, infrastructure mutation, cloud deployment, and production deployment remain unauthorized.

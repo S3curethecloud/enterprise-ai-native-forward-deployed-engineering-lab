@@ -10,9 +10,9 @@ validation.
 
 ```text
 LOCAL CONTRACT GATE: PASSED
-REMOTE CI GATE: PENDING
-PHASE 5B CLOSURE: PENDING
-PHASE 5C: NOT AUTHORIZED
+REMOTE CI GATE: PASSED
+PHASE 5B CLOSURE: COMPLETE
+PHASE 5C: AUTHORIZED AFTER CLOSURE-COMMIT CI
 ```
 
 ## 3. Authorized Scope Evaluated
@@ -171,14 +171,16 @@ The learning update grants no additional runtime authority.
 
 ## 16. Remote CI Gate
 
-Pending requirements:
+Passed evidence:
 
-1. Commit the exact authorized Phase 5B artifact set.
-2. Push the implementation commit to remote `main`.
-3. Run the existing CI workflow against that exact commit.
-4. Require both quality and container jobs to succeed.
-5. Record the implementation commit and CI run.
-6. Close Phase 5B separately.
+- Implementation commit: `efd62671b27e725d2936a2c7ae3a1a0d24b06ca6`
+- Exact-commit CI run: [`29780263857`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29780263857)
+- CI conclusion: Success
+- Python quality and contract tests: Passed
+- Local container build and health verification: Passed
+- CI head SHA matched the implementation commit
+
+Phase 5B implementation passed its exact-commit remote CI gate.
 
 ## 17. Residual Risks
 
@@ -200,9 +202,11 @@ These are scope boundaries, not Phase 5B gate failures.
 
 ```text
 PHASE 5B LOCAL CONTRACT GATE: PASSED
-PHASE 5B IMPLEMENTATION COMMIT: AUTHORIZED
-PHASE 5B REMOTE CI: REQUIRED
-PHASE 5B CLOSURE: PENDING
-PHASE 5C: NOT AUTHORIZED
-EXECUTABLE RETRIEVAL: NOT AUTHORIZED
+PHASE 5B IMPLEMENTATION COMMIT: VERIFIED
+PHASE 5B REMOTE CI: PASSED
+PHASE 5B CLOSURE: COMPLETE
+PHASE 5C: AUTHORIZED AFTER CLOSURE-COMMIT CI
+PHASE 5C SCOPE: SYNTHETIC CORPUS AND DETERMINISTIC KEYWORD RETRIEVAL
+ENTERPRISE RETRIEVAL: NOT AUTHORIZED
+VECTOR RETRIEVAL: NOT AUTHORIZED
 ```

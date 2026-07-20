@@ -313,7 +313,7 @@ The lab is complete when a learner can:
 | Phase 2: Thin vertical slice | Complete |
 | Phase 3: Cloud-native prototype foundation | Complete |
 | Executable contracts | 7 of 7 implemented and tested |
-| Local test suite | 686 passing |
+| Local test suite | 723 passing |
 | Local quality gates | Passed |
 | Dependency locks | Implemented and hash-validated |
 | Dockerfile and Compose definitions | Implemented and tested in CI |
@@ -332,8 +332,13 @@ The lab is complete when a learner can:
 | Phase 5A permission-aware RAG design | Complete |
 | Phase 5A evidence commit | 5b7907bf1bf8aa96c163d034baf183de3e600587 |
 | Phase 5A CI run | [29768908988](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29768908988) |
-| Phase 5B typed retrieval contracts | Next authorized subphase |
-| Executable retrieval | Not started |
+| Phase 5B typed retrieval contracts | Complete |
+| Phase 5B implementation commit | efd62671b27e725d2936a2c7ae3a1a0d24b06ca6 |
+| Phase 5B CI run | [29780263857](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29780263857) |
+| Phase 5B contract tests | 37 passing |
+| Phase 5C synthetic corpus and deterministic keyword retrieval | Next authorized subphase after closure CI |
+| Enterprise retrieval | Not authorized |
+| Vector retrieval and embeddings | Not authorized |
 | Model-provider integration | Not started |
 | Enterprise retrieval | Not started |
 | Tool execution | Not authorized |
@@ -400,15 +405,19 @@ CT-07 runtime trace events
 Runtime-only FastAPI routes
 Runtime and integration tests
 Tutorial and gate evidence
-Next Authorized Work
-PHASE 5B — TYPED RETRIEVAL CONTRACTS ONLY
+Next Authorized Work After Closure-Commit CI
+PHASE 5C — SYNTHETIC CORPUS AND DETERMINISTIC KEYWORD RETRIEVAL
 
-Phase 5B may implement immutable contracts for evidence sources, documents,
-chunks, citations, queries, candidates, results, and abstention evidence.
+Phase 5C may implement a bounded synthetic local evidence corpus and
+deterministic read-only keyword retrieval against that corpus.
 
-Phase 5B does not authorize corpus ingestion, retrieval execution, embeddings,
-reranking, context construction, external providers, enterprise sources,
-tools, infrastructure mutation, cloud deployment, or production deployment.
+The Phase 5B closure commit must pass exact-commit CI before Phase 5C
+implementation begins.
+
+Phase 5C does not authorize enterprise sources, production data, vector
+retrieval, embeddings, hybrid retrieval, reranking, context construction,
+external providers, tools, retrieval API routes, infrastructure mutation,
+cloud deployment, or production deployment.
 ```
 
 ## Independent Project Notice
