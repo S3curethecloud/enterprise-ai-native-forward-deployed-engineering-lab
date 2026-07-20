@@ -641,15 +641,37 @@ Every implementation phase must end with:
 | Phase 3 — Dependency integrity | Complete |
 | Phase 3 — Container execution | Passed in CI |
 | Phase 3 — Quality execution | Passed in CI |
-| Phase 4 — Deterministic runtime and orchestration | Locally validated; remote CI pending |
+| Phase 4 — Deterministic runtime and orchestration | Complete |
+| Phase 4 — Quality execution | Passed in CI |
+| Phase 4 — Container execution | Passed in CI |
+| Phase 4 — CI run | 29724059742 |
+| Phase 4 — Evidence commit | d65a465c57707aac1a144f69b40c2856e5f3d40e |
 | Phases 5–17 | Not started |
 
-## Current Authorized Work
+## Phase 4 Closure Evidence
+
+Phase 4 implemented typed workflow state, deterministic transitions, step and retry budgets, explicit stop conditions, five bounded terminal states, append-only in-memory checkpoints, optimistic concurrency, deterministic replay, CT-07 runtime traces, and runtime-only FastAPI routes.
+
+Evidence:
 
 ```text
-Phase 4 — Agent Runtime and Orchestration
-```
+Implementation commit:
+d65a465c57707aac1a144f69b40c2856e5f3d40e
 
-Phase 4 has locally implemented typed workflow state, deterministic transitions, step and retry budgets, explicit stop conditions, five bounded terminal states, append-only in-memory checkpoints, optimistic concurrency, deterministic replay, CT-07 runtime traces, and runtime-only FastAPI routes. Remote CI and closure evidence remain pending.
+GitHub Actions run:
+29724059742
+
+CI result:
+SUCCESS
+
+Both required jobs passed:
+
+Python quality and contract tests
+Local container build and health verification
+Next Authorized Work
+NONE
+
+Phases 5–17 remain unstarted and unauthorized.
 
 External model providers, enterprise retrieval, tool execution, human approval execution, infrastructure mutation, cloud deployment, and production deployment remain unauthorized.
+```

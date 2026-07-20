@@ -904,14 +904,13 @@ Phase 4 passes only when:
 
 ---
 
-## 31. Current Phase 4 Decision
+## 31. Final Phase 4 Decision
 
 ```text
-BOUNDED LOCAL IMPLEMENTATION VALIDATED
-REMOTE PHASE 4 CI CLOSURE PENDING
+PHASE 4 COMPLETE
 ```
 
-Locally implemented and validated:
+Completed implementation:
 
 - Runtime enumerations and immutable state contracts
 - Authoritative transition table
@@ -926,14 +925,31 @@ Locally implemented and validated:
 - Runtime and integration tests
 - Tutorial and gate evidence
 
-Current authorized work:
+Closure evidence:
 
 ```text
-Phase 4 evidence review, implementation commit, remote CI,
-and closure evidence only
+Implementation commit:
+d65a465c57707aac1a144f69b40c2856e5f3d40e
+
+GitHub Actions run:
+29724059742
+
+CI result:
+SUCCESS
 ```
 
-Not authorized:
+Both required CI jobs passed:
+
+- Python quality and contract tests
+- Local container build and health verification
+
+Next authorized work:
+
+```text
+NONE
+```
+
+Still not authorized:
 
 ```text
 External providers

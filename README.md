@@ -323,7 +323,11 @@ The lab is complete when a learner can:
 | Phase 3 CI run | 29706949782 |
 | Phase 3 evidence commit | f94d90b3b03b70cb5102945e0dc32d3badef15c2 |
 | Phase 3 overall | Complete |
-| Phase 4: Deterministic runtime and orchestration | Locally validated; remote CI pending |
+| Phase 4: Deterministic runtime and orchestration | Complete |
+| Phase 4 CI run | 29724059742 |
+| Phase 4 evidence commit | d65a465c57707aac1a144f69b40c2856e5f3d40e |
+| Phase 4 quality execution | Passed |
+| Phase 4 container execution | Passed |
 | Model-provider integration | Not started |
 | Enterprise retrieval | Not started |
 | Tool execution | Not authorized |
@@ -361,35 +365,42 @@ It currently has:
 
 The runtime service now implements bounded deterministic workflow coordination, checkpoints, replay, budgets, stops, and trace evidence. The evidence service remains a health-and-readiness-only identity. Neither service performs provider calls, enterprise retrieval, tool execution, infrastructure mutation, cloud deployment, or production operations.
 
-## Current Authorized Work
+## Phase 4 Closure Evidence
 
 ```text
-Phase 4 — Agent Runtime and Orchestration
+Phase 4 — Deterministic Runtime and Orchestration
+COMPLETE
+
+Evidence:
+
+Implementation commit: d65a465c57707aac1a144f69b40c2856e5f3d40e
+GitHub Actions run: 29724059742
+CI URL: https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29724059742
+Python quality and contract tests: Passed
+Local container build and health verification: Passed
+CI head SHA matched the implementation commit
+
+Phase 4 completed:
+
+Typed local workflow state
+Deterministic state transitions
+Step and retry budgets
+Explicit stop conditions
+Five bounded terminal states
+Append-only in-memory checkpoints
+Optimistic concurrency
+Deterministic replay
+CT-07 runtime trace events
+Runtime-only FastAPI routes
+Runtime and integration tests
+Tutorial and gate evidence
+Next Authorized Work
+NONE
+
+No later phase is authorized.
+
+External model calls, enterprise retrieval, tool execution, human approval execution, infrastructure mutation, cloud deployment, and production deployment remain unauthorized.
 ```
-
-The bounded Phase 4 implementation is locally validated. Remote Phase 4 CI and closure evidence remain pending.
-
-Phase 4 authorizes:
-
-- Typed local workflow state
-- Deterministic state transitions
-- Step and retry budgets
-- Explicit stop conditions
-- Recommendation and abstention terminal states
-- In-memory local checkpoint behavior
-- Runtime trace events
-- Unit, contract, integration, and transition tests
-- Tutorial and gate evidence
-
-Phase 4 does not authorize:
-
-- External model calls
-- Enterprise retrieval
-- Tool execution
-- Human approval execution
-- Infrastructure mutation
-- Cloud deployment
-- Production deployment
 
 ## Independent Project Notice
 

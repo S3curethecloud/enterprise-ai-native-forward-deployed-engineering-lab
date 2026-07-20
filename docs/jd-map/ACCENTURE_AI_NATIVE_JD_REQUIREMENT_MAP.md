@@ -397,7 +397,11 @@ A requirement may not be marked Complete based only on:
 | Phase 3 quality execution | Passed in CI |
 | Phase 3 CI run | 29706949782 |
 | Phase 3 evidence commit | f94d90b3b03b70cb5102945e0dc32d3badef15c2 |
-| Phase 4 deterministic runtime | Locally validated; remote CI pending |
+| Phase 4 deterministic runtime | Complete |
+| Phase 4 implementation commit | d65a465c57707aac1a144f69b40c2856e5f3d40e |
+| Phase 4 CI run | [29724059742](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29724059742) |
+| Phase 4 CI quality job | Passed |
+| Phase 4 CI container job | Passed |
 | Phase 4 runtime states | 13 of 13 classified |
 | Phase 4 authoritative transitions | 25 of 25 implemented and tested |
 | Phase 4 local test suite | 686 passing |
@@ -422,6 +426,6 @@ JD requirements implemented remains zero because Phase 4 implements a bounded ru
 Phase 4 — Agent Runtime and Orchestration
 ```
 
-Phase 4 has locally implemented typed workflow state, deterministic transitions, budgets, stops, append-only in-memory checkpoints, optimistic concurrency, deterministic replay, CT-07 runtime traces, and runtime-only FastAPI routes. Remote CI and closure evidence remain pending.
+Phase 4 implemented typed workflow state, deterministic transitions, budgets, stops, append-only in-memory checkpoints, optimistic concurrency, deterministic replay, CT-07 runtime traces, and runtime-only FastAPI routes. CI run [`29724059742`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29724059742) passed against exact implementation commit `d65a465c57707aac1a144f69b40c2856e5f3d40e`.
 
 External model calls, enterprise retrieval, tool execution, human approval execution, infrastructure mutation, cloud deployment, and production deployment remain unauthorized.
