@@ -1,4 +1,4 @@
-# Phase 14 — Production Readiness
+# Phase 14 — Production-Readiness Gate
 
 ## 1. Status
 
@@ -120,9 +120,41 @@ Current status:
 - Security, evaluation, and reliability gates interact.
 - Ownership and runbooks are architecture concerns.
 
-## 12. Sixty-Second Interview Answer
+## 12. JD-Aligned Core Answers
 
-> I separate prototype success from production readiness. Before release I want ownership, threat modeling, SLOs, capacity, dependency limits, evaluation thresholds, secure identity and secrets, durable recovery, telemetry, runbooks, gradual rollout, rollback, and incident exercises. Production readiness is the evidence that these controls work together.
+### 30-Second Core Answer
+
+I do not call an agent production-ready because the happy path works. The gate
+requires threat modeling, identity and policy review, evaluation thresholds,
+load and failure testing, SLOs, cost limits, observability, incident response,
+rollback, data governance, support ownership, and residual-risk acceptance.
+
+### 60-Second Core Answer
+
+My production-readiness review covers five areas. Functionally, the workflow
+meets task and evaluation thresholds. Operationally, it has SLOs, dashboards,
+alerts, runbooks, capacity evidence, backup or replay strategy, and clear
+ownership. Security verifies identity propagation, least privilege, data
+classification, secrets, egress, prompt-injection defenses, tool controls, and
+audit evidence. Delivery verifies reproducible infrastructure, signed artifacts,
+progressive deployment, rollback, and disaster recovery. Governance documents
+model and provider versions, data retention, human approval, limitations, and
+residual risk. Any unresolved high-risk item blocks release; it is not converted
+into a vague post-production task.
+
+### Claim Defense
+
+Enterprise production-readiness expertise can be supported with cloud/security
+examples. Full agent production-readiness evidence is a future lab phase.
+
+Likely interviewer challenge:
+
+- What was your exact role?
+- Which artifacts did you personally create?
+- Was this architecture, local implementation, pilot, or production?
+- Which stakeholders or client environment were involved?
+- What measurable evidence supports the claim?
+- What remains unimplemented or unverified?
 
 ## 13. Shadow-Experience Exercise
 
@@ -175,6 +207,20 @@ The phase is interview-ready when the learner can:
 - Give the sixty-second answer naturally.
 - Complete the shadow exercise honestly.
 - Distinguish tutorial knowledge from implementation evidence.
+
+## 17A. Mock-Agent Retrieval Cues
+
+Route questions containing these topics to this phase:
+
+`production readiness, threat model, SLO, runbook, rollback, disaster recovery, support, security review`
+
+The mock agent should answer in this order:
+
+1. Lead with the architectural or delivery decision.
+2. Give the 30-second answer unless depth is requested.
+3. Expand with the 60-second answer.
+4. Use verified evidence only when the claim defense supports it.
+5. State the implementation boundary before implying production use.
 
 ## 18. Exit Posture
 

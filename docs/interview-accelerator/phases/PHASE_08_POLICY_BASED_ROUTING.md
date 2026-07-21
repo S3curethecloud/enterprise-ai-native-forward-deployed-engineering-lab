@@ -113,9 +113,42 @@ Current repository status:
 - Missing or expired authority fails closed.
 - Policy must be tested like application code.
 
-## 12. Sixty-Second Interview Answer
+## 12. JD-Aligned Core Answers
 
-> I separate model reasoning from policy authority. A trusted enforcement point collects identity, tenant, resource, action, risk, and environment attributes. An external deterministic policy service returns allow, deny, approval-required, or a restricted route with decision lineage and expiry. The runtime records and enforces that result, and missing or expired authority fails closed.
+### 30-Second Core Answer
+
+I keep policy routing deterministic and outside the LLM. The policy decision
+uses identity, tenant, data classification, requested capability, risk tier,
+region, provider capabilities, and approval state to allow, deny, abstain, or
+route. Every decision includes a policy version, reason codes, and traceable
+evidence.
+
+### 60-Second Core Answer
+
+The model can recommend a next step, but it should never be the authorization
+authority. I define a policy request containing subject identity, tenant,
+resource scope, data classification, requested model or tool capability,
+action risk, region, and current approval state. A deterministic policy engine
+returns allow, deny, abstain, require approval, or an eligible route, together
+with policy version and reason codes. Routing to another provider cannot bypass
+residency or safety constraints, and tool execution cannot inherit authority
+from a prompt. I test conflicting rules, missing attributes, expired decisions,
+fallback routes, and default denial. This creates a reconstructable decision
+boundary suitable for audit and operational support.
+
+### Claim Defense
+
+Design knowledge supported by implemented authorization-before-retrieval and
+runtime boundaries; full Phase 8 routing is future work.
+
+Likely interviewer challenge:
+
+- What was your exact role?
+- Which artifacts did you personally create?
+- Was this architecture, local implementation, pilot, or production?
+- Which stakeholders or client environment were involved?
+- What measurable evidence supports the claim?
+- What remains unimplemented or unverified?
 
 ## 13. Shadow-Experience Exercise
 
@@ -167,6 +200,20 @@ The phase is interview-ready when the learner can:
 - Give the sixty-second answer naturally.
 - Complete the shadow exercise honestly.
 - Distinguish tutorial knowledge from implementation evidence.
+
+## 17A. Mock-Agent Retrieval Cues
+
+Route questions containing these topics to this phase:
+
+`policy routing, authorization, OPA, allow, deny, reason code, tenant, risk tier, residency, deterministic policy`
+
+The mock agent should answer in this order:
+
+1. Lead with the architectural or delivery decision.
+2. Give the 30-second answer unless depth is requested.
+3. Expand with the 60-second answer.
+4. Use verified evidence only when the claim defense supports it.
+5. State the implementation boundary before implying production use.
 
 ## 18. Exit Posture
 

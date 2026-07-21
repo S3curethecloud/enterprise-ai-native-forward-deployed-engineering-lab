@@ -1,4 +1,4 @@
-# Phase 16 — Compound AI and Bonus Knowledge
+# Supplemental Guide — Compound AI, Agent Registries, and Event Streams
 
 ## 1. Status
 
@@ -7,7 +7,7 @@
 | Learning guide | Drafted |
 | Interview review | Pending |
 | Enterprise implementation | Not started |
-| Implementation authority | Not authorized before interview |
+| Implementation authority | Supplemental interview learning only |
 
 This document teaches the phase. It does not implement or enable the
 capability.

@@ -115,9 +115,43 @@ Current repository status:
 - Open-source models add infrastructure ownership.
 - Provider abstraction is an operational boundary, not only a class interface.
 
-## 12. Sixty-Second Interview Answer
+## 12. JD-Aligned Core Answers
 
-> I would place a typed provider boundary between orchestration and provider SDKs. The shared layer normalizes request envelopes, timeouts, usage, tracing, and error categories. Provider adapters preserve differences in tools, streaming, structured output, safety, and regional controls. A policy-aware router uses capability and evaluation data rather than pretending every model is interchangeable.
+### 30-Second Core Answer
+
+I would place a capability-aware abstraction between the agent workflow and
+model providers. The application uses a common request and response envelope,
+while adapters declare supported models, structured output, tool calling,
+regions, limits, and normalized errors. I would prove the contract first with
+a deterministic mock provider before enabling any real provider call.
+
+### 60-Second Core Answer
+
+I avoid both hard-coding one provider and pretending all providers are
+identical. The abstraction defines stable application-facing envelopes for
+messages, context, structured-output requirements, tool declarations, usage,
+latency, and errors. Each adapter publishes explicit capability metadata for
+model families, context limits, regions, data-handling constraints, structured
+output, and tool calling. Routing then uses policy, capability, evaluation,
+latency, and cost evidence rather than brand preference. I would start with a
+deterministic local mock that passes the complete contract suite, then gate real
+OpenAI, Anthropic, or Vertex adapters independently. Retries and fallbacks are
+bounded, and a fallback cannot weaken residency, safety, or authorization
+requirements.
+
+### Claim Defense
+
+Architecture and next authorized lab phase. Real provider adapters and calls
+are not yet implemented in this repository.
+
+Likely interviewer challenge:
+
+- What was your exact role?
+- Which artifacts did you personally create?
+- Was this architecture, local implementation, pilot, or production?
+- Which stakeholders or client environment were involved?
+- What measurable evidence supports the claim?
+- What remains unimplemented or unverified?
 
 ## 13. Shadow-Experience Exercise
 
@@ -170,6 +204,20 @@ The phase is interview-ready when the learner can:
 - Give the sixty-second answer naturally.
 - Complete the shadow exercise honestly.
 - Distinguish tutorial knowledge from implementation evidence.
+
+## 17A. Mock-Agent Retrieval Cues
+
+Route questions containing these topics to this phase:
+
+`multi-provider, OpenAI, Anthropic, Claude, Vertex, provider adapter, model routing, fallback, abstraction layer`
+
+The mock agent should answer in this order:
+
+1. Lead with the architectural or delivery decision.
+2. Give the 30-second answer unless depth is requested.
+3. Expand with the 60-second answer.
+4. Use verified evidence only when the claim defense supports it.
+5. State the implementation boundary before implying production use.
 
 ## 18. Exit Posture
 

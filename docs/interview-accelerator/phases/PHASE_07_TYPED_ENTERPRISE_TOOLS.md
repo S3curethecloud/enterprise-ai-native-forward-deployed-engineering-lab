@@ -115,9 +115,43 @@ Current repository status:
 - Retry rules depend on idempotency.
 - Tool outputs are untrusted inputs to later steps.
 
-## 12. Sixty-Second Interview Answer
+## 12. JD-Aligned Core Answers
 
-> I treat model tool calls as proposals. Typed code validates the schema, a registry resolves the approved capability, policy checks identity and scope, and high-risk operations require scoped human approval. Execution uses least privilege, timeout, idempotency, result validation, and audit evidence. The model never receives general credentials or unrestricted shell access.
+### 30-Second Core Answer
+
+I expose tools as narrow typed business capabilities, not arbitrary code or
+shell access. Each tool has a validated input and output contract, identity and
+policy requirements, timeout and idempotency behavior, side-effect class, and
+audit evidence. The agent can request a tool, but deterministic controls decide
+whether and how it executes.
+
+### 60-Second Core Answer
+
+For enterprise tool use, I create a registry of narrow capabilities such as
+read incident, create ticket draft, or request remediation approval. Every
+tool declares a versioned schema, required identity and policy context,
+read-versus-write risk, timeout, retry safety, idempotency key, expected errors,
+and evidence fields. MCP can provide a consistent discovery and invocation
+interface, but it does not replace authorization. The orchestrator proposes a
+typed request, the policy layer verifies it, high-risk actions obtain approval,
+and the execution gateway uses a dedicated least-privilege identity. I test
+schema violations, replay, timeout, partial failure, duplicate invocation, and
+compensation. General operating-system access and unregistered tools remain
+prohibited.
+
+### Claim Defense
+
+Enterprise architecture knowledge and future lab phase. Do not claim this lab
+currently executes MCP or enterprise tools.
+
+Likely interviewer challenge:
+
+- What was your exact role?
+- Which artifacts did you personally create?
+- Was this architecture, local implementation, pilot, or production?
+- Which stakeholders or client environment were involved?
+- What measurable evidence supports the claim?
+- What remains unimplemented or unverified?
 
 ## 13. Shadow-Experience Exercise
 
@@ -169,6 +203,20 @@ The phase is interview-ready when the learner can:
 - Give the sixty-second answer naturally.
 - Complete the shadow exercise honestly.
 - Distinguish tutorial knowledge from implementation evidence.
+
+## 17A. Mock-Agent Retrieval Cues
+
+Route questions containing these topics to this phase:
+
+`tools, MCP, function calling, schema, idempotency, timeout, least privilege, enterprise API, tool registry`
+
+The mock agent should answer in this order:
+
+1. Lead with the architectural or delivery decision.
+2. Give the 30-second answer unless depth is requested.
+3. Expand with the 60-second answer.
+4. Use verified evidence only when the claim defense supports it.
+5. State the implementation boundary before implying production use.
 
 ## 18. Exit Posture
 

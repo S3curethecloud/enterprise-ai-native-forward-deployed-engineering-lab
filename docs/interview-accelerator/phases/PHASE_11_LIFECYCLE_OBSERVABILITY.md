@@ -114,9 +114,43 @@ Current status:
 - An alert needs an owner and response.
 - Evaluation and observability should share version lineage.
 
-## 12. Sixty-Second Interview Answer
+## 12. JD-Aligned Core Answers
 
-> I would propagate one trace context across gateway, runtime, policy, retrieval, provider, tools, validation, and delivery. Structured logs record bounded events, metrics show aggregate quality and performance, and traces reconstruct individual requests. I would include reason codes and version references while excluding credentials, protected data, raw prompts, and hidden reasoning.
+### 30-Second Core Answer
+
+I make an agent workflow reconstructable across gateway, orchestration,
+retrieval, provider, policy, tools, and approvals using one request and trace
+identity. Traces capture bounded events and durations, metrics track reliability
+and cost, logs explain controlled failures, and sensitive prompts or evidence
+are redacted rather than copied into telemetry.
+
+### 60-Second Core Answer
+
+Agent observability must explain both distributed-system behavior and AI
+decision flow. I propagate request, trace, workflow, policy, provider, tool,
+and evidence references across every stage. OpenTelemetry-style spans would
+show admission, retrieval, model calls, policy decisions, tool execution,
+approval waits, validation, and delivery. Metrics cover latency percentiles,
+error and abstention rates, retries, token and cost usage, tool outcomes,
+policy denials, and evaluation regressions. Logs contain allowlisted metadata
+and reason codes, not unrestricted prompts or retrieved content. Dashboards and
+alerts align to SLOs, and trace-to-evaluation linkage lets the team convert
+production failures into reviewed regression cases. The goal is safe diagnosis,
+not maximum data collection.
+
+### Claim Defense
+
+Implemented CT-07 traces, checkpoints, replay, and retrieval telemetry provide
+a local foundation. External production observability is not yet implemented.
+
+Likely interviewer challenge:
+
+- What was your exact role?
+- Which artifacts did you personally create?
+- Was this architecture, local implementation, pilot, or production?
+- Which stakeholders or client environment were involved?
+- What measurable evidence supports the claim?
+- What remains unimplemented or unverified?
 
 ## 13. Shadow-Experience Exercise
 
@@ -169,6 +203,20 @@ The phase is interview-ready when the learner can:
 - Give the sixty-second answer naturally.
 - Complete the shadow exercise honestly.
 - Distinguish tutorial knowledge from implementation evidence.
+
+## 17A. Mock-Agent Retrieval Cues
+
+Route questions containing these topics to this phase:
+
+`observability, OpenTelemetry, logging, monitoring, tracing, SLO, dashboard, alert, debugging, cost telemetry`
+
+The mock agent should answer in this order:
+
+1. Lead with the architectural or delivery decision.
+2. Give the 30-second answer unless depth is requested.
+3. Expand with the 60-second answer.
+4. Use verified evidence only when the claim defense supports it.
+5. State the implementation boundary before implying production use.
 
 ## 18. Exit Posture
 

@@ -1,4 +1,4 @@
-# Phase 12 — Client Engagement and Code-With Delivery
+# Phase 12 — Enterprise Integration and Code-With Session
 
 ## 1. Status
 
@@ -118,9 +118,42 @@ Current status:
 - A prototype reduces uncertainty; it does not prove production readiness.
 - Code-with is both engineering and knowledge transfer.
 
-## 12. Sixty-Second Interview Answer
+## 12. JD-Aligned Core Answers
 
-> I begin by mapping stakeholders, the current workflow, the decision, evidence, authority, risk, and success measures. I then choose a thin slice with explicit exclusions and acceptance criteria. I review evidence frequently and use code-with sessions to expose integration constraints and build client ownership. The roadmap advances only when the prototype answers its intended question.
+### 30-Second Core Answer
+
+I use code-with sessions to turn architecture decisions into shared working
+software. Before the session, I agree on the use case, interfaces, data and
+identity prerequisites, success criteria, and rollback boundary. During it,
+client engineers build and test the slice with me so ownership transfers rather
+than remaining with an external prototype team.
+
+### 60-Second Core Answer
+
+For enterprise integration, I combine advisory work with hands-on delivery. I
+first map existing APIs, identity, data, event, network, CI/CD, support, and
+governance constraints. We define a bounded integration contract and prepare a
+code-with session around one thin slice. In the session, we implement the
+adapter or workflow together, run contract and failure tests, capture decisions,
+and document how to operate and extend it. I make unresolved assumptions and
+ownership explicit, including who supports the interface, rotates credentials,
+reviews policy, and handles incidents. The outcome is not only code; it is
+client capability, trusted adoption, and a prioritized roadmap based on evidence
+from their environment.
+
+### Claim Defense
+
+Use real professional collaboration examples where available. The lab provides
+the integration playbook, not proof of an Accenture client session.
+
+Likely interviewer challenge:
+
+- What was your exact role?
+- Which artifacts did you personally create?
+- Was this architecture, local implementation, pilot, or production?
+- Which stakeholders or client environment were involved?
+- What measurable evidence supports the claim?
+- What remains unimplemented or unverified?
 
 ## 13. Shadow-Experience Exercise
 
@@ -170,6 +203,20 @@ The phase is interview-ready when the learner can:
 - Give the sixty-second answer naturally.
 - Complete the shadow exercise honestly.
 - Distinguish tutorial knowledge from implementation evidence.
+
+## 17A. Mock-Agent Retrieval Cues
+
+Route questions containing these topics to this phase:
+
+`client workshop, code-with, enterprise integration, stakeholder, adoption, trusted advisor, ecosystem partner`
+
+The mock agent should answer in this order:
+
+1. Lead with the architectural or delivery decision.
+2. Give the 30-second answer unless depth is requested.
+3. Expand with the 60-second answer.
+4. Use verified evidence only when the claim defense supports it.
+5. State the implementation boundary before implying production use.
 
 ## 18. Exit Posture
 

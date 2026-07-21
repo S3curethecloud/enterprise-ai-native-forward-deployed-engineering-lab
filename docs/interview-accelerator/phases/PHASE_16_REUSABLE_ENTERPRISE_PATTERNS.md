@@ -1,4 +1,4 @@
-# Phase 17 — Reusable Patterns and Interview Synthesis
+# Phase 16 — Reusable Enterprise Patterns
 
 ## 1. Status
 
@@ -114,9 +114,42 @@ Current status:
 - Roadmaps sequence evidence and authority.
 - Knowledge transfer is part of delivery.
 
-## 12. Sixty-Second Interview Answer
+## 12. JD-Aligned Core Answers
 
-> I turn repeated delivery lessons into versioned patterns that include the problem, context, architecture, controls, tradeoffs, failure modes, tests, evidence, and adaptation points. I remove client-specific information, assign ownership, and teach the pattern through documentation and code-with sessions. The roadmap then connects those reusable capabilities to adoption and operational maturity.
+### 30-Second Core Answer
+
+I convert successful delivery decisions into reusable patterns without turning
+them into rigid templates. A pattern includes the problem context, architecture,
+contracts, security controls, tests, evaluation criteria, deployment guidance,
+known limitations, and adaptation points. That shortens future delivery while
+preserving client-specific governance.
+
+### 60-Second Core Answer
+
+After a pattern is proven, I package more than source code. The reusable asset
+contains a reference architecture, typed contracts, policy and identity
+boundaries, threat model, test and evaluation harness, observability schema,
+deployment modules, runbooks, decision records, and an explicit list of what
+must be adapted. I version the pattern and record the environment and evidence
+under which it was validated. Teams can then reuse provider adapters, tool
+contracts, policy requests, evaluation cases, and release gates without copying
+client secrets or assumptions. Feedback from later engagements improves the
+pattern through reviewed changes. This is how individual delivery becomes an
+enterprise adoption playbook.
+
+### Claim Defense
+
+The repository itself demonstrates reusable documentation, gates, contracts,
+and reference patterns. Cross-client production reuse is not claimed.
+
+Likely interviewer challenge:
+
+- What was your exact role?
+- Which artifacts did you personally create?
+- Was this architecture, local implementation, pilot, or production?
+- Which stakeholders or client environment were involved?
+- What measurable evidence supports the claim?
+- What remains unimplemented or unverified?
 
 ## 13. Shadow-Experience Exercise
 
@@ -168,6 +201,20 @@ The phase is interview-ready when the learner can:
 - Give the sixty-second answer naturally.
 - Complete the shadow exercise honestly.
 - Distinguish tutorial knowledge from implementation evidence.
+
+## 17A. Mock-Agent Retrieval Cues
+
+Route questions containing these topics to this phase:
+
+`reusable patterns, playbook, reference architecture, knowledge sharing, internal asset, best practices`
+
+The mock agent should answer in this order:
+
+1. Lead with the architectural or delivery decision.
+2. Give the 30-second answer unless depth is requested.
+3. Expand with the 60-second answer.
+4. Use verified evidence only when the claim defense supports it.
+5. State the implementation boundary before implying production use.
 
 ## 18. Exit Posture
 

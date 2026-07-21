@@ -1,4 +1,4 @@
-# Phase 15 — Domain-Specific Workflows
+# Phase 17 — Domain Adaptation Packs
 
 ## 1. Status
 
@@ -112,9 +112,42 @@ Current status:
 - Finance and retail claims must match real experience.
 - Human judgment boundaries vary by domain.
 
-## 12. Sixty-Second Interview Answer
+## 12. JD-Aligned Core Answers
 
-> I start with the reusable controls—identity, policy, evidence, orchestration, evaluation, observability, and human governance—then adapt them to the domain's users, data, decisions, regulations, failure consequences, and metrics. Healthcare may emphasize PHI and clinician sign-off, finance segregation of duties and audit lineage, and retail latency, inventory freshness, fraud, and cost.
+### 30-Second Core Answer
+
+I keep the platform core reusable and move industry variation into domain
+adaptation packs. A pack defines the workflow vocabulary, evidence sources,
+data classifications, policies, tools, approval tiers, evaluation cases, and
+operational metrics for a domain such as healthcare or finance without forking
+the entire platform.
+
+### 60-Second Core Answer
+
+Domain adaptation should specialize the workflow without weakening the common
+control plane. The core retains identity propagation, orchestration, retrieval
+contracts, provider abstraction, policy, tool enforcement, evaluation, and
+observability. A healthcare pack can add clinical terminology, HIPAA-sensitive
+data classes, approved evidence sources, clinician review, safety-oriented
+abstention, and domain evaluation cases. A finance pack can add account and
+transaction scopes, segregation of duties, fraud or model-risk controls, and
+dual approval. Retail can emphasize catalog freshness, customer privacy,
+inventory actions, and seasonal scale. Each pack has its own tests and release
+evidence, while upgrades to the core remain reusable across domains.
+
+### Claim Defense
+
+Use healthcare and multi-industry professional context honestly. Domain packs
+are prospective lab assets, not current production deployments.
+
+Likely interviewer challenge:
+
+- What was your exact role?
+- Which artifacts did you personally create?
+- Was this architecture, local implementation, pilot, or production?
+- Which stakeholders or client environment were involved?
+- What measurable evidence supports the claim?
+- What remains unimplemented or unverified?
 
 ## 13. Shadow-Experience Exercise
 
@@ -166,6 +199,20 @@ The phase is interview-ready when the learner can:
 - Give the sixty-second answer naturally.
 - Complete the shadow exercise honestly.
 - Distinguish tutorial knowledge from implementation evidence.
+
+## 17A. Mock-Agent Retrieval Cues
+
+Route questions containing these topics to this phase:
+
+`healthcare, finance, retail, domain workflow, HIPAA, segregation of duties, adaptation pack, industry`
+
+The mock agent should answer in this order:
+
+1. Lead with the architectural or delivery decision.
+2. Give the 30-second answer unless depth is requested.
+3. Expand with the 60-second answer.
+4. Use verified evidence only when the claim defense supports it.
+5. State the implementation boundary before implying production use.
 
 ## 18. Exit Posture
 

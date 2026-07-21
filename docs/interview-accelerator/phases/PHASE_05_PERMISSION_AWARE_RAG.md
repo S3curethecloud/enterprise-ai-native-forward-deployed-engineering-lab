@@ -269,9 +269,44 @@ the source is accurate, authoritative, or safe.
 > revalidate candidates, preserve provenance, enforce freshness and deletion,
 > then construct bounded context or abstain.
 
-## 12. Sixty-Second Interview Answer
+## 12. JD-Aligned Core Answers
 
-> I would build RAG as a permission-aware evidence pipeline. Identity and policy filter sources before retrieval results enter model context. I would combine lexical and semantic retrieval where useful, rerank candidates, preserve source identifiers, validate citations, and measure recall, groundedness, access correctness, latency, and cost. If evidence is insufficient, the workflow should abstain.
+### 30-Second Core Answer
+
+I designed RAG so authorization happens before scoring or context construction.
+The pipeline intersects identity and policy scope, performs keyword, vector,
+and hybrid retrieval, builds bounded whole-chunk context, quarantines suspicious
+content, validates citations and freshness, and either returns grounded evidence
+or abstains. It also measures retrieval quality and records content-minimized
+telemetry.
+
+### 60-Second Core Answer
+
+My RAG design treats retrieval as an authorization-sensitive evidence pipeline,
+not just vector search. Identity and policy produce the allowed source,
+tenant, service, and classification scope before any candidate is scored.
+The implemented lab then supports deterministic keyword and vector retrieval,
+hybrid fusion, stable reranking, whole-chunk context budgets, source diversity,
+prompt-injection and contamination signals, exact citation and freshness
+validation, and controlled abstention. Phase 5 also adds precision at K, recall
+at K, reciprocal rank, correctness checks, latency and context metrics, and
+append-only content-minimized lifecycle telemetry. The important outcome is
+that relevance never creates authority, suspicious evidence never silently
+enters context, and unsupported answers fail closed with inspectable evidence.
+
+### Claim Defense
+
+Verified local synthetic implementation through Phase 5J, 954 tests, and
+exact-commit CI. No enterprise corpus, managed vector service, or model call.
+
+Likely interviewer challenge:
+
+- What was your exact role?
+- Which artifacts did you personally create?
+- Was this architecture, local implementation, pilot, or production?
+- Which stakeholders or client environment were involved?
+- What measurable evidence supports the claim?
+- What remains unimplemented or unverified?
 
 ## 13. Shadow-Experience Exercise
 
@@ -324,6 +359,20 @@ The phase is interview-ready when the learner can:
 - Give the sixty-second answer naturally.
 - Complete the shadow exercise honestly.
 - Distinguish tutorial knowledge from implementation evidence.
+
+## 17A. Mock-Agent Retrieval Cues
+
+Route questions containing these topics to this phase:
+
+`RAG, retrieval, embeddings, vector, hybrid, context, citations, grounding, prompt injection, precision, recall, abstention`
+
+The mock agent should answer in this order:
+
+1. Lead with the architectural or delivery decision.
+2. Give the 30-second answer unless depth is requested.
+3. Expand with the 60-second answer.
+4. Use verified evidence only when the claim defense supports it.
+5. State the implementation boundary before implying production use.
 
 ## 18. Exit Posture
 

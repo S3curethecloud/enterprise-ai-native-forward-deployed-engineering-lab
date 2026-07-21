@@ -113,9 +113,42 @@ Current repository status:
 - High-risk actions may require two distinct people.
 - Record what evidence the approver saw.
 
-## 12. Sixty-Second Interview Answer
+## 12. JD-Aligned Core Answers
 
-> I model approval as a typed, scoped, expiring authorization. The approver sees the recommendation, evidence, consequence, and exact action. The decision records identity and reason. Before execution, the runtime rechecks state version, policy, approval scope, and expiry. Self-approval, stale approval, and changed-state execution fail closed.
+### 30-Second Core Answer
+
+I use human approval selectively for consequential or ambiguous actions, not
+for every agent step. The approval binds an identified approver to an exact
+action, parameters, evidence snapshot, policy decision, expiration, and
+idempotency key. Any material change invalidates the approval and requires a
+new decision.
+
+### 60-Second Core Answer
+
+Human-in-the-loop should be a trusted execution control, not a generic chat
+confirmation. I classify actions by risk: read-only analysis can proceed under
+policy, reversible low-risk writes may use bounded automation, and high-impact
+actions require an authorized approver. The approval record binds the approver,
+role, proposed action, exact parameters, supporting evidence, policy decision,
+expiration, and one-time execution identity. If the plan, evidence, target, or
+policy changes, the approval is invalid. Execution then revalidates current
+authority and records the outcome. I would measure approval latency, rejection,
+expiry, override, duplicate prevention, and post-execution exceptions so the
+control remains effective without becoming an operational bottleneck.
+
+### Claim Defense
+
+Future lab capability and enterprise control pattern; no live approval-driven
+tool execution is currently claimed.
+
+Likely interviewer challenge:
+
+- What was your exact role?
+- Which artifacts did you personally create?
+- Was this architecture, local implementation, pilot, or production?
+- Which stakeholders or client environment were involved?
+- What measurable evidence supports the claim?
+- What remains unimplemented or unverified?
 
 ## 13. Shadow-Experience Exercise
 
@@ -166,6 +199,20 @@ The phase is interview-ready when the learner can:
 - Give the sixty-second answer naturally.
 - Complete the shadow exercise honestly.
 - Distinguish tutorial knowledge from implementation evidence.
+
+## 17A. Mock-Agent Retrieval Cues
+
+Route questions containing these topics to this phase:
+
+`human approval, HITL, trusted execution, high-risk action, approval scope, expiration, dual control`
+
+The mock agent should answer in this order:
+
+1. Lead with the architectural or delivery decision.
+2. Give the 30-second answer unless depth is requested.
+3. Expand with the 60-second answer.
+4. Use verified evidence only when the claim defense supports it.
+5. State the implementation boundary before implying production use.
 
 ## 18. Exit Posture
 

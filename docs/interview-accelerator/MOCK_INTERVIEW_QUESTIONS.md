@@ -1,5 +1,26 @@
 # AI Native Engineer Mock Interview
 
+## Canonical Mock-Agent Instructions
+
+Before asking or evaluating questions, apply
+[`MOCK_AGENT_OPERATING_PROMPT.md`](MOCK_AGENT_OPERATING_PROMPT.md).
+
+Retrieve the initial answer from
+[`PHASE_00_17_JD_ALIGNED_CORE_ANSWERS.md`](PHASE_00_17_JD_ALIGNED_CORE_ANSWERS.md),
+then use the matching canonical phase guide for deep follow-ups and claim
+defense.
+
+Rules:
+
+- Ask one question at a time.
+- Expect a 30-second initial response.
+- Request the 60-second version only when more depth is useful.
+- Probe exact role, stakeholders, artifacts, scope, deployment status, metrics,
+  and limitations for experience claims.
+- Never treat a future phase or shadow exercise as implemented production work.
+- Score directness, architecture, hands-on depth, enterprise judgment,
+  production realism, claim accuracy, and communication.
+
 ## 1. Purpose
 
 This guide tests whether the learner can explain the target role using:

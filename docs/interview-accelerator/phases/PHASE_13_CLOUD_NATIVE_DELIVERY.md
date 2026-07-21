@@ -1,4 +1,4 @@
-# Phase 13 — Cloud-Native Delivery
+# Phase 13 — Cloud-Native Deployment
 
 ## 1. Status
 
@@ -119,9 +119,43 @@ Current status:
 - Serverless shifts operations but does not eliminate them.
 - Events require idempotency, schema governance, and observability.
 
-## 12. Sixty-Second Interview Answer
+## 12. JD-Aligned Core Answers
 
-> I would package each bounded service as a minimal non-root image, validate it through CI, provision infrastructure with Terraform, and deploy Kubernetes resources through Helm or an equivalent release process. Health, readiness, identity, secrets, resources, telemetry, gradual rollout, and rollback are part of the design. For intermittent event handlers I would also evaluate serverless, but account for cold starts, state, limits, and vendor coupling.
+### 30-Second Core Answer
+
+I deploy each AI-native component according to its workload rather than forcing
+everything into one runtime. Stateless APIs may use containers or serverless,
+long-running orchestration needs durable state, and event-driven workers absorb
+variable load. Terraform and Helm define repeatable infrastructure, while CI/CD
+enforces tests, security checks, progressive rollout, and rollback.
+
+### 60-Second Core Answer
+
+My deployment design starts with workload characteristics: latency, state,
+concurrency, burstiness, data sensitivity, provider connectivity, and failure
+isolation. Gateway and stateless services can run as autoscaled containers or
+serverless functions; durable orchestration uses an appropriate state store;
+event-driven queues decouple ingestion and long-running work. Kubernetes
+deployments use resource limits, probes, disruption budgets, network policies,
+workload identity, secrets integration, and controlled egress. Terraform and
+Helm provide reviewed, repeatable environments. CI/CD builds signed artifacts,
+runs contract and evaluation gates, scans dependencies and images, deploys
+progressively, verifies health and SLOs, and supports rollback. Model and tool
+credentials never enter prompts or images.
+
+### Claim Defense
+
+Ground this in actual cloud, Kubernetes, Terraform, Docker, and CI/CD
+experience. The lab itself is currently local/CI, not cloud deployed.
+
+Likely interviewer challenge:
+
+- What was your exact role?
+- Which artifacts did you personally create?
+- Was this architecture, local implementation, pilot, or production?
+- Which stakeholders or client environment were involved?
+- What measurable evidence supports the claim?
+- What remains unimplemented or unverified?
 
 ## 13. Shadow-Experience Exercise
 
@@ -176,6 +210,20 @@ The phase is interview-ready when the learner can:
 - Give the sixty-second answer naturally.
 - Complete the shadow exercise honestly.
 - Distinguish tutorial knowledge from implementation evidence.
+
+## 17A. Mock-Agent Retrieval Cues
+
+Route questions containing these topics to this phase:
+
+`Kubernetes, Docker, Terraform, Helm, serverless, event-driven, CI/CD, deployment, scaling, microservices`
+
+The mock agent should answer in this order:
+
+1. Lead with the architectural or delivery decision.
+2. Give the 30-second answer unless depth is requested.
+3. Expand with the 60-second answer.
+4. Use verified evidence only when the claim defense supports it.
+5. State the implementation boundary before implying production use.
 
 ## 18. Exit Posture
 

@@ -119,9 +119,42 @@ Current repository status:
 - Use human review to calibrate model-based graders.
 - Release evidence should be reproducible.
 
-## 12. Sixty-Second Interview Answer
+## 12. JD-Aligned Core Answers
 
-> I treat evaluation as release engineering. I define versioned cases and thresholds for retrieval, groundedness, citations, tools, policy, safety, latency, and cost. I record model, prompt, dataset, and configuration lineage, compare candidates to a baseline, calibrate model graders with human review, and fail the release when required evidence is missing.
+### 30-Second Core Answer
+
+I treat evaluation as a release discipline, not a final demo score. I test
+retrieval, orchestration, policy, tool behavior, grounded responses, safety,
+latency, and cost separately and end to end. Versioned datasets, thresholds,
+regression comparisons, and failure slices determine whether a change can
+advance.
+
+### 60-Second Core Answer
+
+My EvalOps approach begins with a versioned dataset representing supported
+answers, insufficient evidence, policy denial, stale or invalid citations,
+unsafe tool requests, timeouts, and domain-specific edge cases. I score
+components independently—retrieval recall and precision, citation validity,
+policy correctness, tool success—and then evaluate the complete workflow for
+groundedness, task success, safety, latency, and cost. Results are segmented by
+tenant, domain, risk class, provider, and failure type so averages cannot hide
+critical regressions. CI compares the candidate with a baseline and enforces
+explicit release thresholds. Production feedback can propose new cases, but
+dataset changes require review to prevent metric gaming and uncontrolled drift.
+
+### Claim Defense
+
+Phase 5 includes implemented deterministic retrieval evaluation. Full model,
+tool, cost, and end-to-end EvalOps remains a future Phase 10 capability.
+
+Likely interviewer challenge:
+
+- What was your exact role?
+- Which artifacts did you personally create?
+- Was this architecture, local implementation, pilot, or production?
+- Which stakeholders or client environment were involved?
+- What measurable evidence supports the claim?
+- What remains unimplemented or unverified?
 
 ## 13. Shadow-Experience Exercise
 
@@ -174,6 +207,20 @@ The phase is interview-ready when the learner can:
 - Give the sixty-second answer naturally.
 - Complete the shadow exercise honestly.
 - Distinguish tutorial knowledge from implementation evidence.
+
+## 17A. Mock-Agent Retrieval Cues
+
+Route questions containing these topics to this phase:
+
+`evaluation, EvalOps, accuracy, groundedness, regression, test dataset, threshold, latency, cost, model judge`
+
+The mock agent should answer in this order:
+
+1. Lead with the architectural or delivery decision.
+2. Give the 30-second answer unless depth is requested.
+3. Expand with the 60-second answer.
+4. Use verified evidence only when the claim defense supports it.
+5. State the implementation boundary before implying production use.
 
 ## 18. Exit Posture
 

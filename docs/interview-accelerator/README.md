@@ -1,5 +1,46 @@
 # AI-Native Engineer Interview Accelerator
 
+## Interview-Day Canonical Routing
+
+For tomorrow's mock and live interview preparation, use this source order:
+
+1. [`PHASE_00_17_JD_ALIGNED_CORE_ANSWERS.md`](PHASE_00_17_JD_ALIGNED_CORE_ANSWERS.md)
+2. [`MOCK_AGENT_OPERATING_PROMPT.md`](MOCK_AGENT_OPERATING_PROMPT.md)
+3. The matching canonical phase guide below
+4. [`INTERVIEW_DAY_RAPID_REVIEW.md`](INTERVIEW_DAY_RAPID_REVIEW.md)
+5. Experience and shadow-scenario guides for defensible examples
+
+The canonical phases are:
+
+| Phase | Interview guide |
+|---|---|
+| 0 — JD decomposition and foundation | [`PHASE_00_JD_DECOMPOSITION_AND_FOUNDATION.md`](phases/PHASE_00_JD_DECOMPOSITION_AND_FOUNDATION.md) |
+| 1 — Client discovery under ambiguity | [`PHASE_01_CLIENT_DISCOVERY_UNDER_AMBIGUITY.md`](phases/PHASE_01_CLIENT_DISCOVERY_UNDER_AMBIGUITY.md) |
+| 2 — Thin vertical slice | [`PHASE_02_THIN_VERTICAL_SLICE.md`](phases/PHASE_02_THIN_VERTICAL_SLICE.md) |
+| 3 — Cloud-native prototype foundation | [`PHASE_03_CLOUD_NATIVE_PROTOTYPE_FOUNDATION.md`](phases/PHASE_03_CLOUD_NATIVE_PROTOTYPE_FOUNDATION.md) |
+| 4 — Agent runtime and orchestration | [`PHASE_04_AGENT_RUNTIME_AND_ORCHESTRATION.md`](phases/PHASE_04_AGENT_RUNTIME_AND_ORCHESTRATION.md) |
+| 5 — Permission-aware RAG | [`PHASE_05_PERMISSION_AWARE_RAG.md`](phases/PHASE_05_PERMISSION_AWARE_RAG.md) |
+| 6 — Multi-provider abstraction | [`PHASE_06_MULTI_PROVIDER_ABSTRACTION.md`](phases/PHASE_06_MULTI_PROVIDER_ABSTRACTION.md) |
+| 7 — Typed enterprise tools | [`PHASE_07_TYPED_ENTERPRISE_TOOLS.md`](phases/PHASE_07_TYPED_ENTERPRISE_TOOLS.md) |
+| 8 — Deterministic policy routing | [`PHASE_08_POLICY_BASED_ROUTING.md`](phases/PHASE_08_POLICY_BASED_ROUTING.md) |
+| 9 — Human approval and trusted execution | [`PHASE_09_HUMAN_APPROVAL.md`](phases/PHASE_09_HUMAN_APPROVAL.md) |
+| 10 — Evaluation and EvalOps | [`PHASE_10_EVALUATION_AND_EVALOPS.md`](phases/PHASE_10_EVALUATION_AND_EVALOPS.md) |
+| 11 — Lifecycle observability | [`PHASE_11_LIFECYCLE_OBSERVABILITY.md`](phases/PHASE_11_LIFECYCLE_OBSERVABILITY.md) |
+| 12 — Enterprise integration and code-with | [`PHASE_12_CLIENT_ENGAGEMENT.md`](phases/PHASE_12_CLIENT_ENGAGEMENT.md) |
+| 13 — Cloud-native deployment | [`PHASE_13_CLOUD_NATIVE_DELIVERY.md`](phases/PHASE_13_CLOUD_NATIVE_DELIVERY.md) |
+| 14 — Production-readiness gate | [`PHASE_14_PRODUCTION_READINESS.md`](phases/PHASE_14_PRODUCTION_READINESS.md) |
+| 15 — Staged release and controlled autonomy | [`PHASE_15_STAGED_RELEASE_AND_CONTROLLED_AUTONOMY.md`](phases/PHASE_15_STAGED_RELEASE_AND_CONTROLLED_AUTONOMY.md) |
+| 16 — Reusable enterprise patterns | [`PHASE_16_REUSABLE_ENTERPRISE_PATTERNS.md`](phases/PHASE_16_REUSABLE_ENTERPRISE_PATTERNS.md) |
+| 17 — Domain adaptation packs | [`PHASE_17_DOMAIN_ADAPTATION_PACKS.md`](phases/PHASE_17_DOMAIN_ADAPTATION_PACKS.md) |
+
+Supplemental knowledge:
+
+- [`SUPPLEMENT_COMPOUND_AI_AND_AGENT_REGISTRY.md`](phases/SUPPLEMENT_COMPOUND_AI_AND_AGENT_REGISTRY.md)
+
+Every canonical guide contains a 30-second answer, a 60-second answer, claim
+defense, and mock-agent routing cues. Interview learning can describe future
+architecture, but only verified evidence can support “I implemented” claims.
+
 ## 1. Purpose
 
 This directory converts Phases 5–17 of the lab into a documentation-only
@@ -444,7 +485,7 @@ Interview outcome:
 Explain the difference between a successful prototype and a system an
 enterprise can safely operate.
 
-## 16. Phase 15 — Domain-Specific Workflows
+## Supplemental Topic — Domain-Specific Workflow Knowledge (Canonical Phase 17)
 
 Learn how the same architecture changes across:
 
@@ -481,7 +522,7 @@ Interview outcome:
 Explain which architectural controls remain universal and which must be
 adapted to a domain's data, risks, workflows, and regulations.
 
-## 17. Phase 16 — Compound AI and Bonus Knowledge
+## Supplemental Topic — Compound AI and Agent Registries
 
 Learn:
 
@@ -513,7 +554,7 @@ Explain that an enterprise agent is not merely a prompt. It is a compound
 system combining models with retrieval, tools, policies, state, evaluation,
 observability, infrastructure, and human governance.
 
-## 18. Phase 17 — Reusable Patterns and Synthesis
+## Supplemental Topic — Reusable Pattern Knowledge (Canonical Phase 16)
 
 Learn:
 
@@ -578,7 +619,7 @@ professional employment history or production deployment experience.
 
 ## 21. Standard Tutorial Structure
 
-Every Phase 5–17 tutorial must contain:
+Every canonical Phase 0–17 tutorial must contain:
 
 Purpose
 Connection to the job description
@@ -648,10 +689,10 @@ Give concise thirty-second and sixty-second answers
 After the interview:
 
 Preserve this directory as a reusable learning asset.
-Return to the implementation roadmap at Phase 5.
-Review Phase 5 authority before changing executable code.
-Convert the Phase 5 tutorial into an implementation design.
-Implement and validate Phase 5 under a separate gate.
+Return to the implementation roadmap at Phase 6 after the interview.
+Review Phase 6 authority before changing executable code.
+Convert the Phase 6 tutorial into an implementation design.
+Implement and validate Phase 6 under a separate gate.
 Continue through Phase 17 without treating tutorial completion as
 implementation evidence.
 ## 25. Current Decision
