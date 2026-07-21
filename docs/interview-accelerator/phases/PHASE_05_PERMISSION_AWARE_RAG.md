@@ -4,30 +4,30 @@
 
 | Dimension | Status |
 |---|---|
-| Learning guide | Updated through verified Phase 5D permission filtering |
+| Learning guide | Updated through locally verified Phase 5E vector retrieval |
 | Interview review | Pending |
-| Enterprise implementation | Phase 5D implementation verified; closure-commit CI pending |
-| Implementation authority | Phase 5D closure commit only; Phase 5E authorized only after closure-commit CI |
+| Enterprise implementation | Phase 5E locally complete; remote CI pending |
+| Implementation authority | Phase 5E implementation commit only; Phase 5F not authorized |
 
 Phase 5C closed after exact-commit CI run
 [`29795787216`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795787216)
 passed against closure commit
 `0e757ab896d61a29ec520e614bd4276a1291e9cc`.
 
-Phase 5D implemented tenant, service, classification, resource,
-source-type, lifecycle, and policy-lineage filtering before keyword
-scoring. Exact-commit CI run
-[`29805548139`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29805548139)
-passed against implementation commit
-`f3e654da813f4b5bbfd42d5b5cdbc9e14980d1ae`. Phase 5D closure-commit CI
-remains pending.
+Phase 5D closed after exact-commit CI run
+[`29807419438`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29807419438)
+passed against closure commit
+`bdc235b7936186baedeec1181938f57977150b35`.
 
-Phase 5E local deterministic embeddings and vector retrieval becomes
-authorized only after the Phase 5D closure commit passes exact-commit CI.
-External embeddings, managed vector databases, enterprise sources,
-production data, hybrid retrieval, reranking, context construction,
-external providers, tools, retrieval API routes, cloud deployment, and
-production deployment remain unauthorized.
+Phase 5E has locally implemented deterministic feature-hash embeddings,
+an immutable synthetic vector index, cosine-similarity retrieval, and the
+same authorization-before-score boundary used by keyword retrieval.
+Its implementation commit and remote CI evidence remain pending.
+
+External embeddings, downloaded models, managed vector databases,
+enterprise sources, production data, hybrid retrieval, reranking, context
+construction, external providers, tools, retrieval API routes, cloud
+deployment, and production deployment remain unauthorized.
 
 ## 2. Job-Description Connection
 
@@ -340,6 +340,8 @@ Phase 5B implementation evidence:
 - Complete repository tests: 723 passed
 - CI quality job: Passed
 - CI container job: Passed
+- Phase 5D closure commit: `bdc235b7936186baedeec1181938f57977150b35`
+- Phase 5D closure CI run: [`29807419438`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29807419438)
 
 Phase 5B implemented and verified the immutable contract layer only.
 
@@ -570,15 +572,167 @@ deployment.
 - CI quality job: Passed
 - CI container job: Passed
 
-Phase 5D implementation evidence is verified. Phase 5D closure still
-requires the closure commit to pass exact-commit CI.
+Phase 5D closed after exact-commit CI run
+[`29807419438`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29807419438)
+passed against closure commit
+`bdc235b7936186baedeec1181938f57977150b35`.
 
-Next bounded work after closure-commit CI:
+Phase 5E is now locally implemented. Its implementation commit and remote
+CI evidence remain pending. Phase 5F hybrid retrieval and reranking remain
+unauthorized.
 
-Phase 5E — Local deterministic embeddings and vector retrieval
+## Phase 5E Implementation-Derived Concepts
 
-Phase 5E is limited to local deterministic embeddings and local vector
-retrieval over synthetic evidence. External embedding providers, managed
-vector databases, enterprise sources, production data, hybrid retrieval,
-reranking, context construction, provider calls, tools, retrieval API
-routes, cloud deployment, and production deployment remain unauthorized.
+### Embedding
+
+An embedding converts text into a fixed-length numeric vector.
+
+The goal is to place text with related features in comparable vector
+directions so retrieval can rank evidence using mathematical similarity.
+
+Mental note: an embedding is a representation, not authorization, evidence,
+or an answer.
+
+### Deterministic Feature Hashing
+
+Phase 5E uses a local feature-hash embedding.
+
+Each normalized token is hashed into one of 256 dimensions with a stable
+positive or negative direction. The resulting vector is normalized to unit
+length.
+
+The embedding version is `deterministic-feature-hash-v1`.
+
+Mental note: this proves embedding and vector-retrieval mechanics without
+downloading a model or calling an external provider.
+
+### Vector Retrieval
+
+Vector retrieval embeds the query and compares it with precomputed evidence
+vectors.
+
+Phase 5E ranks authorized synthetic chunks by cosine similarity and returns
+typed candidates with citations.
+
+Mental note: keyword retrieval compares explicit words. Vector retrieval
+compares numeric representations. This lab’s feature-hash embedding still
+has limited semantic understanding.
+
+### Cosine Similarity
+
+Cosine similarity measures the angle between vectors rather than their raw
+size.
+
+A score near one means the vectors point in similar directions. A score of
+zero means they are orthogonal or one vector is empty. Negative similarity
+means opposing directions.
+
+Mental note: similarity measures relevance, not permission or factual
+correctness.
+
+### Fixed Vector Dimensions
+
+Every Phase 5E vector has exactly 256 dimensions.
+
+A fixed dimension is necessary because cosine similarity requires compatible
+vector shapes. A dimension mismatch is rejected.
+
+Mental note: the embedding model and vector index must agree on dimensions.
+
+### Embedding and Index Versioning
+
+The embedding version identifies how text becomes a vector.
+
+The index version identifies how vectors are packaged and related to the
+corpus.
+
+Phase 5E uses:
+
+- Embedding version: `deterministic-feature-hash-v1`
+- Index version: `synthetic-vector-index-v1`
+
+Mental note: changing the embedding algorithm normally requires rebuilding
+and reevaluating the index.
+
+### Content-to-Vector Lineage
+
+Each vector entry carries the source chunk identifier, content hash, and
+embedding version.
+
+The index rejects missing chunks, duplicate entries, mismatched hashes,
+unsupported embedding versions, and invalid dimensions.
+
+Mental note: a vector must remain traceable to the exact evidence content
+that produced it.
+
+### Authorization Before Similarity
+
+Phase 5E applies CT-03 resource, source-type, tenant, service,
+classification, and lifecycle filters before cosine scoring.
+
+An executable test replaces the similarity function with a failure sentinel
+and proves that rejected evidence never reaches it.
+
+Mental note: an unauthorized vector should not be scored and discarded
+later. It should never enter the scorer.
+
+### Stable Vector Ranking
+
+Phase 5E sorts candidates by descending similarity and then by stable
+evidence identifiers.
+
+This makes equal-score results repeatable instead of dependent on corpus
+insertion order.
+
+Mental note: deterministic scoring still requires deterministic tie-breaking.
+
+### Teaching Embedding Versus Production Semantic Model
+
+The Phase 5E feature-hash embedding is deterministic, dependency-free, and
+useful for proving architecture and controls.
+
+It is not trained on language semantics, does not provide production
+retrieval quality, may experience hash collisions, and does not replace a
+versioned production embedding model.
+
+Mental note: describe what the implementation proves without overstating
+what it understands.
+
+### Honest Phase 5E Interview Statement
+
+In Phase 5E, I implemented a local deterministic vector-retrieval slice over
+synthetic evidence. I added a versioned 256-dimensional feature-hash
+embedding, cosine similarity, an immutable content-addressed vector index,
+stable ranking, citations, and explicit abstention.
+
+I also extracted the Phase 5D authorization boundary into shared internal
+security helpers so keyword and vector retrieval enforce identical resource,
+source-type, tenant, service, classification, lifecycle, lineage, expiration,
+and policy-limit rules before scoring.
+
+The local evidence is 15 embedding tests, 23 vector tests, 124 retrieval
+tests, and 814 repository tests. Ruff, formatting, strict type checking,
+dependency validation, and the capability-boundary scan pass locally.
+
+The Phase 5E implementation commit and exact-commit remote CI evidence remain
+pending.
+
+I did not implement a trained semantic model, external embeddings, enterprise
+data integration, a managed vector database, hybrid retrieval, reranking,
+context construction, provider calls, tools, retrieval API routes, cloud
+deployment, or production deployment.
+
+## Phase 5E Local Evidence
+
+- Embedding version: `deterministic-feature-hash-v1`
+- Embedding dimensions: 256
+- Vector-index version: `synthetic-vector-index-v1`
+- Embedding tests: 15 passed
+- Vector tests: 23 passed
+- Retrieval tests: 124 passed
+- Complete repository tests: 814 passed
+- Public retrieval exports: 28
+- Local quality gates: Passed
+- Remote exact-commit CI: Pending
+
+Phase 5F hybrid retrieval and reranking remain unauthorized.
