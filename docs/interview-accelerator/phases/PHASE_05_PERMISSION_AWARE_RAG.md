@@ -341,3 +341,77 @@ Phase 5C remains local, synthetic, deterministic, and read-only.
 It does not authorize enterprise sources, vector retrieval,
 embeddings, reranking, provider calls, tools, retrieval API routes,
 cloud deployment, or production deployment.
+
+## Phase 5C Implementation-Derived Concepts
+
+### Lexical Retrieval
+
+Lexical retrieval finds evidence through explicit token overlap between the
+query and evidence text.
+
+In this lab, the score is the number of unique query tokens found in a
+chunk divided by the number of unique query tokens.
+
+Mental note: lexical retrieval matches words. Semantic retrieval attempts
+to match meaning. Phase 5C implements lexical retrieval only.
+
+### Content-Addressed Integrity
+
+Content-addressed integrity binds evidence content to a deterministic
+SHA-256 hash.
+
+When a document or chunk enters the synthetic corpus, its declared hash
+must match the hash calculated from its exact UTF-8 content. A mismatch is
+rejected.
+
+Mental note: the hash detects content changes. It does not prove who
+created the evidence and is not a digital signature.
+
+### Stable Tie-Breaking
+
+Stable tie-breaking gives equally scored candidates a deterministic order.
+
+Phase 5C orders equal scores using source identifier, document identifier,
+chunk index, and chunk identifier. Corpus insertion order therefore does
+not change the result.
+
+Mental note: deterministic retrieval requires both deterministic scores
+and deterministic handling of ties.
+
+### Source Scope Before Scoring
+
+Phase 5C removes non-allowlisted source identifiers, non-allowlisted source
+kinds, and tombstoned chunks before keyword scoring.
+
+Mental note: evidence outside the authorized source scope should never
+become a scored candidate.
+
+This is narrower than full permission filtering. Tenant, service, and
+classification filtering remain Phase 5D work.
+
+### Cite-or-Abstain Behavior
+
+Phase 5C either returns ranked candidates with citations or returns an
+explicit abstention.
+
+It abstains when authority has expired, no source is authorized, the query
+contains no searchable terms, or no evidence meets the configured score
+threshold.
+
+Mental note: no acceptable evidence is a controlled outcome, not a reason
+to fabricate context.
+
+### Honest Phase 5C Interview Statement
+
+In Phase 5C, I implemented deterministic read-only keyword retrieval over
+an immutable synthetic corpus. I added SHA-256 content-integrity checks,
+normalized lexical scoring, source allowlisting before scoring, tombstone
+exclusion, stable tie-breaking, citations, and explicit abstention.
+
+The local evidence is 23 corpus tests, 16 keyword tests, 76 total retrieval
+tests, and 762 repository tests.
+
+Remote CI and Phase 5C closure remain pending. I did not implement
+enterprise retrieval, tenant or service filtering, classification
+filtering, embeddings, vector search, hybrid retrieval, reranking, context
+construction, provider calls, tools, or retrieval API routes.
