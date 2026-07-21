@@ -13,8 +13,8 @@ or infrastructure authority.
 ## 2. Current Decision
 
 > PHASE 5J LOCAL IMPLEMENTATION: COMPLETE
-> PHASE 5J IMPLEMENTATION COMMIT: AUTHORIZED
-> PHASE 5J REMOTE CI: PENDING
+> PHASE 5J IMPLEMENTATION COMMIT: VERIFIED
+> PHASE 5J REMOTE CI: PASSED
 > PHASE 5J CLOSURE: PENDING
 > PHASE 5: NOT YET CLOSED
 > PHASE 6: NOT AUTHORIZED
@@ -337,15 +337,21 @@ Phase 5J closure requires the exact implementation commit to pass:
 - Python quality and contract tests
 - Local container build and health verification
 
-The implementation commit and CI run must be recorded before Phase 5J can be
-closed. A separate closure commit must then pass exact-commit CI before Phase
-6 can become authorized.
+The Phase 5J implementation commit is
+`65befbcc2a5d9a6ac71b90b994c9d60f25ea5cfe`.
+
+Exact-commit CI run
+[`29865065469`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29865065469)
+passed both required jobs against that implementation commit.
+
+Phase 5J closure remains pending. A separate closure commit must pass
+exact-commit CI before Phase 5 can close or Phase 6 can become authorized.
 
 ## 25. Current Exit Posture
 
 > PHASE 5J LOCAL IMPLEMENTATION: COMPLETE
 > LOCAL QUALITY: PASSED
-> REMOTE CI: PENDING
+> REMOTE CI: PASSED
 > PHASE 5J CLOSURE: PENDING
 > PHASE 5: NOT YET CLOSED
 > PHASE 6 MULTI-PROVIDER ABSTRACTION: NOT AUTHORIZED

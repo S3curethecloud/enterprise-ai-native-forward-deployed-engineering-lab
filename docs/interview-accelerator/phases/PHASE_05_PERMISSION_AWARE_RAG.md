@@ -6,8 +6,8 @@
 |---|---|
 | Learning guide | Updated through locally verified Phase 5J retrieval evaluation and lifecycle telemetry |
 | Interview review | Pending |
-| Enterprise implementation | Phase 5J locally complete; remote CI pending |
-| Implementation authority | Phase 5J implementation commit only; Phase 6 not authorized |
+| Enterprise implementation | Phase 5J implementation verified; closure-commit CI pending |
+| Implementation authority | Phase 5J closure commit only; Phase 6 authorized only after closure-commit CI and explicit Phase 5 closure |
 
 Phase 5C closed after exact-commit CI run
 [`29795787216`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795787216)
@@ -82,6 +82,11 @@ reciprocal rank, citation correctness, freshness correctness, abstention
 correctness, query latency, context size, and explicit threshold outcomes.
 It records allowlisted, content-minimized, append-only telemetry with request
 and trace correlation and deterministic hash lineage.
+
+Phase 5J passed exact-commit CI run
+[`29865065469`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29865065469)
+against implementation commit
+`65befbcc2a5d9a6ac71b90b994c9d60f25ea5cfe`. Phase 5J closure-commit CI remains pending.
 
 External evaluators, semantic or factual-correctness judges, provider
 adapters or calls, enterprise sources, production data, external telemetry
@@ -1633,7 +1638,10 @@ external EvalOps, or provider evaluation.
 - Complete repository tests: 954 passed
 - Public retrieval exports: 79
 - Local quality gates: Passed
-- Remote exact-commit CI: Pending
+- Implementation commit: `65befbcc2a5d9a6ac71b90b994c9d60f25ea5cfe`
+- Exact-commit CI run: [`29865065469`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29865065469)
+- Remote exact-commit CI: Passed
+- Phase 5J closure-commit CI: Pending
 - Phase 5J closure: Pending
 - Phase 5 closure: Pending
 

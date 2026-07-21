@@ -380,13 +380,22 @@ The lab is complete when a learner can:
 | Phase 5H content-control pytest cases | 26 passing |
 | Phase 5H retrieval tests | 205 passing |
 | Complete local test suite | 895 passing |
-| Phase 5I citation validation and controlled abstention | Implementation verified; closure-commit CI pending |
+| Phase 5I citation validation and controlled abstention | Complete |
 | Phase 5I implementation commit | f4d3c2079535699374e3ff08a1f955f8f26321f9 |
 | Phase 5I CI run | [29848371644](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29848371644) |
+| Phase 5I closure commit | 501ee512037943a0960878a296309c5922777e9f |
+| Phase 5I closure CI run | [29852373709](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29852373709) |
 | Phase 5I citation-validation pytest cases | 26 passing |
 | Phase 5I retrieval tests | 231 passing |
 | Complete local test suite | 921 passing |
-| Phase 5J retrieval evaluation and lifecycle telemetry | Authorized only after Phase 5I closure-commit CI |
+| Phase 5J retrieval evaluation and lifecycle telemetry | Implementation verified; closure-commit CI pending |
+| Phase 5J implementation commit | 65befbcc2a5d9a6ac71b90b994c9d60f25ea5cfe |
+| Phase 5J CI run | [29865065469](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29865065469) |
+| Phase 5J evaluation pytest cases | 33 passing |
+| Phase 5J retrieval tests | 264 passing |
+| Complete local test suite | 954 passing |
+| Phase 5 — Permission-aware RAG | In progress; Phase 5J closure-commit CI pending |
+| Phase 6 multi-provider abstraction | Authorized only after Phase 5J closure-commit CI and explicit Phase 5 closure |
 | Local vector retrieval | Synthetic and deterministic only |
 | Enterprise retrieval | Not authorized |
 | External embeddings and managed vector databases | Not authorized |
@@ -541,17 +550,42 @@ resolution, content-hash and complete-content verification, lifecycle and
 freshness enforcement, all-or-nothing validated bundles, and explicit
 controlled abstention.
 
-Next Authorized Work After Phase 5I Closure-Commit CI
+PHASE 5I CLOSURE COMMIT:
+501ee512037943a0960878a296309c5922777e9f
 
-PHASE 5J — RETRIEVAL EVALUATION AND LIFECYCLE TELEMETRY
+PHASE 5I CLOSURE CI RUN:
+29852373709
 
-Phase 5J may begin only after the Phase 5I closure-evidence commit passes
-exact-commit CI.
+PHASE 5I CLOSURE RESULT:
+SUCCESS
+
+PHASE 5J IMPLEMENTATION COMMIT:
+65befbcc2a5d9a6ac71b90b994c9d60f25ea5cfe
+
+PHASE 5J EXACT-COMMIT CI RUN:
+29865065469
+
+PHASE 5J CI RESULT:
+SUCCESS
+
+VERIFIED PHASE 5J CAPABILITY:
+Versioned deterministic retrieval evaluation, synthetic relevance labels,
+precision at K, recall at K, reciprocal rank, citation, freshness, and
+abstention correctness, bounded latency and context measurements, explicit
+threshold evidence, and content-minimized append-only lifecycle telemetry
+with deterministic hash lineage.
+
+Next Authorized Work After Phase 5J Closure-Commit CI
+
+PHASE 6 — MULTI-PROVIDER ABSTRACTION
+
+Phase 6 may begin only after the Phase 5J closure-evidence commit passes
+exact-commit CI and Phase 5 is explicitly recorded as closed.
 
 Enterprise sources, production data, external evaluators, external telemetry
-services, model providers, prompt execution, tools, retrieval API routes,
-infrastructure mutation, cloud deployment, and production deployment remain
-unauthorized.
+services, provider adapters or calls, prompt execution, tools, retrieval API
+routes, infrastructure mutation, cloud deployment, and production deployment
+remain unauthorized.
 ```
 
 ## Independent Project Notice

@@ -694,13 +694,21 @@ Every implementation phase must end with:
 | Phase 5H — Content-control pytest cases | 26 passing |
 | Phase 5H — Retrieval tests | 205 passing |
 | Phase 5H — Complete local test suite | 895 passing |
-| Phase 5I — Citation validation and controlled abstention | Implementation verified; closure-commit CI pending |
+| Phase 5I — Citation validation and controlled abstention | Complete |
 | Phase 5I — Implementation commit | f4d3c2079535699374e3ff08a1f955f8f26321f9 |
 | Phase 5I — CI run | [29848371644](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29848371644) |
+| Phase 5I — Closure commit | 501ee512037943a0960878a296309c5922777e9f |
+| Phase 5I — Closure CI run | [29852373709](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29852373709) |
 | Phase 5I — Citation-validation pytest cases | 26 passing |
 | Phase 5I — Retrieval tests | 231 passing |
 | Phase 5I — Complete local test suite | 921 passing |
-| Phase 5J — Retrieval evaluation and lifecycle telemetry | Authorized only after Phase 5I closure-commit CI |
+| Phase 5J — Retrieval evaluation and lifecycle telemetry | Implementation verified; closure-commit CI pending |
+| Phase 5J — Implementation commit | 65befbcc2a5d9a6ac71b90b994c9d60f25ea5cfe |
+| Phase 5J — CI run | [29865065469](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29865065469) |
+| Phase 5J — Evaluation pytest cases | 33 passing |
+| Phase 5J — Retrieval tests | 264 passing |
+| Phase 5J — Complete local test suite | 954 passing |
+| Phase 6 — Multi-provider abstraction | Authorized only after Phase 5J closure-commit CI and explicit Phase 5 closure |
 | Phases 6–17 | Not started |
 
 ## Phase 4 Closure Evidence
@@ -822,12 +830,44 @@ Five controlled abstention reasons
 Request, trace, policy, corpus, and source lineage
 No retained-evidence rewriting
 
-Next Authorized Work After Phase 5I Closure-Commit CI
+Phase 5I Closure Evidence
 
-PHASE 5J — RETRIEVAL EVALUATION AND LIFECYCLE TELEMETRY
+Closure commit:
+501ee512037943a0960878a296309c5922777e9f
 
-Phase 5J may begin only after the Phase 5I closure-evidence commit passes
-exact-commit CI.
+Exact-commit closure CI run:
+29852373709
+
+Phase 5J Verified Implementation
+
+Implementation commit:
+65befbcc2a5d9a6ac71b90b994c9d60f25ea5cfe
+
+Exact-commit implementation CI run:
+29865065469
+
+Implemented and verified:
+
+Versioned evaluation and telemetry contracts
+Synthetic ground-truth expectations
+Precision at K and recall at K
+Reciprocal rank
+Citation, freshness, and abstention correctness
+Bounded query-latency and context-size measurements
+Explicit deterministic thresholds
+Stable pass-or-fail evidence
+Five allowlisted retrieval lifecycle stages
+Content-minimized append-only telemetry
+Per-trace deterministic hash lineage
+History tamper detection
+CT-07 and Phase 4 checkpoint boundaries preserved
+
+Next Authorized Work After Phase 5J Closure-Commit CI
+
+PHASE 6 — MULTI-PROVIDER ABSTRACTION
+
+Phase 6 may begin only after the Phase 5J closure-evidence commit passes
+exact-commit CI and Phase 5 is explicitly recorded as closed.
 
 Not authorized:
 
@@ -835,7 +875,7 @@ Enterprise sources
 Production data
 External evaluators
 External telemetry services
-External model providers
+External model providers or provider calls
 Prompt or model execution
 Tool execution
 Human approval execution
