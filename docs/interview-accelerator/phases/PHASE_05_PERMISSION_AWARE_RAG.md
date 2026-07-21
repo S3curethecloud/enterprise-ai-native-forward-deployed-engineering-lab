@@ -4,10 +4,10 @@
 
 | Dimension | Status |
 |---|---|
-| Learning guide | Updated through locally verified Phase 5I citation validation |
+| Learning guide | Updated through locally verified Phase 5J retrieval evaluation and lifecycle telemetry |
 | Interview review | Pending |
-| Enterprise implementation | Phase 5I implementation verified; closure-commit CI pending |
-| Implementation authority | Phase 5I closure commit only; Phase 5J authorized only after closure-commit CI |
+| Enterprise implementation | Phase 5J locally complete; remote CI pending |
+| Implementation authority | Phase 5J implementation commit only; Phase 6 not authorized |
 
 Phase 5C closed after exact-commit CI run
 [`29795787216`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795787216)
@@ -66,17 +66,27 @@ Phase 5H closed after exact-commit CI run
 passed against closure commit
 `f72e2a5230517597a641e8994cff4a72612bc833`.
 
-Phase 5I has locally implemented deterministic citation validation and
-controlled abstention over retained Phase 5H evidence. It verifies exact
-source, document, version, chunk, hash, locator, content, lifecycle,
-temporal, and freshness lineage before returning an all-valid evidence
-bundle.
+Phase 5I implemented deterministic citation validation and controlled
+abstention over retained Phase 5H evidence. It verifies exact source,
+document, version, chunk, hash, locator, content, lifecycle, temporal, and
+freshness lineage before returning an all-valid evidence bundle.
 
-Prompt construction, factual verification, semantic claim validation,
-external providers, enterprise sources, production data, tools, retrieval
-API routes, cloud deployment, and production deployment remain
-unauthorized. Phase 5J retrieval evaluation and lifecycle telemetry are not
-authorized.
+Phase 5I closed after exact-commit CI run
+[`29852373709`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29852373709)
+passed against closure commit
+`501ee512037943a0960878a296309c5922777e9f`.
+
+Phase 5J has locally implemented deterministic retrieval evaluation and
+bounded lifecycle telemetry. It measures precision at K, recall at K,
+reciprocal rank, citation correctness, freshness correctness, abstention
+correctness, query latency, context size, and explicit threshold outcomes.
+It records allowlisted, content-minimized, append-only telemetry with request
+and trace correlation and deterministic hash lineage.
+
+External evaluators, semantic or factual-correctness judges, provider
+adapters or calls, enterprise sources, production data, external telemetry
+backends, tools, API routes, cloud deployment, and production deployment
+remain unauthorized. Phase 6 multi-provider abstraction is not authorized.
 
 ## 2. Job-Description Connection
 
@@ -1474,7 +1484,158 @@ succeeds.
 - Implementation commit: f4d3c2079535699374e3ff08a1f955f8f26321f9
 - Exact-commit CI run: 29848371644
 - Remote exact-commit CI: Passed
-- Phase 5I closure-commit CI: Pending
+- Phase 5I closure commit: `501ee512037943a0960878a296309c5922777e9f`
+- Phase 5I closure CI run: [`29852373709`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29852373709)
+- Phase 5I closure-commit CI: Passed
 
-Phase 5J retrieval evaluation and lifecycle telemetry are authorized only
-after the Phase 5I closure commit passes exact-commit CI.
+Phase 5J retrieval evaluation and lifecycle telemetry became authorized
+after the Phase 5I closure commit passed exact-commit CI.
+
+## Phase 5J Implementation-Derived Concepts
+
+### Offline Retrieval Evaluation
+
+Offline retrieval evaluation measures a retrieval system against bounded,
+labeled cases before release. Phase 5J cases declare relevant chunks, cutoff
+K, expected abstention, expected citation validity, and expected freshness.
+
+Mental note: offline evaluation checks known cases; it is not production
+monitoring.
+
+### Synthetic Ground Truth
+
+Ground truth is the expected outcome used to score a case. Phase 5J uses
+explicit synthetic labels so calculations are repeatable. These labels do not
+represent production traffic or expert-labeled enterprise data.
+
+### Precision at K
+
+Precision at K is the fraction of returned top-K evidence that is relevant:
+
+`relevant items returned in top K / items returned in top K`
+
+Mental note: precision measures the quality of what was returned.
+
+### Recall at K
+
+Recall at K is the fraction of all labeled relevant evidence recovered:
+
+`relevant items returned in top K / all labeled relevant items`
+
+Mental note: recall measures how much known relevant evidence was found.
+
+### Precision Versus Recall
+
+High precision can still miss relevant evidence. High recall can return more
+noise. The right balance depends on the workflow, context budget, and the
+risk of missing evidence versus including irrelevant evidence.
+
+### Reciprocal Rank
+
+Reciprocal rank rewards placing the first relevant result near the top. Rank
+one scores 1, rank two scores 0.5, and no relevant result scores zero.
+
+### Citation, Freshness, and Abstention Correctness
+
+Phase 5J compares citation validity, freshness validity, and retrieval
+abstention with each case's explicit expectation. It consumes Phase 5I
+validation evidence rather than duplicating citation validation.
+
+These checks do not prove factual or semantic correctness.
+
+### Query Latency and Context Size
+
+The evaluator records non-negative query latency, bounded context item count,
+and bounded estimated-token count. Tokens remain estimates; Phase 5J does not
+use an external provider tokenizer.
+
+### Explicit Evaluation Thresholds
+
+Thresholds turn metrics into stable pass-or-fail evidence. Phase 5J supports
+minimum quality thresholds and maximum latency and context-size thresholds.
+Failed checks are recorded in a fixed order.
+
+Mental note: a threshold is a release rule, not production authorization.
+
+### Offline Evaluation Versus Lifecycle Telemetry
+
+Offline evaluation compares known cases with expected outcomes. Lifecycle
+telemetry records what occurred during retrieval. Evaluation measures quality;
+telemetry preserves operational evidence. They are not interchangeable.
+
+### Content-Minimized Telemetry
+
+Phase 5J telemetry records identifiers, stages, outcomes, numeric
+measurements, opaque references, timestamps, sequences, and hashes. It
+excludes raw queries, evidence, prompts, model responses, and unrestricted
+payloads.
+
+Mental note: observability must not become an uncontrolled data store.
+
+### Append-Only Hash Lineage
+
+Each telemetry event links to the preceding event hash. Verification checks
+sequence, correlation, timestamps, previous-hash lineage, and recomputed
+hashes. This detects local tampering but is not externally anchored durable
+audit storage.
+
+### CT-07 Versus Retrieval Telemetry
+
+CT-07 remains the generic lifecycle trace contract. Phase 5J telemetry is
+retrieval-specific numeric evidence. It does not replace CT-07, modify the
+Phase 4 checkpoint store, or expand runtime authority.
+
+### Deterministic Metrics Versus Model Judges
+
+Deterministic metrics are reproducible but limited to explicit labels and
+contracts. Model judges can assess semantic qualities but introduce provider
+dependency, nondeterminism, cost, and calibration risk. Phase 5J implements
+deterministic metrics only.
+
+### Phase 5J Versus Phase 6
+
+Phase 5J evaluates the local permission-aware retrieval pipeline. Phase 6
+introduces multi-provider abstraction, beginning with common envelopes and a
+deterministic mock provider. Phase 6 remains gated by Phase 5J implementation
+CI, closure evidence, closure CI, and explicit Phase 5 closure.
+
+### Honest Phase 5J Interview Statement
+
+In Phase 5J, I implemented deterministic offline retrieval evaluation and
+bounded lifecycle telemetry over the permission-aware RAG pipeline.
+
+I added synthetic relevance expectations and measured precision at K, recall
+at K, reciprocal rank, citation correctness, freshness correctness,
+abstention correctness, query latency, and context size. Explicit thresholds
+produce stable pass-or-fail evidence.
+
+I also implemented five allowlisted retrieval stages and a bounded append-only
+in-memory telemetry store. Events preserve correlation, timestamp ordering,
+sequence, and hash lineage while excluding raw queries, evidence, prompts,
+responses, and unrestricted payloads.
+
+The local evidence is 32 test functions producing 33 pytest cases, 264
+retrieval tests, and 954 repository tests. All local quality and boundary
+checks pass.
+
+I would call this a deterministic local evaluation and telemetry foundation,
+not production observability, semantic evaluation, factual verification,
+external EvalOps, or provider evaluation.
+
+## Phase 5J Local Evidence
+
+- Evaluation version: `retrieval-evaluation-v1`
+- Telemetry version: `retrieval-telemetry-v1`
+- Lifecycle stages: 5
+- Evaluation test functions: 32
+- Evaluation pytest cases: 33 passed
+- Retrieval tests: 264 passed
+- Complete repository tests: 954 passed
+- Public retrieval exports: 79
+- Local quality gates: Passed
+- Remote exact-commit CI: Pending
+- Phase 5J closure: Pending
+- Phase 5 closure: Pending
+
+Phase 6 multi-provider abstraction remains unauthorized until the Phase 5J
+closure commit passes exact-commit CI and Phase 5 is explicitly closed.
