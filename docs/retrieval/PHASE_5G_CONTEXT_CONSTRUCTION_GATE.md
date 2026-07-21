@@ -11,12 +11,14 @@ committed for exact-commit CI validation.
 ## 2. Current Gate Decision
 
 > PHASE 5G LOCAL IMPLEMENTATION: PASSED
-> PHASE 5G IMPLEMENTATION COMMIT: AUTHORIZED
-> PHASE 5G REMOTE CI: REQUIRED
+> PHASE 5G IMPLEMENTATION COMMIT: VERIFIED
+> PHASE 5G REMOTE CI: PASSED
 > PHASE 5G CLOSURE: PENDING
-> PHASE 5H: NOT AUTHORIZED
+> PHASE 5H: AUTHORIZED ONLY AFTER CLOSURE-COMMIT CI
 
-Phase 5G is locally complete but is not closed.
+Phase 5G is locally and remotely verified but is not closed.
+This documentation-only closure commit must pass exact-commit CI
+before Phase 5H becomes authorized.
 
 ## 3. Prior-Phase Authority Gate
 
@@ -263,24 +265,24 @@ These limitations are explicit and bounded.
 
 ## 21. Remote CI Gate
 
-Required remote jobs:
+Verified implementation evidence:
 
-- Python quality and contract tests
-- Local container build and health verification
-
-Current status:
-
-- Implementation commit: Pending
-- Exact-commit CI run: Pending
-- Remote CI conclusion: Pending
+- Implementation commit: `369e05e21b61f6e0961111d9cfff4515ca0e27db`
+- Exact-commit CI run: [`29817755525`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29817755525)
+- Python quality and contract tests: Passed
+- Local container build and health verification: Passed
+- Remote CI conclusion: Success
 - Phase 5G closure: Pending
+
+The closure gate remains fail-closed until this documentation-only closure
+commit passes exact-commit CI.
 
 ## 22. Final Local Decision
 
 > PHASE 5G LOCAL GATE: PASSED
-> PHASE 5G IMPLEMENTATION COMMIT: AUTHORIZED
+> PHASE 5G IMPLEMENTATION COMMIT: VERIFIED
 > PHASE 5G CLOSURE: PENDING
-> PHASE 5H: NOT AUTHORIZED
+> PHASE 5H: AUTHORIZED ONLY AFTER CLOSURE-COMMIT CI
 > PROMPT-INJECTION CONTROLS: NOT AUTHORIZED
 > MODEL PROVIDERS: NOT AUTHORIZED
 > TOOL EXECUTION: NOT AUTHORIZED

@@ -17,12 +17,14 @@ It does not construct prompts or call a model.
 ## 2. Current Decision
 
 > PHASE 5G LOCAL IMPLEMENTATION: COMPLETE
-> PHASE 5G IMPLEMENTATION COMMIT: AUTHORIZED
-> PHASE 5G REMOTE CI: PENDING
+> PHASE 5G IMPLEMENTATION COMMIT: VERIFIED
+> PHASE 5G REMOTE CI: PASSED
 > PHASE 5G CLOSURE: PENDING
-> PHASE 5H: NOT AUTHORIZED
+> PHASE 5H: AUTHORIZED ONLY AFTER CLOSURE-COMMIT CI
 
-Phase 5G may be committed for exact-commit CI validation.
+Phase 5G implementation passed exact-commit CI. This
+documentation-only closure commit is authorized. Phase 5G remains
+open until the closure commit passes exact-commit CI.
 
 ## 3. Prior-Phase Authority
 
@@ -296,18 +298,22 @@ Phase 5H is not authorized by this implementation commit.
 
 ## 21. Remote CI Requirement
 
-Phase 5G closure requires the exact implementation commit to pass:
+Phase 5G implementation passed exact-commit CI:
 
-- Python quality and contract tests
-- Local container build and health verification
+- Implementation commit: `369e05e21b61f6e0961111d9cfff4515ca0e27db`
+- Exact-commit CI run: [`29817755525`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29817755525)
+- Python quality and contract tests: Passed
+- Local container build and health verification: Passed
+- CI conclusion: Success
 
-The implementation commit and CI run must be recorded before Phase 5G can be
-closed.
+Phase 5G closure still requires this documentation-only closure commit to
+pass the same exact-commit CI workflow. Phase 5H remains unauthorized until
+that closure CI succeeds.
 
 ## 22. Current Exit Posture
 
 > PHASE 5G LOCAL IMPLEMENTATION: COMPLETE
 > LOCAL QUALITY: PASSED
-> REMOTE CI: PENDING
+> IMPLEMENTATION REMOTE CI: PASSED
 > PHASE 5G CLOSURE: PENDING
-> PHASE 5H PROMPT-INJECTION AND RETRIEVAL-CONTAMINATION CONTROLS: NOT AUTHORIZED
+> PHASE 5H PROMPT-INJECTION AND RETRIEVAL-CONTAMINATION CONTROLS: AUTHORIZED ONLY AFTER CLOSURE-COMMIT CI

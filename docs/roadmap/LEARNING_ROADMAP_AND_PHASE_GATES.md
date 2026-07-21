@@ -670,13 +670,21 @@ Every implementation phase must end with:
 | Phase 5E — Vector tests | 23 passing |
 | Phase 5E — Retrieval tests | 124 passing |
 | Phase 5E — Complete local test suite | 814 passing |
-| Phase 5F — Hybrid retrieval and reranking | Implementation verified; closure-commit CI pending |
+| Phase 5F — Hybrid retrieval and reranking | Complete |
 | Phase 5F — Implementation commit | ec0dca55d934d2324a514956aadfb3c8daf341bc |
 | Phase 5F — CI run | [29813776046](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29813776046) |
+| Phase 5F — Closure commit | 2489a6e54fe5b93484b09b40c5ffd9764075dcee |
+| Phase 5F — Closure CI run | [29815184214](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29815184214) |
 | Phase 5F — Hybrid pytest cases | 33 passing |
 | Phase 5F — Retrieval tests | 157 passing |
 | Phase 5F — Complete local test suite | 847 passing |
-| Phase 5G — Context construction and token budgets | Authorized only after Phase 5F closure-commit CI |
+| Phase 5G — Context construction and token budgets | Implementation verified; closure-commit CI pending |
+| Phase 5G — Implementation commit | 369e05e21b61f6e0961111d9cfff4515ca0e27db |
+| Phase 5G — CI run | [29817755525](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29817755525) |
+| Phase 5G — Context pytest cases | 22 passing |
+| Phase 5G — Retrieval tests | 179 passing |
+| Phase 5G — Complete local test suite | 869 passing |
+| Phase 5H — Prompt-injection and retrieval-contamination controls | Authorized only after Phase 5G closure-commit CI |
 | Phases 6–17 | Not started |
 
 ## Phase 4 Closure Evidence
@@ -723,40 +731,37 @@ SUCCESS
 
 Implemented and verified:
 
-Deterministic feature-hash embeddings
-Immutable synthetic vector indexing
-Permission-aware keyword and vector retrieval
-Versioned hybrid-fusion configuration
-Per-method score normalization
-Reciprocal-rank evidence
-Candidate union and deduplication
-Weighted hybrid scoring
-Stable deterministic reranking
-Authorization preservation
-Citations and evidence lineage
-Controlled abstention
-Final relevance thresholds
-Policy-controlled result limits
+Permission-aware keyword, vector, and hybrid retrieval
+Deterministic whole-chunk context construction
+Versioned context-budget configuration
+Maximum item and per-source contribution limits
+Maximum aggregate token estimate
+Minimum source diversity
+Candidate-to-corpus integrity resolution
+Stable retrieval-order preservation
+Contiguous context ranks
+Citation and policy-lineage preservation
+Omitted-candidate counts
+Explicit truncation evidence
+Controlled context insufficiency
 
-Next Authorized Work After Phase 5F Closure-Commit CI
+Next Authorized Work After Phase 5G Closure-Commit CI
 
-PHASE 5G — CONTEXT CONSTRUCTION AND TOKEN BUDGETS
+PHASE 5H — PROMPT-INJECTION AND RETRIEVAL-CONTAMINATION CONTROLS
 
-Phase 5G may begin only after the Phase 5F closure-evidence commit passes
+Phase 5H may begin only after the Phase 5G closure-evidence commit passes
 exact-commit CI.
 
 Not authorized:
 
 Enterprise sources
 Production data
-External embedding providers
-Downloaded embedding models
-Managed vector databases
-Learned or provider rerankers
+External tokenizers
 External model providers
+Prompt or model execution
 Tool execution
 Human approval execution
-Retrieval API routes
+Retrieval or context API routes
 Infrastructure mutation
 Cloud deployment
 Production deployment

@@ -433,13 +433,21 @@ A requirement may not be marked Complete based only on:
 | Phase 5E vector tests | 23 passing |
 | Phase 5E retrieval tests | 124 passing |
 | Complete local test suite | 814 passing |
-| Phase 5F hybrid retrieval and reranking | Implementation verified; closure-commit CI pending |
+| Phase 5F hybrid retrieval and reranking | Complete |
 | Phase 5F implementation commit | ec0dca55d934d2324a514956aadfb3c8daf341bc |
 | Phase 5F CI run | [29813776046](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29813776046) |
+| Phase 5F closure commit | 2489a6e54fe5b93484b09b40c5ffd9764075dcee |
+| Phase 5F closure CI run | [29815184214](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29815184214) |
 | Phase 5F hybrid pytest cases | 33 passing |
 | Phase 5F retrieval tests | 157 passing |
 | Complete local test suite | 847 passing |
-| Phase 5G context construction and token budgets | Authorized only after Phase 5F closure-commit CI |
+| Phase 5G context construction and token budgets | Implementation verified; closure-commit CI pending |
+| Phase 5G implementation commit | 369e05e21b61f6e0961111d9cfff4515ca0e27db |
+| Phase 5G CI run | [29817755525](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29817755525) |
+| Phase 5G context pytest cases | 22 passing |
+| Phase 5G retrieval tests | 179 passing |
+| Complete local test suite | 869 passing |
+| Phase 5H prompt-injection and retrieval-contamination controls | Authorized only after Phase 5G closure-commit CI |
 | Enterprise retrieval | Not authorized |
 | External embeddings and managed vector services | Not authorized |
 | JD requirements mapped | 36 of 36 |
@@ -458,32 +466,26 @@ JD requirements implemented remains zero because the repository now contains bou
 ## Next Authorized Work After Closure-Commit CI
 
 ```text
-Phase 5G — Context Construction and Token Budgets
+Phase 5H — Prompt-Injection and Retrieval-Contamination Controls
 ```
 
-Phase 5E closed after exact-commit CI run
-29811114122
-passed against closure commit
-573b8c196ae46dd272fcb90c6695cbcc6af87bfd.
+Phase 5F closed after exact-commit CI run 29815184214 passed against
+closure commit 2489a6e54fe5b93484b09b40c5ffd9764075dcee.
 
-Phase 5F implemented deterministic hybrid fusion over the existing
-permission-aware keyword and vector retrievers. It added score
-normalization, reciprocal-rank evidence, candidate deduplication, weighted
-fusion, stable reranking, citations, controlled abstention, and
-policy-controlled result limits.
+Phase 5G implemented deterministic whole-chunk context construction,
+versioned item and source budgets, estimated-token limits, source
+diversity, exact candidate-to-corpus resolution, stable ordering,
+truncation evidence, citations, and controlled insufficiency.
 
-Phase 5F passed exact-commit CI run
-29813776046
-against implementation commit
-ec0dca55d934d2324a514956aadfb3c8daf341bc.
+Phase 5G passed exact-commit CI run 29817755525 against implementation
+commit 369e05e21b61f6e0961111d9cfff4515ca0e27db.
 
-Phase 5G becomes authorized only after the Phase 5F closure commit passes
-exact-commit CI. Its scope remains limited to local synthetic context
-construction, deterministic evidence ordering, explicit token budgets,
-provenance preservation, and controlled overflow behavior.
+Phase 5H becomes authorized only after the Phase 5G closure commit passes
+exact-commit CI. Its scope remains limited to local deterministic
+prompt-injection and retrieval-contamination controls over synthetic
+retrieved evidence.
 
-Enterprise sources, production data, external embedding providers,
-downloaded models, managed vector databases, learned or provider rerankers,
-external model providers, tool execution, retrieval API routes,
-infrastructure mutation, cloud deployment, and production deployment
-remain unauthorized.
+Enterprise sources, production data, external tokenizers, external model
+providers, prompt or model execution, tool execution, retrieval or context
+API routes, infrastructure mutation, cloud deployment, and production
+deployment remain unauthorized.

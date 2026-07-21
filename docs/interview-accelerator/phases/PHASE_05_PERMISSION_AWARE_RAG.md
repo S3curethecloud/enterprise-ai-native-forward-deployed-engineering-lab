@@ -6,8 +6,8 @@
 |---|---|
 | Learning guide | Updated through locally verified Phase 5G context construction |
 | Interview review | Pending |
-| Enterprise implementation | Phase 5G locally complete; remote CI pending |
-| Implementation authority | Phase 5G implementation commit only; Phase 5H not authorized |
+| Enterprise implementation | Phase 5G implementation verified; closure-commit CI pending |
+| Implementation authority | Phase 5G closure commit only; Phase 5H authorized only after closure-commit CI |
 
 Phase 5C closed after exact-commit CI run
 [`29795787216`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795787216)
@@ -41,15 +41,18 @@ commit ec0dca55d934d2324a514956aadfb3c8daf341bc.
 Phase 5F closed after exact-commit CI run 29815184214 passed against closure
 commit 2489a6e54fe5b93484b09b40c5ffd9764075dcee.
 
-Phase 5G has locally implemented deterministic whole-chunk context
-construction, explicit item and source budgets, source diversity,
-estimated-token limits, lineage verification, stable ordering, truncation
-evidence, and controlled insufficiency.
+Phase 5G implemented deterministic whole-chunk context construction,
+explicit item and source budgets, source diversity, estimated-token limits,
+lineage verification, stable ordering, truncation evidence, and controlled
+insufficiency. Exact-commit CI run 29817755525 passed against implementation
+commit 369e05e21b61f6e0961111d9cfff4515ca0e27db. Phase 5G closure-commit
+CI remains pending.
 
 Prompt-injection controls, retrieval-contamination controls, prompt
 construction, external providers, enterprise sources, production data,
 tools, retrieval API routes, cloud deployment, and production deployment
-remain unauthorized. Phase 5H is not authorized.
+remain unauthorized. Phase 5H is authorized only after the Phase 5G
+closure commit passes exact-commit CI.
 
 ## 2. Job-Description Connection
 
@@ -1079,9 +1082,10 @@ The local evidence is 21 context test functions producing 22 pytest cases,
 type checking, dependency validation, and the capability-boundary scan
 pass locally.
 
-The Phase 5G implementation commit and exact-commit remote CI evidence
-remain pending. Phase 5G closure is pending, and Phase 5H is not
-authorized.
+Phase 5G passed exact-commit CI run 29817755525 against implementation
+commit 369e05e21b61f6e0961111d9cfff4515ca0e27db. Phase 5G closure-commit
+CI remains pending, and Phase 5H is authorized only after that closure CI
+succeeds.
 
 ## Phase 5G Local Evidence
 
@@ -1096,8 +1100,10 @@ authorized.
 - Complete repository tests: 869 passed
 - Public retrieval exports: 42
 - Local quality gates: Passed
-- Remote exact-commit CI: Pending
-- Phase 5G closure: Pending
+- Implementation commit: 369e05e21b61f6e0961111d9cfff4515ca0e27db
+- Exact-commit CI run: 29817755525
+- Remote exact-commit CI: Passed
+- Phase 5G closure-commit CI: Pending
 
-Phase 5H prompt-injection and retrieval-contamination controls remain
-unauthorized.
+Phase 5H prompt-injection and retrieval-contamination controls are
+authorized only after the Phase 5G closure commit passes exact-commit CI.
