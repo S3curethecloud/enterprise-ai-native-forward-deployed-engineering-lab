@@ -33,6 +33,9 @@ def valid_decision_payload() -> dict[str, Any]:
         "constraints": {
             "max_evidence_items": 10,
             "allowed_source_types": ["runbook"],
+            "allowed_tenant_ids": ["tenant-a"],
+            "allowed_service_ids": ["payments-api"],
+            "allowed_sensitivities": ["internal"],
             "require_citations": True,
             "recommendation_only": True,
         },

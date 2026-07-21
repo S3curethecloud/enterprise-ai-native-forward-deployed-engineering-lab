@@ -4,20 +4,24 @@
 
 | Dimension | Status |
 |---|---|
-| Learning guide | Updated through verified Phase 5C keyword retrieval |
+| Learning guide | Updated through locally verified Phase 5D permission filtering |
 | Interview review | Pending |
-| Enterprise implementation | Synthetic deterministic keyword retrieval complete |
-| Implementation authority | Phase 5D tenant, service, and classification filtering after closure CI |
+| Enterprise implementation | Phase 5D locally complete; remote CI pending |
+| Implementation authority | Phase 5D implementation commit only; Phase 5E not authorized |
 
-Phase 5B implemented immutable retrieval contracts and passed exact-commit CI run [`29780263857`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29780263857) against implementation commit `efd62671b27e725d2936a2c7ae3a1a0d24b06ca6`.
+Phase 5C closed after exact-commit CI run
+[`29795787216`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795787216)
+passed against closure commit
+`0e757ab896d61a29ec520e614bd4276a1291e9cc`.
 
-After the Phase 5B closure commit passes exact-commit CI, Phase 5C may add a
-synthetic local corpus and deterministic read-only keyword retrieval.
+Phase 5D has locally implemented tenant, service, classification, resource,
+source-type, lifecycle, and policy-lineage filtering before keyword
+scoring. Its implementation commit and remote CI evidence remain pending.
 
-Enterprise sources, production data, vector retrieval, embeddings, hybrid
-retrieval, reranking, context construction, external providers, tools,
-retrieval API routes, cloud deployment, and production deployment remain
-unauthorized.
+Phase 5E embeddings and vector retrieval, enterprise sources, production
+data, hybrid retrieval, reranking, context construction, external
+providers, tools, retrieval API routes, cloud deployment, and production
+deployment remain unauthorized.
 
 ## 2. Job-Description Connection
 
@@ -386,8 +390,9 @@ kinds, and tombstoned chunks before keyword scoring.
 Mental note: evidence outside the authorized source scope should never
 become a scored candidate.
 
-This is narrower than full permission filtering. Tenant, service, and
-classification filtering remain Phase 5D work.
+This was the Phase 5C boundary. Phase 5D now applies tenant, service,
+classification, resource, source-type, lifecycle, and policy-lineage
+controls before scoring.
 
 ### Cite-or-Abstain Behavior
 
@@ -412,8 +417,10 @@ The local evidence is 23 corpus tests, 16 keyword tests, 76 total retrieval
 tests, and 762 repository tests.
 
 Phase 5C passed exact-commit CI run [`29795504565`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795504565) against
-implementation commit `8cee3d71676440824b700c62359c162a98cb2b8e`. Phase 5D remains pending until the Phase
-5C closure commit passes exact-commit CI.
+implementation commit `8cee3d71676440824b700c62359c162a98cb2b8e`. Phase 5C closed after exact-commit CI run
+[`29795787216`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795787216)
+passed against closure commit
+`0e757ab896d61a29ec520e614bd4276a1291e9cc`.
 
 I did not implement enterprise retrieval, tenant or service filtering,
 classification filtering, embeddings, vector search, hybrid retrieval,
@@ -431,10 +438,113 @@ routes.
 - CI quality job: Passed
 - CI container job: Passed
 
-Next bounded work after closure-commit CI:
+Current bounded work:
 
-Phase 5D — Tenant, service, and classification filtering
+Phase 5D — Implementation commit and exact-commit CI evidence
 
 Enterprise retrieval, vectors, embeddings, hybrid retrieval,
 reranking, context construction, providers, tools, cloud deployment,
 and production deployment remain unauthorized.
+
+## Phase 5D Implementation-Derived Concepts
+
+### Policy-Derived Retrieval Scope
+
+A retrieval query describes what the caller wants to search. It does not
+grant permission.
+
+Phase 5D requires a separate CT-03 authorization decision containing the
+permitted resources, tenants, services, source types, classifications,
+policy lineage, expiration, and maximum evidence count.
+
+Mental note: the query carries intent; the policy decision carries
+authority.
+
+### Security Trimming
+
+Security trimming removes evidence that the requesting identity is not
+permitted to search.
+
+Phase 5D applies resource, source-type, tenant, service, sensitivity, and
+lifecycle checks before relevance scoring.
+
+Mental note: unauthorized evidence should not merely be hidden after
+ranking. It should never enter the scorer.
+
+### Effective-Scope Intersection
+
+The effective retrieval scope is the intersection of the sources requested
+by the query and the resources allowed by policy.
+
+If either side excludes a source, that source is not searchable.
+
+Mental note: retrieval uses the narrowest valid scope. It does not combine
+request and policy scope into a broader union.
+
+### Authority Lineage
+
+Authority lineage binds retrieval to the policy decision created for the
+same request, trace, subject, policy version, operation, and time window.
+
+A mismatch causes controlled abstention.
+
+Mental note: possessing a structurally valid decision is insufficient. The
+decision must belong to this exact retrieval operation.
+
+### Classification Filtering
+
+Classification filtering compares evidence sensitivity with the
+classifications explicitly permitted by policy.
+
+The retrieval component cannot downgrade restricted evidence or infer
+permission from relevance.
+
+Mental note: relevance answers “is this useful?” Authorization answers
+“may this identity access it?” Authorization is evaluated first.
+
+### Fail-Closed Source Mapping
+
+Phase 5D explicitly maps:
+
+- Runbook evidence to the CT-03 runbook source type
+- Service-catalog evidence to the CT-03 service-metadata source type
+
+Change records, incident history, and observability summaries have no
+Phase 5D policy mapping and therefore fail closed.
+
+Mental note: an unknown mapping is a denial condition, not implicit
+permission.
+
+### Policy-Controlled Result Limits
+
+The candidate limit is the smaller of the query maximum and the policy
+maximum.
+
+Mental note: caller preferences can narrow a policy limit, but they cannot
+increase it.
+
+### Honest Phase 5D Interview Statement
+
+In Phase 5D, I connected deterministic keyword retrieval to a separate
+CT-03 authorization decision so the retrieval query could not authorize
+itself. I extended the policy contract with tenant, service, and
+classification scope, validated request and policy lineage, intersected
+requested sources with permitted resources, mapped supported source types,
+and applied security trimming before keyword scoring.
+
+I also added executable evidence that rejected content never reaches the
+scoring function, unsupported source kinds fail closed, denied or
+mismatched authority produces controlled abstention, and policy limits
+override larger query limits.
+
+The local evidence is 40 authorization and evidence contract tests, 126
+focused contract and retrieval tests, 26 keyword tests, and 776 repository
+tests. Ruff, formatting, strict type checking, dependency validation, and
+the capability-boundary check pass locally.
+
+The Phase 5D implementation commit and remote CI evidence remain pending.
+
+I did not implement enterprise data integration, embeddings, vector
+retrieval, hybrid retrieval, reranking, context construction, provider
+calls, tools, retrieval API routes, cloud deployment, or production
+deployment.

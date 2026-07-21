@@ -15,6 +15,7 @@ from incident_diagnostic_api.contracts.common import (
 from incident_diagnostic_api.contracts.enums import (
     PolicyOperation,
     PolicyOutcome,
+    SensitivityClassification,
     SourceType,
 )
 
@@ -38,12 +39,30 @@ AllowedSourceTypes = Annotated[
     Field(min_length=1, max_length=2),
 ]
 
+AllowedTenantIdentifiers = Annotated[
+    tuple[OpaqueIdentifier, ...],
+    Field(max_length=20),
+]
+
+AllowedServiceIdentifiers = Annotated[
+    tuple[OpaqueIdentifier, ...],
+    Field(max_length=100),
+]
+
+AllowedSensitivities = Annotated[
+    tuple[SensitivityClassification, ...],
+    Field(max_length=4),
+]
+
 
 class PolicyConstraints(ContractModel):
     """Machine-enforceable restrictions applied to an allowed operation."""
 
     max_evidence_items: Annotated[int, Field(ge=1, le=50)]
     allowed_source_types: AllowedSourceTypes
+    allowed_tenant_ids: AllowedTenantIdentifiers = Field(default_factory=tuple)
+    allowed_service_ids: AllowedServiceIdentifiers = Field(default_factory=tuple)
+    allowed_sensitivities: AllowedSensitivities = Field(default_factory=tuple)
     require_citations: Literal[True] = True
     recommendation_only: Literal[True] = True
 
@@ -87,6 +106,20 @@ class AuthorizationDecision(VersionedContract):
             and not allowed
         ):
             raise ValueError("permitted retrieval requires at least one allowed resource")
+
+        permitted_retrieval = (
+            self.operation is PolicyOperation.RETRIEVE_RUNBOOK_EVIDENCE
+            and self.outcome in {PolicyOutcome.ALLOW, PolicyOutcome.CONSTRAIN}
+        )
+
+        if permitted_retrieval and not self.constraints.allowed_tenant_ids:
+            raise ValueError("permitted retrieval requires an allowed tenant")
+
+        if permitted_retrieval and not self.constraints.allowed_service_ids:
+            raise ValueError("permitted retrieval requires an allowed service")
+
+        if permitted_retrieval and not self.constraints.allowed_sensitivities:
+            raise ValueError("permitted retrieval requires allowed sensitivities")
 
         return self
 

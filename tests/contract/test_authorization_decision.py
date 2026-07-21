@@ -32,6 +32,9 @@ def valid_decision_payload() -> dict[str, Any]:
         "constraints": {
             "max_evidence_items": 10,
             "allowed_source_types": ["runbook"],
+            "allowed_tenant_ids": ["tenant-a"],
+            "allowed_service_ids": ["payments-api"],
+            "allowed_sensitivities": ["internal"],
             "require_citations": True,
             "recommendation_only": True,
         },
@@ -205,3 +208,47 @@ def test_decision_collections_are_immutable() -> None:
         )
 
     assert decision.allowed_resource_ids == ("runbook:payments-api",)
+
+
+@pytest.mark.parametrize(
+    ("constraint_field", "expected_message"),
+    [
+        (
+            "allowed_tenant_ids",
+            "permitted retrieval requires an allowed tenant",
+        ),
+        (
+            "allowed_service_ids",
+            "permitted retrieval requires an allowed service",
+        ),
+        (
+            "allowed_sensitivities",
+            "permitted retrieval requires allowed sensitivities",
+        ),
+    ],
+)
+def test_permitted_retrieval_requires_explicit_authorization_scope(
+    constraint_field: str,
+    expected_message: str,
+) -> None:
+    payload = valid_decision_payload()
+    payload["constraints"][constraint_field] = []
+
+    with pytest.raises(ValidationError, match=expected_message):
+        AuthorizationDecision.model_validate(payload)
+
+
+def test_denied_retrieval_does_not_require_allowed_scope() -> None:
+    payload = valid_decision_payload()
+    payload["outcome"] = "deny"
+    payload["allowed_resource_ids"] = []
+    payload["constraints"]["allowed_tenant_ids"] = []
+    payload["constraints"]["allowed_service_ids"] = []
+    payload["constraints"]["allowed_sensitivities"] = []
+
+    decision = AuthorizationDecision.model_validate(payload)
+
+    assert decision.outcome.value == "deny"
+    assert decision.constraints.allowed_tenant_ids == ()
+    assert decision.constraints.allowed_service_ids == ()
+    assert decision.constraints.allowed_sensitivities == ()

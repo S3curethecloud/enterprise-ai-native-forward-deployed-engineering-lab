@@ -1,8 +1,14 @@
 """Tests for deterministic Phase 5C keyword retrieval."""
 
+from collections.abc import Iterable
 from datetime import UTC, datetime, timedelta
 
+import pytest
+
+import incident_diagnostic_api.retrieval.keyword as keyword_module
+from incident_diagnostic_api.contracts import AuthorizationDecision
 from incident_diagnostic_api.contracts.enums import (
+    PolicyOutcome,
     SensitivityClassification,
 )
 from incident_diagnostic_api.retrieval import (
@@ -14,6 +20,7 @@ from incident_diagnostic_api.retrieval import (
     RetrievalAbstentionCode,
     RetrievalDisposition,
     RetrievalQuery,
+    RetrievalResult,
 )
 from incident_diagnostic_api.retrieval.corpus import (
     SyntheticEvidenceCorpus,
@@ -174,6 +181,69 @@ def build_query(
     )
 
 
+def build_authorization(
+    *,
+    query: RetrievalQuery,
+    allowed_resource_ids: tuple[str, ...] | None = None,
+    allowed_tenant_ids: tuple[str, ...] = ("tenant-a",),
+    allowed_service_ids: tuple[str, ...] = ("payments-api",),
+    allowed_sensitivities: tuple[str, ...] = ("internal",),
+    allowed_source_types: tuple[str, ...] = ("runbook",),
+    max_evidence_items: int = 50,
+) -> AuthorizationDecision:
+    """Return live CT-03 authority for one retrieval query."""
+
+    resources = query.allowed_source_ids if allowed_resource_ids is None else allowed_resource_ids
+
+    return AuthorizationDecision.model_validate(
+        {
+            "contract_version": "1.0",
+            "policy_decision_id": query.policy_decision_id,
+            "request_id": query.request_id,
+            "trace_id": query.trace_id,
+            "subject_id": query.subject_id,
+            "operation": "retrieve_runbook_evidence",
+            "resource_ids": query.allowed_source_ids,
+            "outcome": "allow",
+            "allowed_resource_ids": resources,
+            "constraints": {
+                "max_evidence_items": max_evidence_items,
+                "allowed_source_types": list(allowed_source_types),
+                "allowed_tenant_ids": list(allowed_tenant_ids),
+                "allowed_service_ids": list(allowed_service_ids),
+                "allowed_sensitivities": list(allowed_sensitivities),
+                "require_citations": True,
+                "recommendation_only": True,
+            },
+            "reason_codes": ["AUTHORIZED_RETRIEVAL_SCOPE"],
+            "policy_version": query.policy_version,
+            "decided_at": query.requested_at,
+            "expires_at": query.authorization_expires_at,
+        }
+    )
+
+
+def execute_retrieval(
+    *,
+    corpus: SyntheticEvidenceCorpus,
+    query: RetrievalQuery,
+    completed_at: datetime,
+    authorization: AuthorizationDecision | None = None,
+) -> RetrievalResult:
+    """Execute retrieval with matching CT-03 authority by default."""
+
+    resolved_authorization = (
+        build_authorization(query=query) if authorization is None else authorization
+    )
+
+    return retrieve_keywords(
+        corpus=corpus,
+        query=query,
+        authorization=resolved_authorization,
+        completed_at=completed_at,
+    )
+
+
 def test_keyword_tokenization_is_normalized_and_deterministic() -> None:
     tokens = tokenize_keywords("Payment PAYMENT queue-health, queue!")
 
@@ -194,7 +264,7 @@ def test_empty_keyword_set_scores_zero() -> None:
 
 
 def test_keyword_retrieval_returns_ranked_candidates() -> None:
-    result = retrieve_keywords(
+    result = execute_retrieval(
         corpus=build_corpus(),
         query=build_query(),
         completed_at=COMPLETED_AT,
@@ -213,12 +283,12 @@ def test_same_input_produces_same_serialized_result() -> None:
     corpus = build_corpus()
     query = build_query()
 
-    first = retrieve_keywords(
+    first = execute_retrieval(
         corpus=corpus,
         query=query,
         completed_at=COMPLETED_AT,
     )
-    second = retrieve_keywords(
+    second = execute_retrieval(
         corpus=corpus,
         query=query,
         completed_at=COMPLETED_AT,
@@ -228,7 +298,7 @@ def test_same_input_produces_same_serialized_result() -> None:
 
 
 def test_maximum_candidate_count_is_enforced() -> None:
-    result = retrieve_keywords(
+    result = execute_retrieval(
         corpus=build_corpus(),
         query=build_query(max_candidates=1),
         completed_at=COMPLETED_AT,
@@ -239,7 +309,7 @@ def test_maximum_candidate_count_is_enforced() -> None:
 
 
 def test_minimum_score_is_enforced() -> None:
-    result = retrieve_keywords(
+    result = execute_retrieval(
         corpus=build_corpus(),
         query=build_query(minimum_score=0.75),
         completed_at=COMPLETED_AT,
@@ -249,7 +319,7 @@ def test_minimum_score_is_enforced() -> None:
 
 
 def test_no_candidate_meeting_threshold_abstains() -> None:
-    result = retrieve_keywords(
+    result = execute_retrieval(
         corpus=build_corpus(),
         query=build_query(
             query_text="unrelated evidence",
@@ -264,7 +334,7 @@ def test_no_candidate_meeting_threshold_abstains() -> None:
 
 
 def test_punctuation_only_query_abstains() -> None:
-    result = retrieve_keywords(
+    result = execute_retrieval(
         corpus=build_corpus(),
         query=build_query(query_text="... !!! ---"),
         completed_at=COMPLETED_AT,
@@ -276,7 +346,7 @@ def test_punctuation_only_query_abstains() -> None:
 
 
 def test_expired_execution_authority_abstains() -> None:
-    result = retrieve_keywords(
+    result = execute_retrieval(
         corpus=build_corpus(),
         query=build_query(),
         completed_at=NOW + timedelta(minutes=5),
@@ -288,7 +358,7 @@ def test_expired_execution_authority_abstains() -> None:
 
 
 def test_nonallowlisted_source_abstains() -> None:
-    result = retrieve_keywords(
+    result = execute_retrieval(
         corpus=build_corpus(),
         query=build_query(
             allowed_source_ids=("different-source",),
@@ -302,7 +372,7 @@ def test_nonallowlisted_source_abstains() -> None:
 
 
 def test_nonallowlisted_source_kind_abstains() -> None:
-    result = retrieve_keywords(
+    result = execute_retrieval(
         corpus=build_corpus(),
         query=build_query(
             allowed_source_kinds=(EvidenceSourceKind.SERVICE_CATALOG,),
@@ -336,7 +406,7 @@ def test_tombstoned_chunk_is_excluded() -> None:
         chunks=(chunk,),
     )
 
-    result = retrieve_keywords(
+    result = execute_retrieval(
         corpus=corpus,
         query=build_query(),
         completed_at=COMPLETED_AT,
@@ -377,7 +447,7 @@ def test_equal_scores_use_stable_document_order() -> None:
         chunks=(chunk_b, chunk_a),
     )
 
-    result = retrieve_keywords(
+    result = execute_retrieval(
         corpus=corpus,
         query=build_query(),
         completed_at=COMPLETED_AT,
@@ -390,7 +460,7 @@ def test_equal_scores_use_stable_document_order() -> None:
 
 
 def test_candidate_preserves_query_and_citation_lineage() -> None:
-    result = retrieve_keywords(
+    result = execute_retrieval(
         corpus=build_corpus(),
         query=build_query(),
         completed_at=COMPLETED_AT,
@@ -411,7 +481,7 @@ def test_retrieval_does_not_mutate_corpus_or_query() -> None:
     corpus_before = corpus.model_dump(mode="json")
     query_before = query.model_dump(mode="json")
 
-    retrieve_keywords(
+    execute_retrieval(
         corpus=corpus,
         query=query,
         completed_at=COMPLETED_AT,
@@ -419,3 +489,259 @@ def test_retrieval_does_not_mutate_corpus_or_query() -> None:
 
     assert corpus.model_dump(mode="json") == corpus_before
     assert query.model_dump(mode="json") == query_before
+
+
+def test_unmapped_source_kind_fails_closed() -> None:
+    source = build_source(
+        source_kind=EvidenceSourceKind.CHANGE_RECORD,
+    )
+    document = build_document(
+        source=source,
+        document_id="change-document",
+        content="Payment queue recovery change.",
+    )
+    chunk = build_chunk(
+        document=document,
+        chunk_id="change-chunk",
+        content="Payment queue recovery change.",
+    )
+    corpus = SyntheticEvidenceCorpus(
+        corpus_id="unsupported-source-corpus",
+        corpus_version="corpus-v1",
+        sources=(source,),
+        documents=(document,),
+        chunks=(chunk,),
+    )
+    query = build_query(
+        allowed_source_kinds=(EvidenceSourceKind.CHANGE_RECORD,),
+    )
+    authorization = build_authorization(query=query)
+
+    result = execute_retrieval(
+        corpus=corpus,
+        query=query,
+        authorization=authorization,
+        completed_at=COMPLETED_AT,
+    )
+
+    assert result.disposition is RetrievalDisposition.ABSTENTION
+    assert result.abstention is not None
+    assert result.abstention.code is RetrievalAbstentionCode.NO_AUTHORIZED_SOURCES
+    assert result.candidates == ()
+
+
+def test_unauthorized_content_is_never_scored(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    query = build_query()
+    authorization = build_authorization(
+        query=query,
+        allowed_tenant_ids=("tenant-b",),
+    )
+
+    def forbidden_score(
+        query_tokens: Iterable[str],
+        content: str,
+    ) -> float:
+        del query_tokens, content
+        raise AssertionError("unauthorized content reached keyword scoring")
+
+    monkeypatch.setattr(
+        keyword_module,
+        "calculate_keyword_score",
+        forbidden_score,
+    )
+
+    result = execute_retrieval(
+        corpus=build_corpus(),
+        query=query,
+        authorization=authorization,
+        completed_at=COMPLETED_AT,
+    )
+
+    assert result.disposition is RetrievalDisposition.ABSTENTION
+    assert result.abstention is not None
+    assert result.abstention.code is RetrievalAbstentionCode.NO_AUTHORIZED_SOURCES
+    assert result.candidates == ()
+
+
+def test_policy_tenant_scope_is_applied_before_retrieval() -> None:
+    query = build_query()
+    authorization = build_authorization(
+        query=query,
+        allowed_tenant_ids=("tenant-b",),
+    )
+
+    result = execute_retrieval(
+        corpus=build_corpus(),
+        query=query,
+        authorization=authorization,
+        completed_at=COMPLETED_AT,
+    )
+
+    assert result.disposition is RetrievalDisposition.ABSTENTION
+    assert result.abstention is not None
+    assert result.abstention.code is RetrievalAbstentionCode.NO_AUTHORIZED_SOURCES
+    assert result.candidates == ()
+
+
+def test_policy_service_scope_is_applied_before_retrieval() -> None:
+    query = build_query()
+    authorization = build_authorization(
+        query=query,
+        allowed_service_ids=("orders-api",),
+    )
+
+    result = execute_retrieval(
+        corpus=build_corpus(),
+        query=query,
+        authorization=authorization,
+        completed_at=COMPLETED_AT,
+    )
+
+    assert result.disposition is RetrievalDisposition.ABSTENTION
+    assert result.abstention is not None
+    assert result.abstention.code is RetrievalAbstentionCode.NO_AUTHORIZED_SOURCES
+    assert result.candidates == ()
+
+
+def test_policy_sensitivity_scope_is_applied_before_retrieval() -> None:
+    query = build_query()
+    authorization = build_authorization(
+        query=query,
+        allowed_sensitivities=("public",),
+    )
+
+    result = execute_retrieval(
+        corpus=build_corpus(),
+        query=query,
+        authorization=authorization,
+        completed_at=COMPLETED_AT,
+    )
+
+    assert result.disposition is RetrievalDisposition.ABSTENTION
+    assert result.abstention is not None
+    assert result.abstention.code is RetrievalAbstentionCode.NO_AUTHORIZED_SOURCES
+    assert result.candidates == ()
+
+
+def test_policy_resource_scope_intersects_query_source_scope() -> None:
+    query = build_query(
+        allowed_source_ids=("source-a", "source-b"),
+    )
+    authorization = build_authorization(
+        query=query,
+        allowed_resource_ids=("source-b",),
+    )
+
+    result = execute_retrieval(
+        corpus=build_corpus(),
+        query=query,
+        authorization=authorization,
+        completed_at=COMPLETED_AT,
+    )
+
+    assert result.disposition is RetrievalDisposition.ABSTENTION
+    assert result.abstention is not None
+    assert result.abstention.code is RetrievalAbstentionCode.NO_AUTHORIZED_SOURCES
+    assert result.candidates == ()
+
+
+def test_mismatched_policy_lineage_fails_closed() -> None:
+    query = build_query()
+    authorization = build_authorization(query=query).model_copy(
+        update={"trace_id": "trace-another"},
+    )
+
+    result = execute_retrieval(
+        corpus=build_corpus(),
+        query=query,
+        authorization=authorization,
+        completed_at=COMPLETED_AT,
+    )
+
+    assert result.disposition is RetrievalDisposition.ABSTENTION
+    assert result.abstention is not None
+    assert result.abstention.code is RetrievalAbstentionCode.AUTHORIZATION_MISSING
+    assert result.candidates == ()
+
+
+def test_policy_maximum_evidence_items_limits_candidates() -> None:
+    query = build_query(max_candidates=10)
+    authorization = build_authorization(
+        query=query,
+        max_evidence_items=1,
+    )
+
+    result = execute_retrieval(
+        corpus=build_corpus(),
+        query=query,
+        authorization=authorization,
+        completed_at=COMPLETED_AT,
+    )
+
+    assert result.disposition is RetrievalDisposition.CANDIDATES
+    assert len(result.candidates) == 1
+    assert result.candidates[0].rank == 1
+    assert result.candidates[0].chunk_id == "chunk-a"
+
+
+def test_service_catalog_maps_to_service_metadata_authority() -> None:
+    source = build_source(
+        source_kind=EvidenceSourceKind.SERVICE_CATALOG,
+    )
+    document = build_document(
+        source=source,
+        document_id="service-document",
+        content="Payment queue service metadata.",
+    )
+    chunk = build_chunk(
+        document=document,
+        chunk_id="service-chunk",
+        content="Payment queue service metadata.",
+    )
+    corpus = SyntheticEvidenceCorpus(
+        corpus_id="service-metadata-corpus",
+        corpus_version="corpus-v1",
+        sources=(source,),
+        documents=(document,),
+        chunks=(chunk,),
+    )
+    query = build_query(
+        allowed_source_kinds=(EvidenceSourceKind.SERVICE_CATALOG,),
+    )
+    authorization = build_authorization(
+        query=query,
+        allowed_source_types=("service_metadata",),
+    )
+
+    result = execute_retrieval(
+        corpus=corpus,
+        query=query,
+        authorization=authorization,
+        completed_at=COMPLETED_AT,
+    )
+
+    assert result.disposition is RetrievalDisposition.CANDIDATES
+    assert len(result.candidates) == 1
+    assert result.candidates[0].source_id == source.source_id
+    assert result.candidates[0].chunk_id == chunk.chunk_id
+
+
+def test_denied_policy_authority_fails_closed() -> None:
+    query = build_query()
+    authorization = build_authorization(query=query).model_copy(
+        update={"outcome": PolicyOutcome.DENY},
+    )
+
+    result = execute_retrieval(
+        corpus=build_corpus(),
+        query=query,
+        authorization=authorization,
+        completed_at=COMPLETED_AT,
+    )
+
+    assert result.disposition is RetrievalDisposition.ABSTENTION
+    assert result.abstention is not None
+    assert result.abstention.code is RetrievalAbstentionCode.AUTHORIZATION_MISSING
+    assert result.candidates == ()

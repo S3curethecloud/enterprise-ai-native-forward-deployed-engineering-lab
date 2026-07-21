@@ -4,13 +4,20 @@ import re
 from collections.abc import Iterable
 from typing import Final
 
+from incident_diagnostic_api.contracts import AuthorizationDecision
 from incident_diagnostic_api.contracts.common import Timestamp
-from incident_diagnostic_api.contracts.enums import FreshnessStatus
+from incident_diagnostic_api.contracts.enums import (
+    FreshnessStatus,
+    PolicyOperation,
+    PolicyOutcome,
+    SourceType,
+)
 from incident_diagnostic_api.retrieval.corpus import (
     SyntheticEvidenceCorpus,
 )
 from incident_diagnostic_api.retrieval.enums import (
     EvidenceLifecycleStatus,
+    EvidenceSourceKind,
     RetrievalAbstentionCode,
     RetrievalDisposition,
     RetrievalMethod,
@@ -25,6 +32,11 @@ from incident_diagnostic_api.retrieval.models import (
 )
 
 _TOKEN_PATTERN: Final[re.Pattern[str]] = re.compile(r"[a-z0-9]+")
+
+_SOURCE_TYPE_BY_KIND: Final[dict[EvidenceSourceKind, SourceType]] = {
+    EvidenceSourceKind.RUNBOOK: SourceType.RUNBOOK,
+    EvidenceSourceKind.SERVICE_CATALOG: SourceType.SERVICE_METADATA,
+}
 
 
 def tokenize_keywords(text: str) -> tuple[str, ...]:
@@ -50,20 +62,59 @@ def calculate_keyword_score(
     return overlap_count / len(normalized_query)
 
 
+def _authorization_matches_query(
+    *,
+    authorization: AuthorizationDecision,
+    query: RetrievalQuery,
+    completed_at: Timestamp,
+) -> bool:
+    """Return whether CT-03 authority matches this retrieval request."""
+
+    return (
+        authorization.operation is PolicyOperation.RETRIEVE_RUNBOOK_EVIDENCE
+        and authorization.outcome
+        in {
+            PolicyOutcome.ALLOW,
+            PolicyOutcome.CONSTRAIN,
+        }
+        and authorization.request_id == query.request_id
+        and authorization.trace_id == query.trace_id
+        and authorization.subject_id == query.subject_id
+        and authorization.policy_decision_id == query.policy_decision_id
+        and authorization.policy_version == query.policy_version
+        and authorization.expires_at == query.authorization_expires_at
+        and authorization.decided_at <= query.requested_at
+        and completed_at < authorization.expires_at
+    )
+
+
 def _authorized_active_chunks(
     corpus: SyntheticEvidenceCorpus,
     query: RetrievalQuery,
+    authorization: AuthorizationDecision,
 ) -> tuple[EvidenceChunk, ...]:
-    """Apply Phase 5C source scope and lifecycle checks before scoring."""
+    """Apply CT-03 security trimming before keyword scoring."""
 
-    allowed_source_ids = frozenset(query.allowed_source_ids)
+    allowed_source_ids = frozenset(query.allowed_source_ids) & frozenset(
+        authorization.allowed_resource_ids
+    )
     allowed_source_kinds = frozenset(query.allowed_source_kinds)
+    allowed_source_types = frozenset(authorization.constraints.allowed_source_types)
+    allowed_tenant_ids = frozenset(authorization.constraints.allowed_tenant_ids)
+    allowed_service_ids = frozenset(authorization.constraints.allowed_service_ids)
+    allowed_sensitivities = frozenset(authorization.constraints.allowed_sensitivities)
 
     return tuple(
         chunk
         for chunk in corpus.chunks
         if chunk.source_id in allowed_source_ids
         and chunk.source_kind in allowed_source_kinds
+        and _SOURCE_TYPE_BY_KIND.get(chunk.source_kind) in allowed_source_types
+        and query.tenant_id in allowed_tenant_ids
+        and chunk.tenant_id == query.tenant_id
+        and query.service_id in allowed_service_ids
+        and query.service_id in chunk.service_ids
+        and chunk.sensitivity in allowed_sensitivities
         and chunk.lifecycle_status is EvidenceLifecycleStatus.ACTIVE
     )
 
@@ -106,13 +157,18 @@ def retrieve_keywords(
     *,
     corpus: SyntheticEvidenceCorpus,
     query: RetrievalQuery,
+    authorization: AuthorizationDecision,
     completed_at: Timestamp,
 ) -> RetrievalResult:
     """Retrieve deterministically ranked synthetic keyword evidence."""
 
     sources_searched = len(corpus.sources)
 
-    if completed_at >= query.authorization_expires_at:
+    if not _authorization_matches_query(
+        authorization=authorization,
+        query=query,
+        completed_at=completed_at,
+    ):
         return _abstain(
             query=query,
             code=RetrievalAbstentionCode.AUTHORIZATION_MISSING,
@@ -134,7 +190,11 @@ def retrieve_keywords(
             completed_at=completed_at,
         )
 
-    chunks = _authorized_active_chunks(corpus, query)
+    chunks = _authorized_active_chunks(
+        corpus,
+        query,
+        authorization,
+    )
     authorized_source_ids = {chunk.source_id for chunk in chunks}
     authorized_source_count = len(authorized_source_ids)
 
@@ -169,7 +229,11 @@ def retrieve_keywords(
             item[1].chunk_id,
         )
     )
-    selected_chunks = eligible_chunks[: query.max_candidates]
+    candidate_limit = min(
+        query.max_candidates,
+        authorization.constraints.max_evidence_items,
+    )
+    selected_chunks = eligible_chunks[:candidate_limit]
 
     if not selected_chunks:
         return _abstain(
