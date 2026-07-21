@@ -18,6 +18,13 @@ from incident_diagnostic_api.retrieval.enums import (
     RetrievalDisposition,
     RetrievalMethod,
 )
+from incident_diagnostic_api.retrieval.hybrid import (
+    HybridRetrievalConfig,
+    calculate_hybrid_score,
+    calculate_reciprocal_rank_score,
+    normalize_candidate_scores,
+    retrieve_hybrid,
+)
 from incident_diagnostic_api.retrieval.keyword import (
     calculate_keyword_score,
     retrieve_keywords,
@@ -52,6 +59,7 @@ __all__ = [
     "EvidenceLifecycleStatus",
     "EvidenceSource",
     "EvidenceSourceKind",
+    "HybridRetrievalConfig",
     "RetrievalAbstention",
     "RetrievalAbstentionCode",
     "RetrievalCandidate",
@@ -64,9 +72,13 @@ __all__ = [
     "VectorIndexEntry",
     "build_vector_index",
     "calculate_content_hash",
+    "calculate_hybrid_score",
     "calculate_keyword_score",
+    "calculate_reciprocal_rank_score",
     "cosine_similarity",
     "embed_text",
+    "normalize_candidate_scores",
+    "retrieve_hybrid",
     "retrieve_keywords",
     "retrieve_vectors",
     "tokenize_keywords",

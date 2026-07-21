@@ -4,10 +4,10 @@
 
 | Dimension | Status |
 |---|---|
-| Learning guide | Updated through locally verified Phase 5E vector retrieval |
+| Learning guide | Updated through locally verified Phase 5F hybrid retrieval |
 | Interview review | Pending |
-| Enterprise implementation | Phase 5E implementation verified; closure-commit CI pending |
-| Implementation authority | Phase 5E closure commit only; Phase 5F authorized only after closure-commit CI |
+| Enterprise implementation | Phase 5F locally complete; remote CI pending |
+| Implementation authority | Phase 5F implementation commit only; Phase 5G not authorized |
 
 Phase 5C closed after exact-commit CI run
 [`29795787216`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795787216)
@@ -25,12 +25,22 @@ authorization-before-score boundary used by keyword retrieval.
 
 Exact-commit CI run
 [`29810229699`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29810229699) passed against implementation commit
-`fa02cb90e62c5a1279b1ec7b025d54375fba72f3`. Phase 5E closure-commit CI remains pending.
+`fa02cb90e62c5a1279b1ec7b025d54375fba72f3`.
 
-External embeddings, downloaded models, managed vector databases,
-enterprise sources, production data, hybrid retrieval, reranking, context
-construction, external providers, tools, retrieval API routes, cloud
-deployment, and production deployment remain unauthorized.
+Phase 5E closed after exact-commit CI run
+[`29811114122`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29811114122)
+passed against closure commit
+`573b8c196ae46dd272fcb90c6695cbcc6af87bfd`.
+
+Phase 5F has locally implemented deterministic hybrid retrieval,
+score normalization, reciprocal-rank evidence, candidate deduplication,
+weighted fusion, and bounded reranking over the existing keyword and
+vector baselines. Its implementation commit and remote CI remain pending.
+
+Learned or provider rerankers, enterprise sources, production data,
+context construction, external providers, tools, retrieval API routes,
+cloud deployment, and production deployment remain unauthorized.
+Phase 5G is not authorized.
 
 ## 2. Job-Description Connection
 
@@ -723,8 +733,10 @@ dependency validation, and the capability-boundary scan pass locally.
 
 Phase 5E passed exact-commit CI run
 [`29810229699`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29810229699) against implementation commit
-`fa02cb90e62c5a1279b1ec7b025d54375fba72f3`. The Phase 5E closure commit and its exact-commit CI evidence
-remain pending.
+`fa02cb90e62c5a1279b1ec7b025d54375fba72f3`. Phase 5E closed after exact-commit CI run
+[`29811114122`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29811114122)
+passed against closure commit
+`573b8c196ae46dd272fcb90c6695cbcc6af87bfd`.
 
 I did not implement a trained semantic model, external embeddings, enterprise
 data integration, a managed vector database, hybrid retrieval, reranking,
@@ -745,6 +757,167 @@ deployment, or production deployment.
 - Implementation commit: `fa02cb90e62c5a1279b1ec7b025d54375fba72f3`
 - Exact-commit CI run: [`29810229699`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29810229699)
 - Remote exact-commit CI: Passed
-- Phase 5E closure-commit CI: Pending
+- Phase 5E closure commit: `573b8c196ae46dd272fcb90c6695cbcc6af87bfd`
+- Phase 5E closure CI run: [`29811114122`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29811114122)
+- Phase 5E closure-commit CI: Passed
 
-Phase 5F hybrid retrieval and reranking become authorized only after the Phase 5E closure commit passes exact-commit CI.
+Phase 5E is closed. Phase 5F bounded local hybrid retrieval and deterministic reranking are authorized.
+
+## Phase 5F Implementation-Derived Concepts
+
+### Hybrid Retrieval
+
+Hybrid retrieval combines candidates from lexical and vector retrieval.
+
+The lexical path rewards explicit token overlap. The vector path rewards
+similarity in the deterministic embedding space. Combining them provides
+a bounded way to use evidence from both retrieval signals.
+
+Mental note: hybrid retrieval combines relevance signals. It does not
+expand authorization.
+
+### Score Normalization
+
+Keyword and vector scores may have different distributions, so Phase 5F
+normalizes each method's candidate scores before fusion.
+
+Each score is divided by the highest score produced by that method. An
+empty result remains empty, and an all-zero result remains zero.
+
+Mental note: normalization makes scores combinable, but it does not make
+the methods equally accurate or calibrated.
+
+### Weighted Fusion
+
+Phase 5F uses the versioned `hybrid-fusion-v1` configuration:
+
+- Keyword weight: 0.45
+- Vector weight: 0.45
+- Reciprocal-rank weight: 0.10
+- Reciprocal-rank constant: 60
+
+The fused score combines normalized keyword relevance, normalized vector
+relevance, and reciprocal-rank evidence.
+
+Mental note: fusion weights are explicit configuration and must be
+versioned, tested, and evaluated.
+
+### Reciprocal-Rank Evidence
+
+Reciprocal rank gives a small, deterministic preference to candidates that
+rank highly in either component retriever.
+
+The contribution decreases as rank increases. A candidate absent from a
+retriever receives no reciprocal-rank contribution from that method.
+
+Mental note: reciprocal rank uses ordering evidence, not just raw scores.
+
+### Candidate Union and Deduplication
+
+Phase 5F forms the union of keyword and vector candidates and deduplicates
+them by chunk identifier before fusion.
+
+A chunk returned by both methods becomes one hybrid candidate with both
+signals. A chunk returned by only one method can still remain eligible.
+
+Mental note: fusion should combine evidence about one chunk, not return
+duplicate copies of it.
+
+### Deterministic Reranking
+
+Hybrid candidates are ordered by descending fused score and then by stable
+evidence identifiers.
+
+The result is repeatable for identical corpus, query, authorization,
+configuration, embedding version, and index version.
+
+Mental note: deterministic reranking is transparent arithmetic and stable
+tie-breaking. It is not a learned reranker.
+
+### Authority Preservation
+
+Phase 5F invokes the existing keyword and vector retrievers with the same
+query and CT-03 authorization decision.
+
+Both component retrievers apply authorization before scoring. Hybrid fusion
+operates only on the already-authorized candidate results and preserves
+request, trace, policy, citation, and evidence lineage.
+
+Mental note: neither normalization, fusion, nor reranking can grant access.
+
+### Final Threshold and Policy Limit
+
+Component retrieval runs with a zero relevance threshold so the hybrid
+stage can evaluate the complete authorized candidate union.
+
+The original query threshold is then applied to the fused score. The final
+candidate count is bounded by the smaller of the query maximum and the
+policy maximum.
+
+Mental note: intermediate recall can be broad within the authorized set,
+while the final result still honors caller and policy constraints.
+
+### Weak-Winner Normalization Risk
+
+Max normalization assigns the highest candidate from each nonempty method
+a normalized score of one, even when that method's absolute scores are
+weak.
+
+This behavior is deterministic and useful for a teaching baseline, but it
+can overstate a weak method winner. Production-quality hybrid retrieval
+requires evaluation and may need calibrated normalization.
+
+Mental note: deterministic does not automatically mean well calibrated.
+
+### Teaching Reranker Versus Learned Reranker
+
+Phase 5F uses a transparent weighted formula and stable identifiers.
+
+It does not use a cross-encoder, external model, provider reranker, learned
+ranking model, or enterprise search service.
+
+Mental note: describe this as deterministic fusion and reranking, not as a
+production learned relevance model.
+
+### Honest Phase 5F Interview Statement
+
+In Phase 5F, I implemented bounded deterministic hybrid retrieval over the
+existing permission-aware keyword and vector baselines. I added versioned
+weights, per-method score normalization, reciprocal-rank evidence,
+candidate union and deduplication, weighted fusion, stable reranking,
+citation preservation, final threshold enforcement, policy-controlled
+limits, and controlled abstention.
+
+Authorization remains outside the retrieval query. Keyword and vector
+retrieval enforce the same CT-03 security boundary before scoring, and the
+hybrid layer can only fuse candidates those authorized retrievers return.
+
+The local evidence is 30 hybrid test functions producing 33 pytest cases,
+157 retrieval tests, and 847 repository tests. Ruff, formatting, strict
+type checking, dependency validation, and the capability-boundary scan
+pass locally.
+
+The Phase 5F implementation commit and exact-commit remote CI evidence
+remain pending. Phase 5F closure is pending, and Phase 5G is not authorized.
+
+I did not implement learned or provider reranking, enterprise retrieval,
+production data integration, context construction, model providers, tools,
+retrieval API routes, cloud deployment, or production deployment.
+
+## Phase 5F Local Evidence
+
+- Configuration version: `hybrid-fusion-v1`
+- Keyword weight: 0.45
+- Vector weight: 0.45
+- Reciprocal-rank weight: 0.10
+- Reciprocal-rank constant: 60
+- Hybrid test functions: 30
+- Hybrid pytest cases: 33 passed
+- Retrieval tests: 157 passed
+- Complete repository tests: 847 passed
+- Public retrieval exports: 33
+- Local quality gates: Passed
+- Remote exact-commit CI: Pending
+- Phase 5F closure: Pending
+
+Phase 5G context construction and token budgets remain unauthorized.
