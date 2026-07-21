@@ -12,9 +12,9 @@ retrieval, embeddings, hybrid retrieval, or reranking.
 
 ```text
 PHASE 5C LOCAL IMPLEMENTATION: COMPLETE
-PHASE 5C REMOTE CI: PENDING
-PHASE 5C CLOSURE: PENDING
-PHASE 5D: NOT AUTHORIZED
+PHASE 5C REMOTE CI: PASSED
+PHASE 5C CLOSURE: COMPLETE
+PHASE 5D: AUTHORIZED AFTER CLOSURE-COMMIT CI
 ```
 
 ## 3. Authorized Scope Implemented
@@ -239,17 +239,17 @@ Phase 5C intentionally leaves these capabilities unresolved:
 These boundaries do not fail Phase 5C. They prevent overstating its
 maturity.
 
-## 17. Remote CI Requirement
+## 17. Remote CI Evidence
 
-Phase 5C remains open until:
+Recorded implementation evidence:
 
-1. The exact authorized implementation scope is committed.
-2. The commit is synchronized to remote `main`.
-3. CI runs against that exact commit.
-4. Both quality and container jobs succeed.
-5. The implementation commit and CI run are recorded.
-6. Phase 5C is closed separately.
-7. Phase 5D receives explicit authorization.
+- Implementation commit: `8cee3d71676440824b700c62359c162a98cb2b8e`
+- Exact-commit CI run: [`29795504565`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795504565)
+- CI conclusion: Success
+- Python quality and contract tests: Passed
+- Local container build and health verification: Passed
+- CI head SHA matched the Phase 5C implementation commit
+- Remote synchronization: Passed
 
 ## 18. Current Exit Posture
 
@@ -257,9 +257,11 @@ Phase 5C remains open until:
 PHASE 5A: COMPLETE
 PHASE 5B: COMPLETE
 PHASE 5C LOCAL IMPLEMENTATION: COMPLETE
-PHASE 5C REMOTE CI: PENDING
-PHASE 5C CLOSURE: PENDING
-PHASE 5D: NOT AUTHORIZED
+PHASE 5C REMOTE CI: PASSED
+PHASE 5C CLOSURE: COMPLETE
+PHASE 5D: AUTHORIZED AFTER CLOSURE-COMMIT CI
+ENTERPRISE RETRIEVAL: NOT AUTHORIZED
+PHASE 5D SCOPE: TENANT, SERVICE, AND CLASSIFICATION FILTERING
 ENTERPRISE RETRIEVAL: NOT AUTHORIZED
 VECTOR RETRIEVAL: NOT AUTHORIZED
 ```

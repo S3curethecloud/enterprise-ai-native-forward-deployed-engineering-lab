@@ -313,7 +313,7 @@ The lab is complete when a learner can:
 | Phase 2: Thin vertical slice | Complete |
 | Phase 3: Cloud-native prototype foundation | Complete |
 | Executable contracts | 7 of 7 implemented and tested |
-| Local test suite | 723 passing |
+| Local test suite | 762 passing |
 | Local quality gates | Passed |
 | Dependency locks | Implemented and hash-validated |
 | Dockerfile and Compose definitions | Implemented and tested in CI |
@@ -336,7 +336,13 @@ The lab is complete when a learner can:
 | Phase 5B implementation commit | efd62671b27e725d2936a2c7ae3a1a0d24b06ca6 |
 | Phase 5B CI run | [29780263857](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29780263857) |
 | Phase 5B contract tests | 37 passing |
-| Phase 5C synthetic corpus and deterministic keyword retrieval | Next authorized subphase after closure CI |
+| Phase 5C synthetic corpus and deterministic keyword retrieval | Complete |
+| Phase 5C implementation commit | 8cee3d71676440824b700c62359c162a98cb2b8e |
+| Phase 5C CI run | [29795504565](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795504565) |
+| Phase 5C corpus tests | 23 passing |
+| Phase 5C keyword tests | 16 passing |
+| Phase 5C retrieval tests | 76 passing |
+| Phase 5D tenant, service, and classification filtering | Next authorized subphase after closure CI |
 | Enterprise retrieval | Not authorized |
 | Vector retrieval and embeddings | Not authorized |
 | Model-provider integration | Not started |
@@ -406,15 +412,15 @@ Runtime-only FastAPI routes
 Runtime and integration tests
 Tutorial and gate evidence
 Next Authorized Work After Closure-Commit CI
-PHASE 5C — SYNTHETIC CORPUS AND DETERMINISTIC KEYWORD RETRIEVAL
+PHASE 5D — TENANT, SERVICE, AND CLASSIFICATION FILTERING
 
-Phase 5C may implement a bounded synthetic local evidence corpus and
-deterministic read-only keyword retrieval against that corpus.
+Phase 5D may implement deterministic filtering over the existing synthetic
+corpus using tenant, service, and sensitivity-classification metadata.
 
-The Phase 5B closure commit must pass exact-commit CI before Phase 5C
+The Phase 5C closure commit must pass exact-commit CI before Phase 5D
 implementation begins.
 
-Phase 5C does not authorize enterprise sources, production data, vector
+Phase 5D does not authorize enterprise sources, production data, vector
 retrieval, embeddings, hybrid retrieval, reranking, context construction,
 external providers, tools, retrieval API routes, infrastructure mutation,
 cloud deployment, or production deployment.

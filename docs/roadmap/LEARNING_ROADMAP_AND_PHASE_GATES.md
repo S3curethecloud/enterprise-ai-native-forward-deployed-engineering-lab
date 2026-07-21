@@ -654,7 +654,11 @@ Every implementation phase must end with:
 | Phase 5B — Implementation commit | efd62671b27e725d2936a2c7ae3a1a0d24b06ca6 |
 | Phase 5B — CI run | [29780263857](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29780263857) |
 | Phase 5B — Retrieval contract tests | 37 passing |
-| Phase 5C — Synthetic corpus and deterministic keyword retrieval | Next authorized subphase after closure CI |
+| Phase 5C — Synthetic corpus and deterministic keyword retrieval | Complete |
+| Phase 5C — Implementation commit | 8cee3d71676440824b700c62359c162a98cb2b8e |
+| Phase 5C — CI run | [29795504565](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795504565) |
+| Phase 5C — Retrieval tests | 76 passing |
+| Phase 5D — Tenant, service, and classification filtering | Next authorized subphase after closure CI |
 | Phases 6–17 | Not started |
 
 ## Phase 4 Closure Evidence
@@ -678,17 +682,19 @@ Both required jobs passed:
 Python quality and contract tests
 Local container build and health verification
 Next Authorized Work After Closure-Commit CI
-PHASE 5C — SYNTHETIC CORPUS AND DETERMINISTIC KEYWORD RETRIEVAL
+PHASE 5D — TENANT, SERVICE, AND CLASSIFICATION FILTERING
 
 Authorized:
 
-Synthetic local evidence corpus
-Deterministic read-only keyword retrieval
-Existing Phase 5B contracts
-Unit and contract tests
+Tenant filtering over synthetic evidence
+Service filtering over synthetic evidence
+Sensitivity-classification filtering over synthetic evidence
+Deterministic filter-order enforcement
+Cross-scope rejection tests
+Existing Phase 5B contracts and Phase 5C keyword retrieval
 Implementation evidence
 
-The Phase 5B closure commit must pass exact-commit CI before Phase 5C
+The Phase 5C closure commit must pass exact-commit CI before Phase 5D
 implementation begins.
 
 Not authorized:

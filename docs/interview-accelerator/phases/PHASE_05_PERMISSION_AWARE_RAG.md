@@ -4,10 +4,10 @@
 
 | Dimension | Status |
 |---|---|
-| Learning guide | Updated through verified Phase 5B contracts |
+| Learning guide | Updated through verified Phase 5C keyword retrieval |
 | Interview review | Pending |
-| Enterprise implementation | Typed contracts complete; retrieval execution not started |
-| Implementation authority | Phase 5C synthetic corpus and deterministic keyword retrieval after closure CI |
+| Enterprise implementation | Synthetic deterministic keyword retrieval complete |
+| Implementation authority | Phase 5D tenant, service, and classification filtering after closure CI |
 
 Phase 5B implemented immutable retrieval contracts and passed exact-commit CI run [`29780263857`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29780263857) against implementation commit `efd62671b27e725d2936a2c7ae3a1a0d24b06ca6`.
 
@@ -411,7 +411,30 @@ exclusion, stable tie-breaking, citations, and explicit abstention.
 The local evidence is 23 corpus tests, 16 keyword tests, 76 total retrieval
 tests, and 762 repository tests.
 
-Remote CI and Phase 5C closure remain pending. I did not implement
-enterprise retrieval, tenant or service filtering, classification
-filtering, embeddings, vector search, hybrid retrieval, reranking, context
-construction, provider calls, tools, or retrieval API routes.
+Phase 5C passed exact-commit CI run [`29795504565`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795504565) against
+implementation commit `8cee3d71676440824b700c62359c162a98cb2b8e`. Phase 5D remains pending until the Phase
+5C closure commit passes exact-commit CI.
+
+I did not implement enterprise retrieval, tenant or service filtering,
+classification filtering, embeddings, vector search, hybrid retrieval,
+reranking, context construction, provider calls, tools, or retrieval API
+routes.
+
+## Phase 5C Verified Evidence
+
+- Implementation commit: `8cee3d71676440824b700c62359c162a98cb2b8e`
+- Exact-commit CI run: [`29795504565`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795504565)
+- Corpus tests: 23 passed
+- Keyword tests: 16 passed
+- Retrieval tests: 76 passed
+- Complete repository tests: 762 passed
+- CI quality job: Passed
+- CI container job: Passed
+
+Next bounded work after closure-commit CI:
+
+Phase 5D — Tenant, service, and classification filtering
+
+Enterprise retrieval, vectors, embeddings, hybrid retrieval,
+reranking, context construction, providers, tools, cloud deployment,
+and production deployment remain unauthorized.

@@ -416,7 +416,12 @@ A requirement may not be marked Complete based only on:
 | Phase 5B CI run | [29780263857](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29780263857) |
 | Phase 5B retrieval contract tests | 37 passing |
 | Complete local test suite | 723 passing |
-| Phase 5C synthetic corpus and deterministic keyword retrieval | Next authorized subphase after closure CI |
+| Phase 5C synthetic corpus and deterministic keyword retrieval | Complete |
+| Phase 5C implementation commit | 8cee3d71676440824b700c62359c162a98cb2b8e |
+| Phase 5C CI run | [29795504565](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795504565) |
+| Phase 5C retrieval tests | 76 passing |
+| Complete local test suite | 762 passing |
+| Phase 5D tenant, service, and classification filtering | Next authorized subphase after closure CI |
 | Enterprise retrieval | Not authorized |
 | Vector retrieval and embeddings | Not authorized |
 | JD requirements mapped | 36 of 36 |
@@ -435,11 +440,11 @@ JD requirements implemented remains zero because Phase 4 implements a bounded ru
 ## Next Authorized Work After Closure-Commit CI
 
 ```text
-Phase 5C — Synthetic Corpus and Deterministic Keyword Retrieval
+Phase 5D — Tenant, Service, and Classification Filtering
 ```
 
-Phase 5B implemented immutable typed retrieval contracts and passed exact-commit CI run [`29780263857`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29780263857) against implementation commit `efd62671b27e725d2936a2c7ae3a1a0d24b06ca6`.
+Phase 5C implemented deterministic read-only keyword retrieval over an immutable synthetic corpus and passed exact-commit CI run [`29795504565`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795504565) against implementation commit `8cee3d71676440824b700c62359c162a98cb2b8e`.
 
-After the Phase 5B closure commit passes exact-commit CI, Phase 5C may implement a synthetic local corpus and deterministic read-only keyword retrieval.
+After the Phase 5C closure commit passes exact-commit CI, Phase 5D may implement deterministic tenant, service, and sensitivity-classification filtering over synthetic evidence.
 
 Enterprise sources, production data, vector retrieval, embeddings, hybrid retrieval, reranking, context construction, external providers, tool execution, retrieval API routes, infrastructure mutation, cloud deployment, and production deployment remain unauthorized.

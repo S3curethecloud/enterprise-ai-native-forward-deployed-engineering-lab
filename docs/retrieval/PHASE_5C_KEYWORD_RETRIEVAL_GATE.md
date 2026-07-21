@@ -9,9 +9,9 @@ for an implementation commit and exact-commit CI validation.
 
 ```text
 LOCAL IMPLEMENTATION GATE: PASSED
-REMOTE CI GATE: PENDING
-PHASE 5C CLOSURE: PENDING
-PHASE 5D: NOT AUTHORIZED
+REMOTE CI GATE: PASSED
+PHASE 5C CLOSURE: COMPLETE
+PHASE 5D: AUTHORIZED AFTER CLOSURE-COMMIT CI
 ```
 
 ## 3. Evaluated Scope
@@ -222,24 +222,27 @@ Phase 5C does not establish:
 
 ## 17. Remote CI Gate
 
-Pending requirements:
+Passed evidence:
 
-1. Commit the exact Phase 5C scope.
-2. Synchronize the commit to remote `main`.
-3. Execute CI against that exact commit.
-4. Require quality and container jobs to pass.
-5. Record the implementation commit and CI run.
-6. Close Phase 5C separately.
-7. Authorize Phase 5D explicitly.
+- Implementation commit: `8cee3d71676440824b700c62359c162a98cb2b8e`
+- Exact-commit CI run: [`29795504565`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795504565)
+- CI conclusion: Success
+- Python quality and contract tests: Passed
+- Local container build and health verification: Passed
+- CI head SHA matched the implementation commit
+
+Phase 5C passed its exact-commit remote CI gate.
 
 ## 18. Final Local Decision
 
 ```text
 PHASE 5C LOCAL IMPLEMENTATION GATE: PASSED
-PHASE 5C IMPLEMENTATION COMMIT: AUTHORIZED
-PHASE 5C REMOTE CI: REQUIRED
-PHASE 5C CLOSURE: PENDING
-PHASE 5D: NOT AUTHORIZED
+PHASE 5C IMPLEMENTATION COMMIT: VERIFIED
+PHASE 5C REMOTE CI: PASSED
+PHASE 5C CLOSURE: COMPLETE
+PHASE 5D: AUTHORIZED AFTER CLOSURE-COMMIT CI
+ENTERPRISE RETRIEVAL: NOT AUTHORIZED
+PHASE 5D SCOPE: TENANT, SERVICE, AND CLASSIFICATION FILTERING
 ENTERPRISE RETRIEVAL: NOT AUTHORIZED
 VECTOR RETRIEVAL: NOT AUTHORIZED
 ```
