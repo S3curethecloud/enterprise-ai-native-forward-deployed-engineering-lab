@@ -13,10 +13,10 @@ retrieval component independent authorization authority.
 
 ```text
 PHASE 5D LOCAL IMPLEMENTATION: PASSED
-PHASE 5D IMPLEMENTATION COMMIT: AUTHORIZED
-PHASE 5D REMOTE CI: PENDING
-PHASE 5D CLOSURE: PENDING
-PHASE 5E: NOT AUTHORIZED
+PHASE 5D IMPLEMENTATION COMMIT: f3e654da813f4b5bbfd42d5b5cdbc9e14980d1ae
+PHASE 5D REMOTE CI: PASSED — RUN 29805548139
+PHASE 5D CLOSURE: PENDING CLOSURE-COMMIT CI
+PHASE 5E: AUTHORIZED ONLY AFTER CLOSURE-COMMIT CI
 ```
 
 Phase 5D cannot close until remote CI succeeds against its exact
@@ -252,33 +252,49 @@ The following remain deliberately unresolved:
 
 These are later gated concerns and are not Phase 5D claims.
 
-## 17. Remote CI Requirement
+## 17. Remote CI Evidence
 
-Phase 5D closure requires:
-
-1. An exact implementation commit.
-2. A remote Phase 4 CI run against that exact commit.
-3. Successful Python quality and contract-test execution.
-4. Successful container build and health verification.
-5. Recorded commit and run identifiers.
-6. A separate closure commit if closure evidence changes tracked files.
-
-Until that evidence exists:
+Phase 5D implementation evidence:
 
 ```text
-PHASE 5D REMOTE CI: PENDING
-PHASE 5D CLOSURE: PENDING
-PHASE 5E: NOT AUTHORIZED
+Implementation commit:
+f3e654da813f4b5bbfd42d5b5cdbc9e14980d1ae
+
+GitHub Actions run:
+29805548139
+
+Workflow:
+Phase 4 CI
+
+Branch:
+main
+
+Conclusion:
+SUCCESS
+
+Run URL:
+
+29805548139
+
+Both required jobs passed:
+
+Python quality and contract tests
+Local container build and health verification
+
+The run executed the exact Phase 5D implementation commit.
+
+Phase 5D still requires a closure-evidence commit and successful CI against
+that exact closure commit before Phase 5E begins.
 ```
 
 ## 18. Current Exit Posture
 
 ```text
 PHASE 5D LOCAL GATE: PASSED
-PHASE 5D IMPLEMENTATION COMMIT: AUTHORIZED
-PHASE 5D REMOTE CI: REQUIRED
-PHASE 5D CLOSURE: PENDING
-PHASE 5E LOCAL EMBEDDINGS AND VECTOR RETRIEVAL: NOT AUTHORIZED
+PHASE 5D IMPLEMENTATION COMMIT: f3e654da813f4b5bbfd42d5b5cdbc9e14980d1ae
+PHASE 5D REMOTE CI: PASSED — RUN 29805548139
+PHASE 5D CLOSURE: PENDING CLOSURE-COMMIT CI
+PHASE 5E LOCAL EMBEDDINGS AND VECTOR RETRIEVAL: AUTHORIZED ONLY AFTER CLOSURE-COMMIT CI
 ENTERPRISE RETRIEVAL: NOT AUTHORIZED
 EXTERNAL PROVIDERS: NOT AUTHORIZED
 TOOL EXECUTION: NOT AUTHORIZED

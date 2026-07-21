@@ -342,7 +342,13 @@ The lab is complete when a learner can:
 | Phase 5C corpus tests | 23 passing |
 | Phase 5C keyword tests | 16 passing |
 | Phase 5C retrieval tests | 76 passing |
-| Phase 5D tenant, service, and classification filtering | Next authorized subphase after closure CI |
+| Phase 5D tenant, service, and classification filtering | Implementation verified; closure-commit CI pending |
+| Phase 5D implementation commit | f3e654da813f4b5bbfd42d5b5cdbc9e14980d1ae |
+| Phase 5D CI run | [29805548139](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29805548139) |
+| Phase 5D keyword tests | 26 passing |
+| Phase 5D focused contract and retrieval tests | 126 passing |
+| Complete local test suite | 776 passing |
+| Phase 5E local deterministic embeddings and vector retrieval | Authorized only after Phase 5D closure-commit CI |
 | Enterprise retrieval | Not authorized |
 | Vector retrieval and embeddings | Not authorized |
 | Model-provider integration | Not started |
@@ -411,19 +417,33 @@ CT-07 runtime trace events
 Runtime-only FastAPI routes
 Runtime and integration tests
 Tutorial and gate evidence
-Next Authorized Work After Closure-Commit CI
-PHASE 5D — TENANT, SERVICE, AND CLASSIFICATION FILTERING
+Phase 5D Verified Implementation Evidence
 
-Phase 5D may implement deterministic filtering over the existing synthetic
-corpus using tenant, service, and sensitivity-classification metadata.
+IMPLEMENTATION COMMIT:
+f3e654da813f4b5bbfd42d5b5cdbc9e14980d1ae
 
-The Phase 5C closure commit must pass exact-commit CI before Phase 5D
-implementation begins.
+EXACT-COMMIT CI RUN:
+29805548139
 
-Phase 5D does not authorize enterprise sources, production data, vector
-retrieval, embeddings, hybrid retrieval, reranking, context construction,
-external providers, tools, retrieval API routes, infrastructure mutation,
-cloud deployment, or production deployment.
+CI RESULT:
+SUCCESS
+
+VERIFIED CAPABILITY:
+Tenant, service, sensitivity, resource, source-type, lifecycle, and
+policy-lineage filtering before deterministic keyword scoring.
+
+Next Authorized Work After Phase 5D Closure-Commit CI
+
+PHASE 5E — LOCAL DETERMINISTIC EMBEDDINGS AND VECTOR RETRIEVAL
+
+Phase 5E may begin only after the Phase 5D closure-evidence commit passes
+exact-commit CI.
+
+Phase 5E does not authorize enterprise sources, production data, external
+embedding providers, managed vector databases, hybrid retrieval, reranking,
+context construction, external model providers, tools, retrieval API
+routes, infrastructure mutation, cloud deployment, or production
+deployment.
 ```
 
 ## Independent Project Notice

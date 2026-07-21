@@ -4,24 +4,30 @@
 
 | Dimension | Status |
 |---|---|
-| Learning guide | Updated through locally verified Phase 5D permission filtering |
+| Learning guide | Updated through verified Phase 5D permission filtering |
 | Interview review | Pending |
-| Enterprise implementation | Phase 5D locally complete; remote CI pending |
-| Implementation authority | Phase 5D implementation commit only; Phase 5E not authorized |
+| Enterprise implementation | Phase 5D implementation verified; closure-commit CI pending |
+| Implementation authority | Phase 5D closure commit only; Phase 5E authorized only after closure-commit CI |
 
 Phase 5C closed after exact-commit CI run
 [`29795787216`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795787216)
 passed against closure commit
 `0e757ab896d61a29ec520e614bd4276a1291e9cc`.
 
-Phase 5D has locally implemented tenant, service, classification, resource,
+Phase 5D implemented tenant, service, classification, resource,
 source-type, lifecycle, and policy-lineage filtering before keyword
-scoring. Its implementation commit and remote CI evidence remain pending.
+scoring. Exact-commit CI run
+[`29805548139`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29805548139)
+passed against implementation commit
+`f3e654da813f4b5bbfd42d5b5cdbc9e14980d1ae`. Phase 5D closure-commit CI
+remains pending.
 
-Phase 5E embeddings and vector retrieval, enterprise sources, production
-data, hybrid retrieval, reranking, context construction, external
-providers, tools, retrieval API routes, cloud deployment, and production
-deployment remain unauthorized.
+Phase 5E local deterministic embeddings and vector retrieval becomes
+authorized only after the Phase 5D closure commit passes exact-commit CI.
+External embeddings, managed vector databases, enterprise sources,
+production data, hybrid retrieval, reranking, context construction,
+external providers, tools, retrieval API routes, cloud deployment, and
+production deployment remain unauthorized.
 
 ## 2. Job-Description Connection
 
@@ -542,9 +548,37 @@ focused contract and retrieval tests, 26 keyword tests, and 776 repository
 tests. Ruff, formatting, strict type checking, dependency validation, and
 the capability-boundary check pass locally.
 
-The Phase 5D implementation commit and remote CI evidence remain pending.
+Phase 5D passed exact-commit CI run
+[`29805548139`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29805548139)
+against implementation commit
+`f3e654da813f4b5bbfd42d5b5cdbc9e14980d1ae`. The Phase 5D closure commit
+and its exact-commit CI evidence remain pending.
 
 I did not implement enterprise data integration, embeddings, vector
 retrieval, hybrid retrieval, reranking, context construction, provider
 calls, tools, retrieval API routes, cloud deployment, or production
 deployment.
+
+## Phase 5D Verified Implementation Evidence
+
+- Implementation commit: `f3e654da813f4b5bbfd42d5b5cdbc9e14980d1ae`
+- Exact-commit CI run: [`29805548139`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29805548139)
+- Authorization and evidence contract tests: 40 passed
+- Focused contract and retrieval tests: 126 passed
+- Keyword tests: 26 passed
+- Complete repository tests: 776 passed
+- CI quality job: Passed
+- CI container job: Passed
+
+Phase 5D implementation evidence is verified. Phase 5D closure still
+requires the closure commit to pass exact-commit CI.
+
+Next bounded work after closure-commit CI:
+
+Phase 5E — Local deterministic embeddings and vector retrieval
+
+Phase 5E is limited to local deterministic embeddings and local vector
+retrieval over synthetic evidence. External embedding providers, managed
+vector databases, enterprise sources, production data, hybrid retrieval,
+reranking, context construction, provider calls, tools, retrieval API
+routes, cloud deployment, and production deployment remain unauthorized.

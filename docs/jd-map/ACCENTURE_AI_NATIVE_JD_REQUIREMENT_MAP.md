@@ -421,9 +421,15 @@ A requirement may not be marked Complete based only on:
 | Phase 5C CI run | [29795504565](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795504565) |
 | Phase 5C retrieval tests | 76 passing |
 | Complete local test suite | 762 passing |
-| Phase 5D tenant, service, and classification filtering | Next authorized subphase after closure CI |
+| Phase 5D tenant, service, and classification filtering | Implementation verified; closure-commit CI pending |
+| Phase 5D implementation commit | f3e654da813f4b5bbfd42d5b5cdbc9e14980d1ae |
+| Phase 5D CI run | [29805548139](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29805548139) |
+| Phase 5D keyword tests | 26 passing |
+| Phase 5D focused contract and retrieval tests | 126 passing |
+| Complete local test suite | 776 passing |
+| Phase 5E local deterministic embeddings and vector retrieval | Authorized only after Phase 5D closure-commit CI |
 | Enterprise retrieval | Not authorized |
-| Vector retrieval and embeddings | Not authorized |
+| External embeddings and managed vector services | Not authorized |
 | JD requirements mapped | 36 of 36 |
 | JD requirements documented | 7 of 36 |
 | JD requirements implemented | 0 of 36 |
@@ -435,16 +441,26 @@ A requirement may not be marked Complete based only on:
 | Tool execution authority | None |
 | Production infrastructure mutation | None |
 
-JD requirements implemented remains zero because Phase 4 implements a bounded runtime component but does not yet complete an end-to-end agent workflow, enterprise POC, provider integration, retrieval capability, tool capability, or other entire JD requirement.
+JD requirements implemented remains zero because the repository now contains bounded runtime coordination and synthetic permission-aware keyword retrieval components, but it does not yet complete an end-to-end agent workflow, enterprise POC, external provider integration, enterprise retrieval capability, tool capability, or other entire JD requirement.
 
 ## Next Authorized Work After Closure-Commit CI
 
 ```text
-Phase 5D — Tenant, Service, and Classification Filtering
+Phase 5E — Local Deterministic Embeddings and Vector Retrieval
 ```
 
-Phase 5C implemented deterministic read-only keyword retrieval over an immutable synthetic corpus and passed exact-commit CI run [`29795504565`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795504565) against implementation commit `8cee3d71676440824b700c62359c162a98cb2b8e`.
+Phase 5D implemented deterministic permission filtering using the CT-03
+authorization boundary. Tenant, service, sensitivity classification,
+resource, source-type, policy-lineage, expiration, and result-limit
+constraints are enforced before keyword scoring.
 
-After the Phase 5C closure commit passes exact-commit CI, Phase 5D may implement deterministic tenant, service, and sensitivity-classification filtering over synthetic evidence.
+Phase 5D passed exact-commit CI run [`29805548139`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29805548139) against implementation commit `f3e654da813f4b5bbfd42d5b5cdbc9e14980d1ae`.
 
-Enterprise sources, production data, vector retrieval, embeddings, hybrid retrieval, reranking, context construction, external providers, tool execution, retrieval API routes, infrastructure mutation, cloud deployment, and production deployment remain unauthorized.
+Phase 5E becomes authorized only after the Phase 5D closure commit passes
+exact-commit CI. Its scope is limited to local deterministic embeddings and
+local vector retrieval over synthetic evidence.
+
+External embedding providers, managed vector databases, enterprise sources,
+production data, hybrid retrieval, reranking, context construction, external
+model providers, tool execution, retrieval API routes, infrastructure
+mutation, cloud deployment, and production deployment remain unauthorized.

@@ -658,7 +658,13 @@ Every implementation phase must end with:
 | Phase 5C — Implementation commit | 8cee3d71676440824b700c62359c162a98cb2b8e |
 | Phase 5C — CI run | [29795504565](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795504565) |
 | Phase 5C — Retrieval tests | 76 passing |
-| Phase 5D — Tenant, service, and classification filtering | Next authorized subphase after closure CI |
+| Phase 5D — Tenant, service, and classification filtering | Implementation verified; closure-commit CI pending |
+| Phase 5D — Implementation commit | f3e654da813f4b5bbfd42d5b5cdbc9e14980d1ae |
+| Phase 5D — CI run | [29805548139](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29805548139) |
+| Phase 5D — Keyword tests | 26 passing |
+| Phase 5D — Focused contract and retrieval tests | 126 passing |
+| Phase 5D — Complete local test suite | 776 passing |
+| Phase 5E — Local deterministic embeddings and vector retrieval | Authorized only after Phase 5D closure-commit CI |
 | Phases 6–17 | Not started |
 
 ## Phase 4 Closure Evidence
@@ -681,28 +687,44 @@ Both required jobs passed:
 
 Python quality and contract tests
 Local container build and health verification
-Next Authorized Work After Closure-Commit CI
-PHASE 5D — TENANT, SERVICE, AND CLASSIFICATION FILTERING
+Phase 5D Verified Implementation Evidence
 
-Authorized:
+Implementation commit:
+f3e654da813f4b5bbfd42d5b5cdbc9e14980d1ae
+
+Exact-commit CI run:
+29805548139
+
+CI result:
+SUCCESS
+
+Implemented and verified:
 
 Tenant filtering over synthetic evidence
 Service filtering over synthetic evidence
 Sensitivity-classification filtering over synthetic evidence
-Deterministic filter-order enforcement
-Cross-scope rejection tests
-Existing Phase 5B contracts and Phase 5C keyword retrieval
-Implementation evidence
+Resource intersection
+Source-type mapping
+Policy-lineage validation
+Lifecycle filtering
+Filtering before scoring
+Policy-controlled candidate limits
+Controlled abstention
+Fail-closed unsupported source kinds
 
-The Phase 5C closure commit must pass exact-commit CI before Phase 5D
-implementation begins.
+Next Authorized Work After Phase 5D Closure-Commit CI
+
+PHASE 5E — LOCAL DETERMINISTIC EMBEDDINGS AND VECTOR RETRIEVAL
+
+Phase 5E may begin only after the Phase 5D closure-evidence commit passes
+exact-commit CI.
 
 Not authorized:
 
 Enterprise sources
 Production data
-Vector retrieval
-Embeddings
+External embedding providers
+Managed vector databases
 Hybrid retrieval
 Reranking
 Context construction
