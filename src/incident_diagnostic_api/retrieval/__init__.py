@@ -1,5 +1,16 @@
 """Public contracts for bounded permission-aware retrieval."""
 
+from incident_diagnostic_api.retrieval.citation_validation import (
+    CITATION_VALIDATION_VERSION,
+    CitationAbstention,
+    CitationAbstentionCode,
+    CitationValidationDisposition,
+    CitationValidationEvidence,
+    CitationValidationResult,
+    ValidatedEvidenceBundle,
+    ValidatedEvidenceItem,
+    validate_citations,
+)
 from incident_diagnostic_api.retrieval.content_controls import (
     CONTENT_CONTROL_VERSION,
     ContentControlDisposition,
@@ -72,12 +83,18 @@ from incident_diagnostic_api.retrieval.vector import (
 )
 
 __all__ = [
+    "CITATION_VALIDATION_VERSION",
     "CONTENT_CONTROL_VERSION",
     "CONTEXT_BUDGET_VERSION",
     "EMBEDDING_DIMENSIONS",
     "EMBEDDING_VERSION",
     "VECTOR_INDEX_VERSION",
     "Citation",
+    "CitationAbstention",
+    "CitationAbstentionCode",
+    "CitationValidationDisposition",
+    "CitationValidationEvidence",
+    "CitationValidationResult",
     "ContentControlDisposition",
     "ContentControlResult",
     "ContentRiskCategory",
@@ -108,6 +125,8 @@ __all__ = [
     "RetrievalResult",
     "SyntheticEvidenceCorpus",
     "SyntheticVectorIndex",
+    "ValidatedEvidenceBundle",
+    "ValidatedEvidenceItem",
     "VectorIndexEntry",
     "build_context",
     "build_vector_index",
@@ -124,4 +143,5 @@ __all__ = [
     "retrieve_keywords",
     "retrieve_vectors",
     "tokenize_keywords",
+    "validate_citations",
 ]

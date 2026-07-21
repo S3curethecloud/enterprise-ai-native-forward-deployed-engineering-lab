@@ -4,10 +4,10 @@
 
 | Dimension | Status |
 |---|---|
-| Learning guide | Updated through locally verified Phase 5H retrieval-content controls |
+| Learning guide | Updated through locally verified Phase 5I citation validation |
 | Interview review | Pending |
-| Enterprise implementation | Phase 5H implementation verified; closure-commit CI pending |
-| Implementation authority | Phase 5H closure commit only; Phase 5I authorized only after closure-commit CI |
+| Enterprise implementation | Phase 5I locally complete; remote CI pending |
+| Implementation authority | Phase 5I implementation commit only; Phase 5J not authorized |
 
 Phase 5C closed after exact-commit CI run
 [`29795787216`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795787216)
@@ -61,10 +61,22 @@ quarantines complete suspicious evidence items, preserves retained content
 without rewriting, and returns explicit clean, filtered, or blocked
 outcomes.
 
-Prompt construction, semantic safety classifiers, external guardrail
-providers, enterprise sources, production data, tools, retrieval API
-routes, cloud deployment, and production deployment remain unauthorized.
-Phase 5I citation validation and controlled abstention are not authorized.
+Phase 5H closed after exact-commit CI run
+[`29822375893`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29822375893)
+passed against closure commit
+`f72e2a5230517597a641e8994cff4a72612bc833`.
+
+Phase 5I has locally implemented deterministic citation validation and
+controlled abstention over retained Phase 5H evidence. It verifies exact
+source, document, version, chunk, hash, locator, content, lifecycle,
+temporal, and freshness lineage before returning an all-valid evidence
+bundle.
+
+Prompt construction, factual verification, semantic claim validation,
+external providers, enterprise sources, production data, tools, retrieval
+API routes, cloud deployment, and production deployment remain
+unauthorized. Phase 5J retrieval evaluation and lifecycle telemetry are not
+authorized.
 
 ## 2. Job-Description Connection
 
@@ -1239,8 +1251,9 @@ access.
 
 Phase 5H detects and quarantines bounded retrieval-content risks.
 
-It does not implement the next phase's citation-validation and controlled
-abstention boundary. Phase 5I remains unauthorized until Phase 5H closes.
+Phase 5H does not prove that retained citations still resolve to current,
+exact corpus evidence. Phase 5I performs that downstream validation after
+Phase 5H content inspection.
 
 Mental note: detecting suspicious content and proving citation validity are
 separate controls.
@@ -1266,10 +1279,11 @@ strict type checking, dependency validation, and capability-boundary checks
 pass locally.
 
 Phase 5G closed after exact-commit CI run 29818951742 against closure commit
-3851259a94474cab6b4d167b84cca56278e1a3b3. Phase 5H passed exact-commit CI run 29820773913 against implementation
-commit 2c1a812bbba005345c3f394011a9b1c3580ce995. Phase 5H closure-commit CI
-remains pending, and Phase 5I is authorized only after that closure CI
-succeeds.
+3851259a94474cab6b4d167b84cca56278e1a3b3. Phase 5H passed exact-commit CI
+run 29820773913 against implementation commit
+2c1a812bbba005345c3f394011a9b1c3580ce995 and closed after exact-commit CI
+run 29822375893 passed against closure commit
+f72e2a5230517597a641e8994cff4a72612bc833.
 
 ## Phase 5H Local Evidence
 
@@ -1285,7 +1299,178 @@ succeeds.
 - Implementation commit: 2c1a812bbba005345c3f394011a9b1c3580ce995
 - Exact-commit CI run: 29820773913
 - Remote exact-commit CI: Passed
-- Phase 5H closure-commit CI: Pending
+- Phase 5H closure commit: f72e2a5230517597a641e8994cff4a72612bc833
+- Phase 5H closure CI run: 29822375893
+- Phase 5H closure-commit CI: Passed
 
-Phase 5I citation validation and controlled abstention are authorized only
-after the Phase 5H closure commit passes exact-commit CI.
+Phase 5H is closed. Phase 5I bounded local citation validation and
+controlled abstention are authorized and locally implemented.
+
+## Phase 5I Implementation-Derived Concepts
+
+### Citation Validation
+
+Citation validation proves that a retained evidence pointer still resolves
+to the exact evidence object represented by the context.
+
+Phase 5I validates source, document, document version, chunk, content hash,
+locator, complete content, lifecycle, time, and freshness metadata.
+
+Mental note: a citation is validated only when its complete provenance chain
+resolves consistently.
+
+### Citation Validity Versus Factual Correctness
+
+A valid citation proves that the cited evidence exists and matches its
+recorded lineage.
+
+It does not prove that the evidence itself is factually correct, complete,
+non-conflicting, or sufficient to support every generated claim.
+
+Mental note: provenance validation and truth validation are separate
+problems.
+
+### Content-Addressed Evidence
+
+Phase 5I recalculates the retained content hash and compares the complete
+retained text with the immutable corpus chunk.
+
+This prevents a citation from remaining apparently valid after evidence
+content is changed without receiving a new identity.
+
+Mental note: identifiers locate evidence; hashes bind the citation to exact
+content.
+
+### Exact Locator Resolution
+
+The citation locator must match the deterministic corpus locator derived
+from the chunk index.
+
+A matching chunk identifier with a mismatched locator fails closed.
+
+Mental note: every citation field participates in provenance; none is merely
+decorative.
+
+### Lifecycle and Temporal Validation
+
+The document and chunk must both remain active.
+
+The citation cannot precede the document effective time, occur after context
+construction, or be validated before content inspection.
+
+Mental note: identity alignment is insufficient when the evidence was not
+valid during the claimed timeline.
+
+### Freshness Deadline
+
+Phase 5I derives a freshness deadline from document ingestion time plus the
+source freshness TTL.
+
+If the document has an explicit expiry, the earlier deadline wins.
+Validation at or after that deadline returns controlled abstention.
+
+Mental note: freshness is an explicit metadata boundary, not an inference
+from relevance score.
+
+### All-or-Nothing Validation
+
+Every retained Phase 5H item must pass validation before the bundle is
+constructed.
+
+If any retained citation is mismatched, stale, or internally inconsistent,
+Phase 5I returns no validated bundle.
+
+Mental note: all-or-nothing validation prevents partially trusted evidence
+from silently escaping a failed validation run.
+
+### Controlled Abstention
+
+Phase 5I uses five bounded abstention codes:
+
+- Content blocked
+- No retained evidence
+- Citation mismatch
+- Evidence stale
+- Integrity failure
+
+The abstention preserves correlation identifiers, evidence counts, ordered
+reason codes, a safe message, and occurrence time.
+
+Mental note: abstention is a typed result that downstream systems must
+handle, not an empty success response.
+
+### Upstream Content-Control Preservation
+
+Phase 5I consumes the output of Phase 5H.
+
+It cannot restore quarantined evidence. Every retained item must have a
+matching non-quarantined assessment with the same content hash and no
+signals.
+
+Mental note: a downstream validator can narrow or reject upstream output,
+but it cannot undo an earlier security decision.
+
+### Authority and Lineage Preservation
+
+Phase 5I preserves request, trace, policy decision, content-control version,
+corpus version, source version, citation, rank, and validation-time lineage.
+
+Citation validity does not grant access, create policy authority, or permit
+new evidence to be added.
+
+Mental note: validation confirms provenance; it does not authorize
+retrieval.
+
+### Phase 5I Versus Phase 5J
+
+Phase 5I validates individual retained citation chains and abstains when the
+controlled evidence set is invalid.
+
+It does not implement retrieval-quality evaluation, lifecycle telemetry,
+metrics emission, monitoring, or release thresholds. Those remain Phase 5J
+work.
+
+Mental note: validating one result is different from evaluating system
+quality over a test population and lifecycle.
+
+### Honest Phase 5I Interview Statement
+
+In Phase 5I, I implemented a deterministic, all-or-nothing
+citation-validation boundary over retained Phase 5H evidence. I added a
+versioned validation contract, exact source-to-document-to-chunk resolution,
+content-hash and complete-content verification, deterministic locator
+validation, lifecycle and temporal checks, source-TTL and document-expiry
+freshness enforcement, immutable validation evidence, and five controlled
+abstention reasons.
+
+The validator consumes content-control output, cannot restore quarantined
+items, preserves retained evidence without rewriting, and constructs a
+validated bundle only after every retained item passes. Any mismatch,
+staleness, or integrity failure produces a correlated abstention with no
+partial bundle.
+
+The local evidence is 26 citation-validation test functions producing 26
+pytest cases, 231 retrieval tests, and 921 repository tests. Ruff,
+formatting, strict type checking, dependency validation, public-boundary
+checks, and capability-boundary checks pass locally.
+
+Phase 5H closed after exact-commit CI run 29822375893 against closure commit
+f72e2a5230517597a641e8994cff4a72612bc833. The Phase 5I implementation
+commit and exact-commit remote CI evidence remain pending. Phase 5I closure
+is pending, and Phase 5J is not authorized.
+
+## Phase 5I Local Evidence
+
+- Validation version: `citation-validation-v1`
+- Validation dispositions: 2
+- Controlled abstention codes: 5
+- Citation-validation test functions: 26
+- Citation-validation pytest cases: 26 passed
+- Retrieval tests: 231 passed
+- Complete repository tests: 921 passed
+- Public retrieval exports: 61
+- Local quality gates: Passed
+- Remote exact-commit CI: Pending
+- Phase 5I closure: Pending
+
+Phase 5J retrieval evaluation and lifecycle telemetry remain unauthorized.
