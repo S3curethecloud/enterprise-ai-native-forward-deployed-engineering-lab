@@ -661,14 +661,22 @@ Every implementation phase must end with:
 | Phase 5D — Tenant, service, and classification filtering | Complete |
 | Phase 5D — Closure commit | bdc235b7936186baedeec1181938f57977150b35 |
 | Phase 5D — Closure CI run | [29807419438](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29807419438) |
-| Phase 5E — Local deterministic embeddings and vector retrieval | Implementation verified; closure-commit CI pending |
+| Phase 5E — Local deterministic embeddings and vector retrieval | Complete |
 | Phase 5E — Implementation commit | fa02cb90e62c5a1279b1ec7b025d54375fba72f3 |
 | Phase 5E — CI run | [29810229699](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29810229699) |
+| Phase 5E — Closure commit | 573b8c196ae46dd272fcb90c6695cbcc6af87bfd |
+| Phase 5E — Closure CI run | [29811114122](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29811114122) |
 | Phase 5E — Embedding tests | 15 passing |
 | Phase 5E — Vector tests | 23 passing |
 | Phase 5E — Retrieval tests | 124 passing |
 | Phase 5E — Complete local test suite | 814 passing |
-| Phase 5F — Hybrid retrieval and reranking | Authorized only after Phase 5E closure-commit CI |
+| Phase 5F — Hybrid retrieval and reranking | Implementation verified; closure-commit CI pending |
+| Phase 5F — Implementation commit | ec0dca55d934d2324a514956aadfb3c8daf341bc |
+| Phase 5F — CI run | [29813776046](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29813776046) |
+| Phase 5F — Hybrid pytest cases | 33 passing |
+| Phase 5F — Retrieval tests | 157 passing |
+| Phase 5F — Complete local test suite | 847 passing |
+| Phase 5G — Context construction and token budgets | Authorized only after Phase 5F closure-commit CI |
 | Phases 6–17 | Not started |
 
 ## Phase 4 Closure Evidence
@@ -716,24 +724,25 @@ SUCCESS
 Implemented and verified:
 
 Deterministic feature-hash embeddings
-Explicit embedding and index versions
-Fixed 256-dimensional vectors
-Cosine similarity
-Immutable synthetic vector index
-Exact corpus coverage
-Content-hash lineage
-Shared retrieval-security controls
-Authorization before vector scoring
-Stable vector ranking
-Citations
+Immutable synthetic vector indexing
+Permission-aware keyword and vector retrieval
+Versioned hybrid-fusion configuration
+Per-method score normalization
+Reciprocal-rank evidence
+Candidate union and deduplication
+Weighted hybrid scoring
+Stable deterministic reranking
+Authorization preservation
+Citations and evidence lineage
 Controlled abstention
+Final relevance thresholds
 Policy-controlled result limits
 
-Next Authorized Work After Phase 5E Closure-Commit CI
+Next Authorized Work After Phase 5F Closure-Commit CI
 
-PHASE 5F — HYBRID RETRIEVAL AND RERANKING
+PHASE 5G — CONTEXT CONSTRUCTION AND TOKEN BUDGETS
 
-Phase 5F may begin only after the Phase 5E closure-evidence commit passes
+Phase 5G may begin only after the Phase 5F closure-evidence commit passes
 exact-commit CI.
 
 Not authorized:
@@ -743,8 +752,7 @@ Production data
 External embedding providers
 Downloaded embedding models
 Managed vector databases
-Provider rerankers
-Context construction
+Learned or provider rerankers
 External model providers
 Tool execution
 Human approval execution

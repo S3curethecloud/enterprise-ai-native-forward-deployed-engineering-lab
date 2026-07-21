@@ -13,12 +13,14 @@ reranked candidates.
 ## 2. Current Decision
 
 > PHASE 5F LOCAL IMPLEMENTATION: COMPLETE
-> PHASE 5F IMPLEMENTATION COMMIT: AUTHORIZED
-> PHASE 5F REMOTE CI: PENDING
+> PHASE 5F IMPLEMENTATION COMMIT: VERIFIED
+> PHASE 5F REMOTE CI: PASSED
 > PHASE 5F CLOSURE: PENDING
-> PHASE 5G: NOT AUTHORIZED
+> PHASE 5G: AUTHORIZED ONLY AFTER CLOSURE-COMMIT CI
 
-Phase 5F may be committed for exact-commit CI validation.
+Phase 5F implementation passed exact-commit CI. This documentation-only
+closure commit is authorized. Phase 5F remains open until the closure
+commit passes exact-commit CI.
 
 ## 3. Authorized Scope Implemented
 
@@ -377,18 +379,22 @@ These limitations require Phase 5J evaluation and remain documented.
 
 ## 21. Remote CI Requirement
 
-Phase 5F closure requires the exact implementation commit to pass:
+Phase 5F implementation passed exact-commit CI:
 
-- Python quality and contract tests
-- Local container build and health verification
+- Implementation commit: `ec0dca55d934d2324a514956aadfb3c8daf341bc`
+- Exact-commit CI run: [`29813776046`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29813776046)
+- Python quality and contract tests: Passed
+- Local container build and health verification: Passed
+- CI conclusion: Success
 
-The implementation commit and CI run must be recorded before Phase 5F can
-be closed.
+Phase 5F closure still requires this documentation-only closure commit to
+pass the same exact-commit CI workflow. Phase 5G remains unauthorized until
+that closure CI succeeds.
 
 ## 22. Current Exit Posture
 
 > PHASE 5F LOCAL IMPLEMENTATION: COMPLETE
 > LOCAL QUALITY: PASSED
-> REMOTE CI: PENDING
+> IMPLEMENTATION REMOTE CI: PASSED
 > PHASE 5F CLOSURE: PENDING
-> PHASE 5G CONTEXT CONSTRUCTION AND TOKEN BUDGETS: NOT AUTHORIZED
+> PHASE 5G CONTEXT CONSTRUCTION AND TOKEN BUDGETS: AUTHORIZED ONLY AFTER CLOSURE-COMMIT CI

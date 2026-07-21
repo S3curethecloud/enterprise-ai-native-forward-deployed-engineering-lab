@@ -8,12 +8,14 @@ committed for exact-commit CI validation.
 ## 2. Current Gate Decision
 
 > PHASE 5F LOCAL IMPLEMENTATION: PASSED
-> PHASE 5F IMPLEMENTATION COMMIT: AUTHORIZED
-> PHASE 5F REMOTE CI: REQUIRED
+> PHASE 5F IMPLEMENTATION COMMIT: VERIFIED
+> PHASE 5F REMOTE CI: PASSED
 > PHASE 5F CLOSURE: PENDING
-> PHASE 5G: NOT AUTHORIZED
+> PHASE 5G: AUTHORIZED ONLY AFTER CLOSURE-COMMIT CI
 
-Phase 5F is locally complete but is not closed.
+Phase 5F implementation is locally and remotely verified but is not closed.
+This documentation-only closure commit must pass exact-commit CI before
+Phase 5G becomes authorized.
 
 ## 3. Evaluated Scope
 
@@ -291,17 +293,17 @@ Phase 5G does not inherit authority for:
 
 ## 21. Remote CI Gate
 
-Required remote jobs:
+Verified implementation evidence:
 
-- Python quality and contract tests
-- Local container build and health verification
-
-Current status:
-
-- Implementation commit: Pending
-- Exact-commit CI run: Pending
-- Remote CI conclusion: Pending
+- Implementation commit: `ec0dca55d934d2324a514956aadfb3c8daf341bc`
+- Exact-commit CI run: [`29813776046`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29813776046)
+- Python quality and contract tests: Passed
+- Local container build and health verification: Passed
+- Remote CI conclusion: Success
 - Phase 5F closure: Pending
+
+The closure gate remains fail-closed until this documentation-only closure
+commit passes exact-commit CI.
 
 ## 22. Residual Risks
 
@@ -321,9 +323,10 @@ These limitations remain documented and bounded.
 ## 23. Final Local Decision
 
 > PHASE 5F LOCAL GATE: PASSED
-> PHASE 5F IMPLEMENTATION COMMIT: AUTHORIZED
+> PHASE 5F IMPLEMENTATION COMMIT: VERIFIED
+> PHASE 5F IMPLEMENTATION CI: PASSED
 > PHASE 5F CLOSURE: PENDING
-> PHASE 5G: NOT AUTHORIZED
+> PHASE 5G: AUTHORIZED ONLY AFTER CLOSURE-COMMIT CI
 > LEARNED RERANKING: NOT AUTHORIZED
-> CONTEXT CONSTRUCTION: NOT AUTHORIZED
+> CONTEXT CONSTRUCTION: NOT AUTHORIZED UNTIL PHASE 5G
 > PRODUCTION DEPLOYMENT: NOT AUTHORIZED

@@ -6,8 +6,8 @@
 |---|---|
 | Learning guide | Updated through locally verified Phase 5F hybrid retrieval |
 | Interview review | Pending |
-| Enterprise implementation | Phase 5F locally complete; remote CI pending |
-| Implementation authority | Phase 5F implementation commit only; Phase 5G not authorized |
+| Enterprise implementation | Phase 5F implementation verified; closure-commit CI pending |
+| Implementation authority | Phase 5F closure commit only; Phase 5G authorized only after closure-commit CI |
 
 Phase 5C closed after exact-commit CI run
 [`29795787216`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795787216)
@@ -32,10 +32,12 @@ Phase 5E closed after exact-commit CI run
 passed against closure commit
 `573b8c196ae46dd272fcb90c6695cbcc6af87bfd`.
 
-Phase 5F has locally implemented deterministic hybrid retrieval,
-score normalization, reciprocal-rank evidence, candidate deduplication,
-weighted fusion, and bounded reranking over the existing keyword and
-vector baselines. Its implementation commit and remote CI remain pending.
+Phase 5F implemented deterministic hybrid retrieval, score
+normalization, reciprocal-rank evidence, candidate deduplication, weighted
+fusion, and bounded reranking over the existing keyword and vector
+baselines. Exact-commit CI run 29813776046 passed against implementation
+commit ec0dca55d934d2324a514956aadfb3c8daf341bc. Phase 5F closure-commit
+CI remains pending.
 
 Learned or provider rerankers, enterprise sources, production data,
 context construction, external providers, tools, retrieval API routes,
@@ -594,9 +596,9 @@ Phase 5E implementation passed exact-commit CI run
 [`29810229699`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29810229699) against implementation commit
 `fa02cb90e62c5a1279b1ec7b025d54375fba72f3`.
 
-Phase 5E closure remains pending until its closure-evidence commit passes
-exact-commit CI. Phase 5F becomes authorized only after that closure CI
-succeeds.
+Phase 5E closed after exact-commit CI run 29811114122 passed against
+closure commit 573b8c196ae46dd272fcb90c6695cbcc6af87bfd. Phase 5F was then
+authorized.
 
 ## Phase 5E Implementation-Derived Concepts
 
@@ -897,8 +899,10 @@ The local evidence is 30 hybrid test functions producing 33 pytest cases,
 type checking, dependency validation, and the capability-boundary scan
 pass locally.
 
-The Phase 5F implementation commit and exact-commit remote CI evidence
-remain pending. Phase 5F closure is pending, and Phase 5G is not authorized.
+Phase 5F passed exact-commit CI run 29813776046 against implementation
+commit ec0dca55d934d2324a514956aadfb3c8daf341bc. Phase 5F closure-commit
+CI remains pending, and Phase 5G is authorized only after that closure CI
+succeeds.
 
 I did not implement learned or provider reranking, enterprise retrieval,
 production data integration, context construction, model providers, tools,
@@ -917,7 +921,10 @@ retrieval API routes, cloud deployment, or production deployment.
 - Complete repository tests: 847 passed
 - Public retrieval exports: 33
 - Local quality gates: Passed
-- Remote exact-commit CI: Pending
-- Phase 5F closure: Pending
+- Implementation commit: ec0dca55d934d2324a514956aadfb3c8daf341bc
+- Exact-commit CI run: 29813776046
+- Remote exact-commit CI: Passed
+- Phase 5F closure-commit CI: Pending
 
-Phase 5G context construction and token budgets remain unauthorized.
+Phase 5G context construction and token budgets are authorized only after
+the Phase 5F closure commit passes exact-commit CI.
