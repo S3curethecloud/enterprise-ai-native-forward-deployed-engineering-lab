@@ -16,9 +16,9 @@ It does not claim production semantic-search maturity.
 ```text
 PHASE 5E LOCAL IMPLEMENTATION: COMPLETE
 PHASE 5E IMPLEMENTATION COMMIT: AUTHORIZED
-PHASE 5E REMOTE CI: PENDING
+PHASE 5E REMOTE CI: PASSED — RUN 29810229699
 PHASE 5E CLOSURE: PENDING
-PHASE 5F: NOT AUTHORIZED
+PHASE 5F: AUTHORIZED ONLY AFTER CLOSURE-COMMIT CI
 ```
 
 Phase 5E may be committed for exact-commit CI validation.
@@ -365,23 +365,29 @@ Has no operational telemetry
 
 These limitations are intentional and bounded.
 
-## 18. Remote CI Requirement
+## 18. Remote CI Evidence
 
-Phase 5E closure requires the exact implementation commit to pass the
-repository workflow with both required jobs:
+Phase 5E passed exact-commit CI run
+[`29810229699`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29810229699) against implementation commit
+`fa02cb90e62c5a1279b1ec7b025d54375fba72f3`.
 
-Python quality and contract tests
-Local container build and health verification
+Both required jobs passed:
 
-The implementation commit and CI run must be recorded before Phase 5E can
-be closed.
+- Python quality and contract tests
+- Local container build and health verification
+
+Phase 5E implementation evidence is verified.
+
+Phase 5E closure remains pending until this evidence update is committed and
+that exact closure commit passes CI. Phase 5F remains unavailable until that
+closure-commit CI succeeds.
 
 ## 19. Current Exit Posture
 
 ```text
 PHASE 5E LOCAL IMPLEMENTATION: COMPLETE
 LOCAL QUALITY: PASSED
-REMOTE CI: PENDING
+REMOTE CI: PASSED — RUN 29810229699
 PHASE 5E CLOSURE: PENDING
-PHASE 5F HYBRID RETRIEVAL AND RERANKING: NOT AUTHORIZED
+PHASE 5F HYBRID RETRIEVAL AND RERANKING: AUTHORIZED ONLY AFTER CLOSURE-COMMIT CI
 ```

@@ -658,13 +658,17 @@ Every implementation phase must end with:
 | Phase 5C — Implementation commit | 8cee3d71676440824b700c62359c162a98cb2b8e |
 | Phase 5C — CI run | [29795504565](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795504565) |
 | Phase 5C — Retrieval tests | 76 passing |
-| Phase 5D — Tenant, service, and classification filtering | Implementation verified; closure-commit CI pending |
-| Phase 5D — Implementation commit | f3e654da813f4b5bbfd42d5b5cdbc9e14980d1ae |
-| Phase 5D — CI run | [29805548139](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29805548139) |
-| Phase 5D — Keyword tests | 26 passing |
-| Phase 5D — Focused contract and retrieval tests | 126 passing |
-| Phase 5D — Complete local test suite | 776 passing |
-| Phase 5E — Local deterministic embeddings and vector retrieval | Authorized only after Phase 5D closure-commit CI |
+| Phase 5D — Tenant, service, and classification filtering | Complete |
+| Phase 5D — Closure commit | bdc235b7936186baedeec1181938f57977150b35 |
+| Phase 5D — Closure CI run | [29807419438](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29807419438) |
+| Phase 5E — Local deterministic embeddings and vector retrieval | Implementation verified; closure-commit CI pending |
+| Phase 5E — Implementation commit | fa02cb90e62c5a1279b1ec7b025d54375fba72f3 |
+| Phase 5E — CI run | [29810229699](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29810229699) |
+| Phase 5E — Embedding tests | 15 passing |
+| Phase 5E — Vector tests | 23 passing |
+| Phase 5E — Retrieval tests | 124 passing |
+| Phase 5E — Complete local test suite | 814 passing |
+| Phase 5F — Hybrid retrieval and reranking | Authorized only after Phase 5E closure-commit CI |
 | Phases 6–17 | Not started |
 
 ## Phase 4 Closure Evidence
@@ -687,36 +691,49 @@ Both required jobs passed:
 
 Python quality and contract tests
 Local container build and health verification
-Phase 5D Verified Implementation Evidence
+Phase 5D Closure Evidence
 
-Implementation commit:
-f3e654da813f4b5bbfd42d5b5cdbc9e14980d1ae
+Closure commit:
+bdc235b7936186baedeec1181938f57977150b35
 
 Exact-commit CI run:
-29805548139
+29807419438
+
+CI result:
+SUCCESS
+
+Phase 5E Verified Implementation Evidence
+
+Implementation commit:
+fa02cb90e62c5a1279b1ec7b025d54375fba72f3
+
+Exact-commit CI run:
+29810229699
 
 CI result:
 SUCCESS
 
 Implemented and verified:
 
-Tenant filtering over synthetic evidence
-Service filtering over synthetic evidence
-Sensitivity-classification filtering over synthetic evidence
-Resource intersection
-Source-type mapping
-Policy-lineage validation
-Lifecycle filtering
-Filtering before scoring
-Policy-controlled candidate limits
+Deterministic feature-hash embeddings
+Explicit embedding and index versions
+Fixed 256-dimensional vectors
+Cosine similarity
+Immutable synthetic vector index
+Exact corpus coverage
+Content-hash lineage
+Shared retrieval-security controls
+Authorization before vector scoring
+Stable vector ranking
+Citations
 Controlled abstention
-Fail-closed unsupported source kinds
+Policy-controlled result limits
 
-Next Authorized Work After Phase 5D Closure-Commit CI
+Next Authorized Work After Phase 5E Closure-Commit CI
 
-PHASE 5E — LOCAL DETERMINISTIC EMBEDDINGS AND VECTOR RETRIEVAL
+PHASE 5F — HYBRID RETRIEVAL AND RERANKING
 
-Phase 5E may begin only after the Phase 5D closure-evidence commit passes
+Phase 5F may begin only after the Phase 5E closure-evidence commit passes
 exact-commit CI.
 
 Not authorized:
@@ -724,9 +741,9 @@ Not authorized:
 Enterprise sources
 Production data
 External embedding providers
+Downloaded embedding models
 Managed vector databases
-Hybrid retrieval
-Reranking
+Provider rerankers
 Context construction
 External model providers
 Tool execution

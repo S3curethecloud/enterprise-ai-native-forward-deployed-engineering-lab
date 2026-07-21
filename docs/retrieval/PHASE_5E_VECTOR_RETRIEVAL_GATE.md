@@ -12,9 +12,9 @@ permission-aware vector retrieval, evidence quality, and authority limits.
 
 > PHASE 5E LOCAL IMPLEMENTATION: PASSED
 > PHASE 5E IMPLEMENTATION COMMIT: AUTHORIZED
-> PHASE 5E REMOTE CI: REQUIRED
+> PHASE 5E REMOTE CI: PASSED — RUN 29810229699
 > PHASE 5E CLOSURE: PENDING
-> PHASE 5F: NOT AUTHORIZED
+> PHASE 5F: AUTHORIZED ONLY AFTER CLOSURE-COMMIT CI
 
 Phase 5E is locally complete but is not closed.
 
@@ -292,17 +292,18 @@ Unauthorized Phase 5F capabilities include:
 
 ## 17. Remote CI Gate
 
-Required remote jobs:
+Verified implementation evidence:
 
-- Python quality and contract tests
-- Local container build and health verification
+- Implementation commit: `fa02cb90e62c5a1279b1ec7b025d54375fba72f3`
+- Exact-commit CI run: [`29810229699`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29810229699)
+- Remote CI conclusion: Success
+- Python quality and contract tests: Passed
+- Local container build and health verification: Passed
+- Phase 5E implementation gate: Passed
+- Phase 5E closure: Pending closure-commit CI
 
-Current status:
-
-- Implementation commit: Pending
-- Exact-commit CI run: Pending
-- Remote CI conclusion: Pending
-- Phase 5E closure: Pending
+Phase 5F becomes authorized only after the Phase 5E closure commit passes
+exact-commit CI.
 
 ## 18. Residual Risks
 
@@ -326,7 +327,7 @@ and outside the authorized scope.
 > PHASE 5E LOCAL GATE: PASSED
 > PHASE 5E IMPLEMENTATION COMMIT: AUTHORIZED
 > PHASE 5E CLOSURE: PENDING
-> PHASE 5F: NOT AUTHORIZED
+> PHASE 5F: AUTHORIZED ONLY AFTER CLOSURE-COMMIT CI
 > EXTERNAL EMBEDDINGS: NOT AUTHORIZED
 > MANAGED VECTOR DATABASES: NOT AUTHORIZED
 > PRODUCTION DEPLOYMENT: NOT AUTHORIZED

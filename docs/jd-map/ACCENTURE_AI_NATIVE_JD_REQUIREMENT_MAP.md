@@ -421,13 +421,17 @@ A requirement may not be marked Complete based only on:
 | Phase 5C CI run | [29795504565](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795504565) |
 | Phase 5C retrieval tests | 76 passing |
 | Complete local test suite | 762 passing |
-| Phase 5D tenant, service, and classification filtering | Implementation verified; closure-commit CI pending |
-| Phase 5D implementation commit | f3e654da813f4b5bbfd42d5b5cdbc9e14980d1ae |
-| Phase 5D CI run | [29805548139](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29805548139) |
-| Phase 5D keyword tests | 26 passing |
-| Phase 5D focused contract and retrieval tests | 126 passing |
-| Complete local test suite | 776 passing |
-| Phase 5E local deterministic embeddings and vector retrieval | Authorized only after Phase 5D closure-commit CI |
+| Phase 5D tenant, service, and classification filtering | Complete |
+| Phase 5D closure commit | bdc235b7936186baedeec1181938f57977150b35 |
+| Phase 5D closure CI run | [29807419438](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29807419438) |
+| Phase 5E local deterministic embeddings and vector retrieval | Implementation verified; closure-commit CI pending |
+| Phase 5E implementation commit | fa02cb90e62c5a1279b1ec7b025d54375fba72f3 |
+| Phase 5E CI run | [29810229699](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29810229699) |
+| Phase 5E embedding tests | 15 passing |
+| Phase 5E vector tests | 23 passing |
+| Phase 5E retrieval tests | 124 passing |
+| Complete local test suite | 814 passing |
+| Phase 5F hybrid retrieval and reranking | Authorized only after Phase 5E closure-commit CI |
 | Enterprise retrieval | Not authorized |
 | External embeddings and managed vector services | Not authorized |
 | JD requirements mapped | 36 of 36 |
@@ -446,21 +450,25 @@ JD requirements implemented remains zero because the repository now contains bou
 ## Next Authorized Work After Closure-Commit CI
 
 ```text
-Phase 5E — Local Deterministic Embeddings and Vector Retrieval
+Phase 5F — Hybrid Retrieval and Reranking
 ```
 
-Phase 5D implemented deterministic permission filtering using the CT-03
-authorization boundary. Tenant, service, sensitivity classification,
-resource, source-type, policy-lineage, expiration, and result-limit
-constraints are enforced before keyword scoring.
+Phase 5D closed after exact-commit CI run [`29807419438`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29807419438) against closure commit `bdc235b7936186baedeec1181938f57977150b35`.
 
-Phase 5D passed exact-commit CI run [`29805548139`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29805548139) against implementation commit `f3e654da813f4b5bbfd42d5b5cdbc9e14980d1ae`.
+Phase 5E implemented deterministic local feature-hash embeddings, an
+immutable content-addressed synthetic vector index, cosine-similarity
+retrieval, shared permission filtering before scoring, stable ranking,
+citations, and controlled abstention.
 
-Phase 5E becomes authorized only after the Phase 5D closure commit passes
-exact-commit CI. Its scope is limited to local deterministic embeddings and
-local vector retrieval over synthetic evidence.
+Phase 5E passed exact-commit CI run [`29810229699`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29810229699) against implementation commit `fa02cb90e62c5a1279b1ec7b025d54375fba72f3`.
 
-External embedding providers, managed vector databases, enterprise sources,
-production data, hybrid retrieval, reranking, context construction, external
-model providers, tool execution, retrieval API routes, infrastructure
-mutation, cloud deployment, and production deployment remain unauthorized.
+Phase 5F becomes authorized only after the Phase 5E closure commit passes
+exact-commit CI. Its scope remains limited to local synthetic hybrid
+retrieval, deterministic score normalization, duplicate handling, and
+bounded reranking.
+
+Enterprise sources, production data, external embedding providers,
+downloaded models, managed vector databases, provider rerankers, context
+construction, external model providers, tool execution, retrieval API
+routes, infrastructure mutation, cloud deployment, and production
+deployment remain unauthorized.
