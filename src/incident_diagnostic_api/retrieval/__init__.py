@@ -1,5 +1,17 @@
 """Public contracts for bounded permission-aware retrieval."""
 
+from incident_diagnostic_api.retrieval.content_controls import (
+    CONTENT_CONTROL_VERSION,
+    ContentControlDisposition,
+    ContentControlResult,
+    ContentRiskCategory,
+    ContentSignal,
+    ContentTrustLabel,
+    ContextItemAssessment,
+    ControlledContextItem,
+    detect_content_signals,
+    inspect_context,
+)
 from incident_diagnostic_api.retrieval.context import (
     CONTEXT_BUDGET_VERSION,
     ContextBudget,
@@ -60,11 +72,17 @@ from incident_diagnostic_api.retrieval.vector import (
 )
 
 __all__ = [
+    "CONTENT_CONTROL_VERSION",
     "CONTEXT_BUDGET_VERSION",
     "EMBEDDING_DIMENSIONS",
     "EMBEDDING_VERSION",
     "VECTOR_INDEX_VERSION",
     "Citation",
+    "ContentControlDisposition",
+    "ContentControlResult",
+    "ContentRiskCategory",
+    "ContentSignal",
+    "ContentTrustLabel",
     "ContextBudget",
     "ContextBundle",
     "ContextConstructionResult",
@@ -72,6 +90,8 @@ __all__ = [
     "ContextInsufficiency",
     "ContextInsufficiencyCode",
     "ContextItem",
+    "ContextItemAssessment",
+    "ControlledContextItem",
     "EmbeddingVector",
     "EvidenceChunk",
     "EvidenceDocument",
@@ -96,7 +116,9 @@ __all__ = [
     "calculate_keyword_score",
     "calculate_reciprocal_rank_score",
     "cosine_similarity",
+    "detect_content_signals",
     "embed_text",
+    "inspect_context",
     "normalize_candidate_scores",
     "retrieve_hybrid",
     "retrieve_keywords",

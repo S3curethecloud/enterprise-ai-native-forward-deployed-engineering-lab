@@ -4,10 +4,10 @@
 
 | Dimension | Status |
 |---|---|
-| Learning guide | Updated through locally verified Phase 5G context construction |
+| Learning guide | Updated through locally verified Phase 5H retrieval-content controls |
 | Interview review | Pending |
-| Enterprise implementation | Phase 5G implementation verified; closure-commit CI pending |
-| Implementation authority | Phase 5G closure commit only; Phase 5H authorized only after closure-commit CI |
+| Enterprise implementation | Phase 5H locally complete; remote CI pending |
+| Implementation authority | Phase 5H implementation commit only; Phase 5I not authorized |
 
 Phase 5C closed after exact-commit CI run
 [`29795787216`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795787216)
@@ -44,15 +44,27 @@ commit 2489a6e54fe5b93484b09b40c5ffd9764075dcee.
 Phase 5G implemented deterministic whole-chunk context construction,
 explicit item and source budgets, source diversity, estimated-token limits,
 lineage verification, stable ordering, truncation evidence, and controlled
-insufficiency. Exact-commit CI run 29817755525 passed against implementation
-commit 369e05e21b61f6e0961111d9cfff4515ca0e27db. Phase 5G closure-commit
-CI remains pending.
+insufficiency. Exact-commit CI run
+[`29817755525`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29817755525)
+passed against implementation commit
+`369e05e21b61f6e0961111d9cfff4515ca0e27db`.
 
-Prompt-injection controls, retrieval-contamination controls, prompt
-construction, external providers, enterprise sources, production data,
-tools, retrieval API routes, cloud deployment, and production deployment
-remain unauthorized. Phase 5H is authorized only after the Phase 5G
-closure commit passes exact-commit CI.
+Phase 5G closed after exact-commit CI run
+[`29818951742`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29818951742)
+passed against closure commit
+`3851259a94474cab6b4d167b84cca56278e1a3b3`.
+
+Phase 5H has locally implemented deterministic prompt-injection and
+retrieval-contamination controls over constructed context. It detects a
+bounded set of instruction-like signals, records non-echoing metadata,
+quarantines complete suspicious evidence items, preserves retained content
+without rewriting, and returns explicit clean, filtered, or blocked
+outcomes.
+
+Prompt construction, semantic safety classifiers, external guardrail
+providers, enterprise sources, production data, tools, retrieval API
+routes, cloud deployment, and production deployment remain unauthorized.
+Phase 5I citation validation and controlled abstention are not authorized.
 
 ## 2. Job-Description Connection
 
@@ -1083,9 +1095,9 @@ type checking, dependency validation, and the capability-boundary scan
 pass locally.
 
 Phase 5G passed exact-commit CI run 29817755525 against implementation
-commit 369e05e21b61f6e0961111d9cfff4515ca0e27db. Phase 5G closure-commit
-CI remains pending, and Phase 5H is authorized only after that closure CI
-succeeds.
+commit 369e05e21b61f6e0961111d9cfff4515ca0e27db and closed after exact-commit
+CI run 29818951742 passed against closure commit
+3851259a94474cab6b4d167b84cca56278e1a3b3.
 
 ## Phase 5G Local Evidence
 
@@ -1103,7 +1115,173 @@ succeeds.
 - Implementation commit: 369e05e21b61f6e0961111d9cfff4515ca0e27db
 - Exact-commit CI run: 29817755525
 - Remote exact-commit CI: Passed
-- Phase 5G closure-commit CI: Pending
+- Phase 5G closure commit: 3851259a94474cab6b4d167b84cca56278e1a3b3
+- Phase 5G closure CI run: 29818951742
+- Phase 5G closure-commit CI: Passed
 
-Phase 5H prompt-injection and retrieval-contamination controls are
-authorized only after the Phase 5G closure commit passes exact-commit CI.
+Phase 5G is closed. Phase 5H deterministic retrieval-content controls are
+authorized and locally implemented.
+
+## Phase 5H Implementation-Derived Concepts
+
+### Untrusted Retrieved Evidence
+
+Retrieved content remains untrusted even when its source, citation, and
+authorization lineage are valid.
+
+Authorization answers whether evidence may be accessed. It does not prove
+that the evidence is safe to interpret as instructions.
+
+Mental note: trusted provenance and trusted instructions are different
+security properties.
+
+### Prompt Injection Versus Retrieval Contamination
+
+Prompt injection is content that attempts to influence later model behavior
+as if it were an instruction.
+
+Retrieval contamination is the broader condition in which unsafe,
+irrelevant, manipulated, or instruction-like material enters the evidence
+set used for downstream reasoning.
+
+Phase 5H addresses a bounded intersection: deterministic instruction-like
+signals inside retrieved evidence.
+
+Mental note: retrieval security must consider what authorized evidence says,
+not only who may read it.
+
+### Deterministic Content Signals
+
+Phase 5H recognizes eight bounded risk categories:
+
+- Authority override
+- Policy manipulation
+- Tenant-scope change
+- Tool request
+- Secret request
+- Evaluation evasion
+- Citation suppression
+- Budget manipulation
+
+The patterns are local, versioned, deterministic, and case-insensitive.
+
+Mental note: a pattern match is a safety signal, not proof of malicious
+intent.
+
+### Non-Echoing Signal Metadata
+
+A content signal records the pattern identity, risk category, content hash,
+and start and end offsets.
+
+It does not copy suspicious content into logs or control results.
+
+Mental note: security telemetry should identify what matched without
+unnecessarily propagating the hazardous payload.
+
+### Whole-Item Quarantine
+
+If an item contains a recognized signal, Phase 5H quarantines the complete
+context item.
+
+It does not delete matched words and retain rewritten evidence. Clean items
+retain their exact content, content hash, citation, rank, and authority
+lineage.
+
+Mental note: silently editing evidence would create new content without a
+new provenance contract.
+
+### Clean, Filtered, and Blocked Outcomes
+
+A clean result retains every item.
+
+A filtered result retains at least one clean item and quarantines at least
+one suspicious item.
+
+A blocked result retains no items because every item was quarantined.
+
+Mental note: an explicit blocked result is safer than passing an empty
+context forward as if inspection had succeeded normally.
+
+### Detection Versus Sanitization
+
+Phase 5H detects bounded signals and quarantines whole evidence items.
+
+It does not sanitize text, rewrite instructions, infer author intent, or
+claim that retained evidence is semantically safe.
+
+Mental note: deterministic detection provides a reproducible control
+baseline, not complete content understanding.
+
+### False Positives and False Negatives
+
+Benign operational language can resemble an instruction and trigger a
+pattern. Novel, obfuscated, multilingual, or semantically equivalent attacks
+may avoid deterministic patterns.
+
+These are expected limitations of a bounded rule-based detector.
+
+Mental note: precision and recall must be evaluated before expanding the
+control beyond its teaching corpus.
+
+### Authority Preservation
+
+Content inspection occurs after permission-aware retrieval and bounded
+context construction.
+
+The content-control layer cannot add evidence, expand access, alter policy
+authority, or convert relevance into permission. It preserves the lineage of
+retained and quarantined items.
+
+Mental note: content safety controls constrain evidence; they do not grant
+access.
+
+### Phase 5H Versus Phase 5I
+
+Phase 5H detects and quarantines bounded retrieval-content risks.
+
+It does not implement the next phase's citation-validation and controlled
+abstention boundary. Phase 5I remains unauthorized until Phase 5H closes.
+
+Mental note: detecting suspicious content and proving citation validity are
+separate controls.
+
+### Honest Phase 5H Interview Statement
+
+In Phase 5H, I implemented deterministic prompt-injection and
+retrieval-contamination controls over the immutable context bundle. I added
+a versioned local detector covering eight bounded instruction-like risk
+categories, non-echoing signal metadata with hashes and offsets, immutable
+item assessments, whole-item quarantine, explicit clean, filtered, and
+blocked outcomes, and lineage-preserving controlled context items.
+
+The implementation labels evidence as untrusted, detects before selecting
+retained items, never allows quarantined items into controlled context, and
+does not rewrite retained evidence. It does not claim semantic safety,
+sanitize content, call a model, use an external guardrail provider, execute
+tools, or introduce infrastructure capability.
+
+The local evidence is 19 content-control test functions producing 26 pytest
+cases, 205 retrieval tests, and 895 repository tests. Ruff, formatting,
+strict type checking, dependency validation, and capability-boundary checks
+pass locally.
+
+Phase 5G closed after exact-commit CI run 29818951742 against closure commit
+3851259a94474cab6b4d167b84cca56278e1a3b3. The Phase 5H implementation
+commit and exact-commit remote CI evidence remain pending. Phase 5H closure
+is pending, and Phase 5I is not authorized.
+
+## Phase 5H Local Evidence
+
+- Control version: `deterministic-content-controls-v1`
+- Risk categories: 8
+- Control dispositions: 3
+- Content-control test functions: 19
+- Content-control pytest cases: 26 passed
+- Retrieval tests: 205 passed
+- Complete repository tests: 895 passed
+- Public retrieval exports: 52
+- Local quality gates: Passed
+- Remote exact-commit CI: Pending
+- Phase 5H closure: Pending
+
+Phase 5I citation validation and controlled abstention remain unauthorized.
