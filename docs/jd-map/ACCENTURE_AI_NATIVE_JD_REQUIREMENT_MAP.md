@@ -449,13 +449,21 @@ A requirement may not be marked Complete based only on:
 | Phase 5G context pytest cases | 22 passing |
 | Phase 5G retrieval tests | 179 passing |
 | Complete local test suite | 869 passing |
-| Phase 5H prompt-injection and retrieval-contamination controls | Implementation verified; closure-commit CI pending |
+| Phase 5H prompt-injection and retrieval-contamination controls | Complete |
 | Phase 5H implementation commit | 2c1a812bbba005345c3f394011a9b1c3580ce995 |
 | Phase 5H CI run | [29820773913](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29820773913) |
+| Phase 5H closure commit | f72e2a5230517597a641e8994cff4a72612bc833 |
+| Phase 5H closure CI run | [29822375893](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29822375893) |
 | Phase 5H content-control pytest cases | 26 passing |
 | Phase 5H retrieval tests | 205 passing |
 | Complete local test suite | 895 passing |
-| Phase 5I citation validation and controlled abstention | Authorized only after Phase 5H closure-commit CI |
+| Phase 5I citation validation and controlled abstention | Implementation verified; closure-commit CI pending |
+| Phase 5I implementation commit | f4d3c2079535699374e3ff08a1f955f8f26321f9 |
+| Phase 5I CI run | [29848371644](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29848371644) |
+| Phase 5I citation-validation pytest cases | 26 passing |
+| Phase 5I retrieval tests | 231 passing |
+| Complete local test suite | 921 passing |
+| Phase 5J retrieval evaluation and lifecycle telemetry | Authorized only after Phase 5I closure-commit CI |
 | Enterprise retrieval | Not authorized |
 | External embeddings and managed vector services | Not authorized |
 | JD requirements mapped | 36 of 36 |
@@ -474,30 +482,30 @@ JD requirements implemented remains zero because the repository now contains bou
 ## Next Authorized Work After Closure-Commit CI
 
 ```text
-Phase 5I — Citation Validation and Controlled Abstention
+Phase 5J — Retrieval Evaluation and Lifecycle Telemetry
 ```
 
-Phase 5G closed after exact-commit CI run
-29818951742
+Phase 5H closed after exact-commit CI run
+29822375893
 passed against closure commit
-3851259a94474cab6b4d167b84cca56278e1a3b3.
+f72e2a5230517597a641e8994cff4a72612bc833.
 
-Phase 5H implemented deterministic retrieval-content controls over bounded
-synthetic context. It added eight instruction-like risk categories,
-untrusted-evidence labeling, non-echoing pattern metadata with hashes and
-offsets, whole-item quarantine, no retained-content rewriting, stable
-assessment ordering, and explicit clean, filtered, or blocked outcomes.
+Phase 5I implemented deterministic all-or-nothing citation validation over
+retained synthetic evidence. It added exact source-document-chunk
+resolution, content-hash and complete-content checks, locator,
+lifecycle, temporal, TTL, and document-expiry validation, immutable
+validation evidence, and five controlled abstention reasons.
 
-Phase 5H passed exact-commit CI run
-29820773913
+Phase 5I passed exact-commit CI run
+29848371644
 against implementation commit
-2c1a812bbba005345c3f394011a9b1c3580ce995.
+f4d3c2079535699374e3ff08a1f955f8f26321f9.
 
-Phase 5I becomes authorized only after the Phase 5H closure commit passes
-exact-commit CI. Its scope remains limited to bounded local citation
-validation and controlled abstention over synthetic evidence.
+Phase 5J becomes authorized only after the Phase 5I closure commit passes
+exact-commit CI. Its scope remains limited to bounded local retrieval
+evaluation and lifecycle telemetry over synthetic evidence.
 
-Enterprise sources, production data, external tokenizers, semantic safety
-classifiers, external guardrail or model providers, prompt or model
-execution, tool execution, retrieval or context API routes, infrastructure
-mutation, cloud deployment, and production deployment remain unauthorized.
+Enterprise sources, production data, external evaluators, external
+telemetry services, model providers, prompt or model execution, tool
+execution, retrieval or context API routes, infrastructure mutation,
+cloud deployment, and production deployment remain unauthorized.

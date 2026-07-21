@@ -686,13 +686,21 @@ Every implementation phase must end with:
 | Phase 5G — Context pytest cases | 22 passing |
 | Phase 5G — Retrieval tests | 179 passing |
 | Phase 5G — Complete local test suite | 869 passing |
-| Phase 5H — Prompt-injection and retrieval-contamination controls | Implementation verified; closure-commit CI pending |
+| Phase 5H — Prompt-injection and retrieval-contamination controls | Complete |
 | Phase 5H — Implementation commit | 2c1a812bbba005345c3f394011a9b1c3580ce995 |
 | Phase 5H — CI run | [29820773913](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29820773913) |
+| Phase 5H — Closure commit | f72e2a5230517597a641e8994cff4a72612bc833 |
+| Phase 5H — Closure CI run | [29822375893](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29822375893) |
 | Phase 5H — Content-control pytest cases | 26 passing |
 | Phase 5H — Retrieval tests | 205 passing |
 | Phase 5H — Complete local test suite | 895 passing |
-| Phase 5I — Citation validation and controlled abstention | Authorized only after Phase 5H closure-commit CI |
+| Phase 5I — Citation validation and controlled abstention | Implementation verified; closure-commit CI pending |
+| Phase 5I — Implementation commit | f4d3c2079535699374e3ff08a1f955f8f26321f9 |
+| Phase 5I — CI run | [29848371644](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29848371644) |
+| Phase 5I — Citation-validation pytest cases | 26 passing |
+| Phase 5I — Retrieval tests | 231 passing |
+| Phase 5I — Complete local test suite | 921 passing |
+| Phase 5J — Retrieval evaluation and lifecycle telemetry | Authorized only after Phase 5I closure-commit CI |
 | Phases 6–17 | Not started |
 
 ## Phase 4 Closure Evidence
@@ -783,20 +791,51 @@ No retained-evidence rewriting
 Stable assessment ordering
 Lineage preservation
 
-Next Authorized Work After Phase 5H Closure-Commit CI
+Phase 5H Closure Evidence
 
-PHASE 5I — CITATION VALIDATION AND CONTROLLED ABSTENTION
+Closure commit:
+f72e2a5230517597a641e8994cff4a72612bc833
 
-Phase 5I may begin only after the Phase 5H closure-evidence commit passes
+Exact-commit closure CI run:
+29822375893
+
+Phase 5I Verified Implementation
+
+Implementation commit:
+f4d3c2079535699374e3ff08a1f955f8f26321f9
+
+Exact-commit implementation CI run:
+29848371644
+
+Implemented and verified:
+
+Versioned deterministic citation validation
+Exact source-document-chunk resolution
+Document-version validation
+Content-hash and complete-content validation
+Deterministic locator validation
+Lifecycle and temporal validation
+Source-TTL freshness validation
+Explicit document-expiry validation
+All-or-nothing validated bundles
+Five controlled abstention reasons
+Request, trace, policy, corpus, and source lineage
+No retained-evidence rewriting
+
+Next Authorized Work After Phase 5I Closure-Commit CI
+
+PHASE 5J — RETRIEVAL EVALUATION AND LIFECYCLE TELEMETRY
+
+Phase 5J may begin only after the Phase 5I closure-evidence commit passes
 exact-commit CI.
 
 Not authorized:
 
 Enterprise sources
 Production data
-External tokenizers
-Semantic safety classifiers
-External guardrail or model providers
+External evaluators
+External telemetry services
+External model providers
 Prompt or model execution
 Tool execution
 Human approval execution

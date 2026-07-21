@@ -17,12 +17,14 @@ data.
 ## 2. Current Decision
 
 > PHASE 5I LOCAL IMPLEMENTATION: COMPLETE
-> PHASE 5I IMPLEMENTATION COMMIT: AUTHORIZED
-> PHASE 5I REMOTE CI: PENDING
+> PHASE 5I IMPLEMENTATION COMMIT: VERIFIED
+> PHASE 5I REMOTE CI: PASSED
 > PHASE 5I CLOSURE: PENDING
-> PHASE 5J: NOT AUTHORIZED
+> PHASE 5J: AUTHORIZED ONLY AFTER CLOSURE-COMMIT CI
 
-Phase 5I may be committed for exact-commit CI validation.
+Phase 5I implementation commit `f4d3c2079535699374e3ff08a1f955f8f26321f9` passed exact-commit CI run
+[`29848371644`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29848371644). Closure documentation is authorized, but Phase 5I
+is not closed.
 
 ## 3. Prior-Phase Authority
 
@@ -300,18 +302,21 @@ deployment authority.
 
 ## 22. Remote CI Requirement
 
-Phase 5I closure requires the exact implementation commit to pass:
+Phase 5I implementation commit `f4d3c2079535699374e3ff08a1f955f8f26321f9` passed exact-commit CI run
+[`29848371644`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29848371644).
 
-- Python quality and contract tests
-- Local container build and health verification
+Verified jobs:
 
-The implementation commit and CI run must be recorded before Phase 5I can be
-closed.
+- Python quality and contract tests: Passed
+- Local container build and health verification: Passed
+
+Phase 5I closure still requires this evidence to be committed and the exact
+closure commit to pass the same required remote jobs.
 
 ## 23. Current Exit Posture
 
 > PHASE 5I LOCAL IMPLEMENTATION: COMPLETE
 > LOCAL QUALITY: PASSED
-> REMOTE CI: PENDING
+> REMOTE IMPLEMENTATION CI: PASSED
 > PHASE 5I CLOSURE: PENDING
-> PHASE 5J RETRIEVAL EVALUATION AND LIFECYCLE TELEMETRY: NOT AUTHORIZED
+> PHASE 5J RETRIEVAL EVALUATION AND LIFECYCLE TELEMETRY: AUTHORIZED ONLY AFTER CLOSURE-COMMIT CI
