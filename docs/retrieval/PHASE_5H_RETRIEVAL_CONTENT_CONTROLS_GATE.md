@@ -11,12 +11,13 @@ committed for exact-commit CI validation.
 ## 2. Current Gate Decision
 
 > PHASE 5H LOCAL IMPLEMENTATION: PASSED
-> PHASE 5H IMPLEMENTATION COMMIT: AUTHORIZED
-> PHASE 5H REMOTE CI: REQUIRED
+> PHASE 5H IMPLEMENTATION COMMIT: VERIFIED
+> PHASE 5H REMOTE CI: PASSED
 > PHASE 5H CLOSURE: PENDING
-> PHASE 5I: NOT AUTHORIZED
+> PHASE 5I: AUTHORIZED ONLY AFTER CLOSURE-COMMIT CI
 
-Phase 5H is locally complete but is not closed.
+Phase 5H implementation commit `2c1a812bbba005345c3f394011a9b1c3580ce995` passed exact-commit CI run
+[`29820773913`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29820773913). Phase 5H is not closed.
 
 ## 3. Prior-Phase Authority Gate
 
@@ -271,17 +272,23 @@ Required remote jobs:
 
 Current status:
 
-- Implementation commit: Pending
-- Exact-commit CI run: Pending
-- Remote CI conclusion: Pending
+- Implementation commit: `2c1a812bbba005345c3f394011a9b1c3580ce995`
+- Exact-commit CI run: [`29820773913`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29820773913)
+- Remote CI conclusion: Passed
+- Python quality and contract tests: Passed
+- Local container build and health verification: Passed
 - Phase 5H closure: Pending
+
+The closure-evidence commit must pass exact-commit CI before Phase 5H closes
+or Phase 5I becomes authorized.
 
 ## 22. Final Local Decision
 
 > PHASE 5H LOCAL GATE: PASSED
-> PHASE 5H IMPLEMENTATION COMMIT: AUTHORIZED
+> PHASE 5H IMPLEMENTATION COMMIT: VERIFIED
+> PHASE 5H IMPLEMENTATION CI: PASSED
 > PHASE 5H CLOSURE: PENDING
-> PHASE 5I: NOT AUTHORIZED
+> PHASE 5I: AUTHORIZED ONLY AFTER CLOSURE-COMMIT CI
 > COMPREHENSIVE INJECTION DETECTION: NOT CLAIMED
 > MODEL PROVIDERS: NOT AUTHORIZED
 > TOOL EXECUTION: NOT AUTHORIZED

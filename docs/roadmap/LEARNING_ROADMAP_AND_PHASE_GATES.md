@@ -678,13 +678,21 @@ Every implementation phase must end with:
 | Phase 5F — Hybrid pytest cases | 33 passing |
 | Phase 5F — Retrieval tests | 157 passing |
 | Phase 5F — Complete local test suite | 847 passing |
-| Phase 5G — Context construction and token budgets | Implementation verified; closure-commit CI pending |
+| Phase 5G — Context construction and token budgets | Complete |
 | Phase 5G — Implementation commit | 369e05e21b61f6e0961111d9cfff4515ca0e27db |
 | Phase 5G — CI run | [29817755525](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29817755525) |
+| Phase 5G — Closure commit | 3851259a94474cab6b4d167b84cca56278e1a3b3 |
+| Phase 5G — Closure CI run | [29818951742](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29818951742) |
 | Phase 5G — Context pytest cases | 22 passing |
 | Phase 5G — Retrieval tests | 179 passing |
 | Phase 5G — Complete local test suite | 869 passing |
-| Phase 5H — Prompt-injection and retrieval-contamination controls | Authorized only after Phase 5G closure-commit CI |
+| Phase 5H — Prompt-injection and retrieval-contamination controls | Implementation verified; closure-commit CI pending |
+| Phase 5H — Implementation commit | 2c1a812bbba005345c3f394011a9b1c3580ce995 |
+| Phase 5H — CI run | [29820773913](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29820773913) |
+| Phase 5H — Content-control pytest cases | 26 passing |
+| Phase 5H — Retrieval tests | 205 passing |
+| Phase 5H — Complete local test suite | 895 passing |
+| Phase 5I — Citation validation and controlled abstention | Authorized only after Phase 5H closure-commit CI |
 | Phases 6–17 | Not started |
 
 ## Phase 4 Closure Evidence
@@ -745,11 +753,41 @@ Omitted-candidate counts
 Explicit truncation evidence
 Controlled context insufficiency
 
-Next Authorized Work After Phase 5G Closure-Commit CI
+Phase 5G Closure Evidence
 
-PHASE 5H — PROMPT-INJECTION AND RETRIEVAL-CONTAMINATION CONTROLS
+Closure commit:
+3851259a94474cab6b4d167b84cca56278e1a3b3
 
-Phase 5H may begin only after the Phase 5G closure-evidence commit passes
+Exact-commit closure CI run:
+29818951742
+
+Phase 5H Verified Implementation
+
+Implementation commit:
+2c1a812bbba005345c3f394011a9b1c3580ce995
+
+Exact-commit implementation CI run:
+29820773913
+
+Implemented and verified:
+
+Deterministic retrieval-content controls
+Explicit control version
+Eight bounded risk categories
+Untrusted-evidence labeling
+Non-echoing pattern metadata
+Content hashes and bounded offsets
+Whole-item quarantine
+Clean, filtered, and blocked outcomes
+No retained-evidence rewriting
+Stable assessment ordering
+Lineage preservation
+
+Next Authorized Work After Phase 5H Closure-Commit CI
+
+PHASE 5I — CITATION VALIDATION AND CONTROLLED ABSTENTION
+
+Phase 5I may begin only after the Phase 5H closure-evidence commit passes
 exact-commit CI.
 
 Not authorized:
@@ -757,7 +795,8 @@ Not authorized:
 Enterprise sources
 Production data
 External tokenizers
-External model providers
+Semantic safety classifiers
+External guardrail or model providers
 Prompt or model execution
 Tool execution
 Human approval execution
