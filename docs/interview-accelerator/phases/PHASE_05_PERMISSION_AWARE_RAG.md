@@ -4,10 +4,10 @@
 
 | Dimension | Status |
 |---|---|
-| Learning guide | Updated through locally verified Phase 5F hybrid retrieval |
+| Learning guide | Updated through locally verified Phase 5G context construction |
 | Interview review | Pending |
-| Enterprise implementation | Phase 5F implementation verified; closure-commit CI pending |
-| Implementation authority | Phase 5F closure commit only; Phase 5G authorized only after closure-commit CI |
+| Enterprise implementation | Phase 5G locally complete; remote CI pending |
+| Implementation authority | Phase 5G implementation commit only; Phase 5H not authorized |
 
 Phase 5C closed after exact-commit CI run
 [`29795787216`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29795787216)
@@ -36,13 +36,20 @@ Phase 5F implemented deterministic hybrid retrieval, score
 normalization, reciprocal-rank evidence, candidate deduplication, weighted
 fusion, and bounded reranking over the existing keyword and vector
 baselines. Exact-commit CI run 29813776046 passed against implementation
-commit ec0dca55d934d2324a514956aadfb3c8daf341bc. Phase 5F closure-commit
-CI remains pending.
+commit ec0dca55d934d2324a514956aadfb3c8daf341bc.
 
-Learned or provider rerankers, enterprise sources, production data,
-context construction, external providers, tools, retrieval API routes,
-cloud deployment, and production deployment remain unauthorized.
-Phase 5G is not authorized.
+Phase 5F closed after exact-commit CI run 29815184214 passed against closure
+commit 2489a6e54fe5b93484b09b40c5ffd9764075dcee.
+
+Phase 5G has locally implemented deterministic whole-chunk context
+construction, explicit item and source budgets, source diversity,
+estimated-token limits, lineage verification, stable ordering, truncation
+evidence, and controlled insufficiency.
+
+Prompt-injection controls, retrieval-contamination controls, prompt
+construction, external providers, enterprise sources, production data,
+tools, retrieval API routes, cloud deployment, and production deployment
+remain unauthorized. Phase 5H is not authorized.
 
 ## 2. Job-Description Connection
 
@@ -899,10 +906,9 @@ The local evidence is 30 hybrid test functions producing 33 pytest cases,
 type checking, dependency validation, and the capability-boundary scan
 pass locally.
 
-Phase 5F passed exact-commit CI run 29813776046 against implementation
-commit ec0dca55d934d2324a514956aadfb3c8daf341bc. Phase 5F closure-commit
-CI remains pending, and Phase 5G is authorized only after that closure CI
-succeeds.
+Phase 5F passed exact-commit implementation CI and then closed after
+exact-commit CI run 29815184214 passed against closure commit
+2489a6e54fe5b93484b09b40c5ffd9764075dcee. Phase 5G was then authorized.
 
 I did not implement learned or provider reranking, enterprise retrieval,
 production data integration, context construction, model providers, tools,
@@ -924,7 +930,174 @@ retrieval API routes, cloud deployment, or production deployment.
 - Implementation commit: ec0dca55d934d2324a514956aadfb3c8daf341bc
 - Exact-commit CI run: 29813776046
 - Remote exact-commit CI: Passed
-- Phase 5F closure-commit CI: Pending
+- Phase 5F closure commit: 2489a6e54fe5b93484b09b40c5ffd9764075dcee
+- Phase 5F closure CI run: 29815184214
+- Phase 5F closure-commit CI: Passed
 
-Phase 5G context construction and token budgets are authorized only after
-the Phase 5F closure commit passes exact-commit CI.
+Phase 5F is closed. Phase 5G bounded local context construction and
+token budgets are authorized.
+
+## Phase 5G Implementation-Derived Concepts
+
+### Context Construction
+
+Context construction transforms ranked retrieval candidates into the
+bounded evidence package that a later model-facing phase could consume.
+
+Phase 5G does not create a prompt or call a model. It constructs an
+immutable evidence bundle with content, citations, ranks, estimates, and
+authority lineage.
+
+Mental note: retrieval selects evidence; context construction packages a
+bounded subset of that evidence.
+
+### Whole-Chunk Budgeting
+
+Phase 5G admits or omits a complete evidence chunk.
+
+It does not slice content to make a partial chunk fit. Whole-chunk handling
+preserves the exact content hash and citation produced by retrieval.
+
+Mental note: partial text truncation can break provenance unless it has its
+own explicit content identity and citation semantics.
+
+### Estimated Tokens Versus Exact Tokens
+
+Phase 5G uses the existing `EvidenceChunk.token_estimate` metadata.
+
+This is deterministic corpus metadata, not an exact provider-token count.
+No external or provider-specific tokenizer is installed or called.
+
+Mental note: token estimates support bounded planning; exact counts depend
+on the eventual provider tokenizer and model version.
+
+### Layered Context Budgets
+
+The versioned `context-budget-v1` contract controls:
+
+- Maximum context items
+- Maximum items from one source
+- Maximum aggregate token estimate
+- Minimum distinct-source count
+
+Mental note: a context window needs more than one total-size limit. Source
+concentration and evidence diversity also affect quality and risk.
+
+### Source Diversity
+
+A minimum source count can require evidence from distinct sources.
+
+Phase 5G deterministically chooses the highest-ranked complete chunk that
+fits from each required source, then fills remaining capacity and restores
+retrieval-rank order.
+
+Mental note: source diversity is a bounded selection rule, not proof that
+the sources agree or are independently correct.
+
+### Candidate-to-Corpus Resolution
+
+Retrieval candidates intentionally carry provenance rather than duplicated
+content.
+
+The context builder resolves each candidate back to the exact corpus chunk
+and verifies source, document, version, chunk, hash, locator, lifecycle,
+freshness, and retrieval timestamp before exposing content.
+
+Mental note: never attach content to a citation merely because a chunk
+identifier looks familiar.
+
+### Stable Context Ordering
+
+Selected items retain ascending retrieval rank and receive contiguous
+context ranks beginning at one.
+
+Repeated construction with identical inputs produces an equal immutable
+result.
+
+Mental note: deterministic selection still needs deterministic output
+ordering.
+
+### Truncation Evidence
+
+The context bundle records its aggregate token estimate, omitted-candidate
+count, and truncation flag.
+
+In Phase 5G, truncation means complete candidates were omitted. It does not
+mean their text was partially sliced.
+
+Mental note: the system should disclose that evidence was omitted instead
+of making a reduced context appear complete.
+
+### Controlled Context Insufficiency
+
+Context construction returns explicit insufficiency when retrieval
+abstained, evidence integrity fails, no complete item fits the budget, or
+required source diversity cannot be met.
+
+Mental note: an empty or invalid context is a controlled outcome, not
+permission to construct unsupported model input.
+
+### Authority Preservation
+
+Phase 5G consumes the typed output of the permission-aware retrieval
+boundary. It cannot add candidates and it preserves request, trace,
+subject, tenant, service, policy, score, method, citation, and hash lineage.
+
+The builder verifies evidence lineage but does not independently execute
+CT-03 policy evaluation. That upstream trust boundary is explicit.
+
+Mental note: context construction preserves authority; relevance and budget
+selection do not create authority.
+
+### Phase 5G Versus Phase 5H
+
+Phase 5G packages retrieved content as untrusted evidence.
+
+It does not detect prompt injection, classify instructions inside evidence,
+sanitize content, or score retrieval contamination. Those controls remain
+Phase 5H work.
+
+Mental note: bounding context size and validating provenance do not make
+the content safe to treat as instructions.
+
+### Honest Phase 5G Interview Statement
+
+In Phase 5G, I implemented deterministic whole-chunk context construction
+over permission-aware retrieval results and an immutable synthetic corpus.
+I added a versioned budget contract, exact candidate-to-corpus resolution,
+item and per-source limits, estimated-token limits, minimum source
+diversity, stable ordering, citation and policy-lineage preservation,
+truncation evidence, and controlled insufficiency.
+
+The implementation uses existing corpus token estimates and deliberately
+does not claim provider-exact token counts. It never slices chunks, builds
+prompts, calls models, executes tools, or introduces prompt-injection
+controls.
+
+The local evidence is 21 context test functions producing 22 pytest cases,
+179 retrieval tests, and 869 repository tests. Ruff, formatting, strict
+type checking, dependency validation, and the capability-boundary scan
+pass locally.
+
+The Phase 5G implementation commit and exact-commit remote CI evidence
+remain pending. Phase 5G closure is pending, and Phase 5H is not
+authorized.
+
+## Phase 5G Local Evidence
+
+- Budget version: `context-budget-v1`
+- Default maximum items: 10
+- Default maximum items per source: 3
+- Default maximum token estimate: 4096
+- Default minimum source count: 1
+- Context test functions: 21
+- Context pytest cases: 22 passed
+- Retrieval tests: 179 passed
+- Complete repository tests: 869 passed
+- Public retrieval exports: 42
+- Local quality gates: Passed
+- Remote exact-commit CI: Pending
+- Phase 5G closure: Pending
+
+Phase 5H prompt-injection and retrieval-contamination controls remain
+unauthorized.

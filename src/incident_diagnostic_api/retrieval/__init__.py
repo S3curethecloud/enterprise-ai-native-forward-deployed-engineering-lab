@@ -1,5 +1,16 @@
 """Public contracts for bounded permission-aware retrieval."""
 
+from incident_diagnostic_api.retrieval.context import (
+    CONTEXT_BUDGET_VERSION,
+    ContextBudget,
+    ContextBundle,
+    ContextConstructionResult,
+    ContextDisposition,
+    ContextInsufficiency,
+    ContextInsufficiencyCode,
+    ContextItem,
+    build_context,
+)
 from incident_diagnostic_api.retrieval.corpus import (
     SyntheticEvidenceCorpus,
     calculate_content_hash,
@@ -49,10 +60,18 @@ from incident_diagnostic_api.retrieval.vector import (
 )
 
 __all__ = [
+    "CONTEXT_BUDGET_VERSION",
     "EMBEDDING_DIMENSIONS",
     "EMBEDDING_VERSION",
     "VECTOR_INDEX_VERSION",
     "Citation",
+    "ContextBudget",
+    "ContextBundle",
+    "ContextConstructionResult",
+    "ContextDisposition",
+    "ContextInsufficiency",
+    "ContextInsufficiencyCode",
+    "ContextItem",
     "EmbeddingVector",
     "EvidenceChunk",
     "EvidenceDocument",
@@ -70,6 +89,7 @@ __all__ = [
     "SyntheticEvidenceCorpus",
     "SyntheticVectorIndex",
     "VectorIndexEntry",
+    "build_context",
     "build_vector_index",
     "calculate_content_hash",
     "calculate_hybrid_score",
