@@ -8,10 +8,10 @@ complete enough to commit for exact-commit CI validation.
 ## 2. Current Gate Decision
 
 > PHASE 6A LOCAL IMPLEMENTATION: PASSED
-> PHASE 6A IMPLEMENTATION COMMIT: AUTHORIZED
-> PHASE 6A REMOTE CI: REQUIRED
+> PHASE 6A IMPLEMENTATION COMMIT: VERIFIED
+> PHASE 6A REMOTE CI: PASSED
 > PHASE 6A CLOSURE: PENDING
-> PHASE 6B: NOT AUTHORIZED
+> PHASE 6B: AUTHORIZED ONLY AFTER PHASE 6A EVIDENCE-COMMIT CI
 > REAL PROVIDER ADAPTERS OR CALLS: NOT AUTHORIZED
 
 ## 3. Authority Gate
@@ -171,6 +171,16 @@ The documentation must not claim:
 
 PASS: evidence distinguishes contract declarations from executable adapters.
 
+
+### Verified Exact-Commit CI Evidence
+
+- Implementation commit: `68512606235f60a1b8ad7a3e655f597aa1f3788f`
+- CI run: [`29890345022`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29890345022)
+- Python quality and contract tests: Passed
+- Local container build and health verification: Passed
+- Exact commit identity: Verified
+- CI conclusion: Success
+
 ## 16. Phase 6B Boundary
 
 Phase 6B may implement only a deterministic local mock provider after the
@@ -189,17 +199,17 @@ Required remote jobs:
 
 Current status:
 
-- Implementation commit: Pending
-- Exact-commit CI run: Pending
-- Remote CI conclusion: Pending
-- Phase 6A closure: Pending
+- Implementation commit: `68512606235f60a1b8ad7a3e655f597aa1f3788f`
+- Exact-commit CI run: [`29890345022`](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29890345022)
+- Remote CI conclusion: Passed
+- Phase 6A closure: Pending evidence-commit CI
 
 ## 18. Final Local Decision
 
 > PHASE 6A LOCAL GATE: PASSED
-> PHASE 6A IMPLEMENTATION COMMIT: AUTHORIZED
+> PHASE 6A IMPLEMENTATION COMMIT: VERIFIED
 > PHASE 6A CLOSURE: PENDING
-> PHASE 6B: NOT AUTHORIZED
+> PHASE 6B: AUTHORIZED ONLY AFTER PHASE 6A EVIDENCE-COMMIT CI
 > REAL PROVIDER ADAPTERS: NOT AUTHORIZED
 > PROVIDER CALLS: NOT AUTHORIZED
 > PRODUCTION DEPLOYMENT: NOT AUTHORIZED
