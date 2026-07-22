@@ -8,14 +8,18 @@ implementation is complete enough for exact-commit CI validation.
 ## 2. Current Gate Decision
 
 > PHASE 6B LOCAL IMPLEMENTATION: PASSED
-> PHASE 6B IMPLEMENTATION COMMIT: AUTHORIZED
-> PHASE 6B REMOTE CI: REQUIRED
+> PHASE 6B IMPLEMENTATION COMMIT: VERIFIED
+> PHASE 6B REMOTE CI: PASSED
 > PHASE 6B CLOSURE: PENDING
 > PHASE 6: NOT YET CLOSED
-> PHASE 7: NOT AUTHORIZED
+> PHASE 7: AUTHORIZED ONLY AFTER PHASE 6 CLOSURE-COMMIT CI
 > REAL PROVIDER ADAPTERS OR CALLS: NOT AUTHORIZED
 
 ## 3. Prior-Phase Authority Gate
+
+Phase 6A implementation commit
+`68512606235f60a1b8ad7a3e655f597aa1f3788f` passed exact-commit CI run
+`29890345022`.
 
 Phase 6A evidence commit `0314605bdba27a41022c578c2bf424615e1cbee8`
 passed exact-commit CI run `29891756010`.
@@ -125,6 +129,7 @@ PASS: the concrete mock has no instance dictionary.
 
 Verified evidence:
 
+- Phase 6A provider contract pytest cases: 29 passed
 - Mock test functions: 17
 - Mock pytest cases: 20 passed
 - Provider pytest cases: 49 passed
@@ -195,18 +200,18 @@ Required jobs:
 
 Current status:
 
-- Implementation commit: Pending
-- Exact-commit CI run: Pending
-- Remote CI conclusion: Pending
-- Phase 6B closure: Pending
+- Implementation commit: `b1a6142ad682b8752c0c0a822ed5fc807c08b9b9`
+- Exact-commit CI run: [29896004047](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29896004047)
+- Remote CI conclusion: Passed
+- Phase 6B closure: Pending Phase 6 closure-commit CI
 
 ## 18. Final Local Decision
 
 > PHASE 6B LOCAL GATE: PASSED
-> PHASE 6B IMPLEMENTATION COMMIT: AUTHORIZED
+> PHASE 6B IMPLEMENTATION COMMIT: VERIFIED
 > PHASE 6B CLOSURE: PENDING
 > PHASE 6: NOT YET CLOSED
-> PHASE 7: NOT AUTHORIZED
+> PHASE 7: AUTHORIZED ONLY AFTER PHASE 6 CLOSURE-COMMIT CI
 > REAL PROVIDER ADAPTERS: NOT AUTHORIZED
 > PROVIDER CALLS: NOT AUTHORIZED
 > PRODUCTION DEPLOYMENT: NOT AUTHORIZED

@@ -4,13 +4,14 @@
 
 | Dimension | Status |
 |---|---|
-| Learning guide | Drafted |
-| Interview review | Pending |
-| Enterprise implementation | Not started |
-| Implementation authority | Not authorized before interview |
+| Learning guide | Updated through verified bounded Phase 6 implementation |
+| Interview review | Ready for implementation-grounded review |
+| Enterprise implementation | Bounded local contracts and deterministic mock verified; closure-commit CI pending |
+| Implementation authority | Phase 6 closure evidence only; Phase 7 authorized only after closure-commit CI |
 
-This document teaches the phase. It does not implement or enable the
-capability.
+This document teaches the broader architecture and records the bounded local
+implementation. It does not claim real-provider integration or production
+deployment.
 
 ## 2. Job-Description Connection
 
@@ -62,15 +63,25 @@ Phases 0–4 provide discovery, a thin slice, typed contracts, service
 boundaries, deterministic state, budgets, stops, checkpoints, replay,
 lifecycle traces, tests, containers, and CI evidence.
 
-This phase describes how the next capability would connect to those
-existing boundaries after implementation authority is restored.
+The repository now implements the initial bounded Phase 6 slice over
+those existing boundaries.
 
-Current repository status:
+Verified repository status:
 
-- The phase is not implemented.
-- No external capability is enabled by this tutorial.
-- The Phase 4 runtime remains the latest executable boundary.
-- Post-interview work requires a new design and implementation gate.
+- Phase 6A provides immutable provider-neutral contracts and normalized errors.
+- Phase 6A implementation commit: `68512606235f60a1b8ad7a3e655f597aa1f3788f`.
+- Phase 6A implementation CI run: `29890345022` passed.
+- Phase 6A evidence commit: `0314605bdba27a41022c578c2bf424615e1cbee8`.
+- Phase 6A evidence CI run: `29891756010` passed.
+- Phase 6B provides one stateless deterministic local mock provider.
+- Provider tests: 49 passing.
+- Complete repository tests: 1,003 passing.
+- Public provider exports: 19.
+- Phase 6B implementation commit: `b1a6142ad682b8752c0c0a822ed5fc807c08b9b9`.
+- Exact-commit CI run: `29896004047` passed.
+- Phase 6 closure-commit CI remains pending.
+- Real provider adapters, credentials, network calls, routing, fallback,
+  streaming execution, and tool execution remain unauthorized.
 
 ## 8. Authority and Security Boundaries
 
@@ -178,14 +189,19 @@ Required disclosure:
 
 ## 15. Post-Interview Implementation Backlog
 
-- Approve provider-integration authority.
-- Define shared capability and request contracts.
-- Implement mocked provider conformance tests.
-- Implement provider adapters separately.
-- Add secrets and regional policy controls.
-- Add routing evaluation.
-- Add timeouts, circuit breakers, and bounded fallback.
-- Add usage and cost telemetry.
+Completed locally:
+
+- Shared capability, request, response, usage, and normalized-error contracts
+- Deterministic local mock-provider conformance tests
+- Explicit capability and limit enforcement
+
+Future work requiring separate authority:
+
+- Implement real provider adapters separately
+- Add secrets and regional policy controls
+- Add routing evaluation
+- Add timeouts, circuit breakers, and bounded fallback
+- Add provider usage, latency, and cost telemetry
 
 ## 16. Official References
 
@@ -219,6 +235,20 @@ The mock agent should answer in this order:
 4. Use verified evidence only when the claim defense supports it.
 5. State the implementation boundary before implying production use.
 
+## Phase 6 Verified Local Evidence
+
+- Provider contract version: `provider-contract-v1`
+- Mock-provider version: `deterministic-local-mock-v1`
+- Phase 6A provider contract pytest cases: 29 passed
+- Phase 6B mock pytest cases: 20 passed
+- Provider pytest cases: 49 passed
+- Complete repository tests: 1,003 passed
+- Public provider exports: 19
+- Phase 6B implementation commit: `b1a6142ad682b8752c0c0a822ed5fc807c08b9b9`
+- Phase 6B exact-commit CI run: `29896004047`
+- Phase 6 closure-commit CI: Pending
+- Real provider integrations: Not implemented or authorized
+
 ## 18. Exit Posture
 
 | Dimension | Status |
@@ -228,5 +258,8 @@ The mock agent should answer in this order:
 | Risks documented | Yes |
 | Metrics documented | Yes |
 | Interview answer drafted | Yes |
-| Enterprise capability implemented | No |
-| Implementation authorized | No |
+| Bounded local provider contracts implemented | Yes |
+| Deterministic local mock implemented | Yes |
+| Real-provider integration implemented | No |
+| Phase 6 closure | Pending closure-commit CI |
+| Phase 7 authority | Authorized only after Phase 6 closure-commit CI |
