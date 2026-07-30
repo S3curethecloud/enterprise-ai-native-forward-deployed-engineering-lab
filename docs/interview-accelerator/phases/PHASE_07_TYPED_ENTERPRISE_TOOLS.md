@@ -4,13 +4,14 @@
 
 | Dimension | Status |
 |---|---|
-| Learning guide | Drafted |
-| Interview review | Pending |
-| Enterprise implementation | Not started |
-| Implementation authority | Not authorized before interview |
+| Learning guide | Updated with verified Phase 7A evidence |
+| Interview review | Evidence-backed for the Phase 7A registry boundary |
+| Phase 7A registry implementation | Verified; closure-commit CI pending |
+| Phase 7B implementation authority | Not authorized before Phase 7A closure-commit CI |
 
-This document teaches the phase. It does not implement or enable the
-capability.
+This document teaches the complete phase and records the implemented Phase 7A
+metadata-only registry boundary. It does not implement or enable tool
+invocation.
 
 ## 2. Job-Description Connection
 
@@ -67,10 +68,16 @@ existing boundaries after implementation authority is restored.
 
 Current repository status:
 
-- The phase is not implemented.
-- No external capability is enabled by this tutorial.
-- The Phase 4 runtime remains the latest executable boundary.
-- Post-interview work requires a new design and implementation gate.
+- Phase 7A implements a typed, immutable, fail-closed registry for seven
+  allowlisted tool definitions.
+- Phase 7A implementation commit
+  `94eef8f1b7da84cd39d6c608250278603a033f97` passed exact-commit CI run
+  [30527591986](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/30527591986).
+- No tool request, result, invocation, mock execution, or external capability
+  is enabled.
+- Every registry entry requires authorization, disables execution, and
+  prohibits general shell access.
+- Phase 7B requires a separate post-closure authority gate.
 
 ## 8. Authority and Security Boundaries
 
@@ -187,6 +194,45 @@ Required disclosure:
 - Add idempotency and timeout behavior.
 - Add tool evaluation and trace evidence.
 
+## Phase 7A Fail-Closed Tool Registry Closure Evidence
+
+Phase 6 closure commit `6e4aa1edbb7c5fd160ca020d777052445fb4249b` passed exact-commit CI run
+[29900746310](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/29900746310),
+authorizing the gradual start of Phase 7.
+
+Phase 7A implementation commit `94eef8f1b7da84cd39d6c608250278603a033f97` passed
+exact-commit CI run
+[30527591986](https://github.com/S3curethecloud/enterprise-ai-native-forward-deployed-engineering-lab/actions/runs/30527591986).
+
+Verified Phase 7A evidence:
+
+- Seven governed, typed tool definitions
+- Closed `ToolName` allowlist
+- Immutable registry metadata
+- Explicit capability, side-effect, risk, idempotency, approval, timeout, and
+  authorization metadata
+- `execution_enabled=False` for every definition
+- `general_shell_access=False` for every definition
+- 39 focused Phase 7A registry pytest cases passed
+- 1,042 complete repository pytest cases passed
+- Ruff linting and formatting passed
+- Strict MyPy checking passed
+- Dependency integrity passed
+- Python quality and contract-tests CI job passed
+- Local container build and health-verification CI job passed
+
+Phase 7A is metadata-only. It does not implement a tool request or result
+envelope, invocation interface, mock execution, policy-decision evaluation,
+approval execution, credential access, network access, filesystem access,
+general shell access, MCP server, real enterprise integration, provider call,
+infrastructure mutation, cloud deployment, or production authority.
+
+Phase 7A closure remains pending until this documentation-only closure commit
+passes exact-commit CI. Phase 7B remains unauthorized until that closure gate
+passes.
+
+Tool execution remains unauthorized. Real enterprise integrations remain unauthorized.
+
 ## 16. Official References
 
 - https://modelcontextprotocol.io/docs/
@@ -227,5 +273,11 @@ The mock agent should answer in this order:
 | Risks documented | Yes |
 | Metrics documented | Yes |
 | Interview answer drafted | Yes |
-| Enterprise capability implemented | No |
-| Implementation authorized | No |
+| Phase 7A registry metadata implemented | Yes |
+| Phase 7A focused pytest cases | 39 passing |
+| Complete repository pytest cases | 1,042 passing |
+| Phase 7A exact-commit implementation CI | Passed |
+| Phase 7A closure | Pending closure-commit CI |
+| Phase 7B implementation authorized | No |
+| Tool execution authorized | No |
+| Real enterprise integration authorized | No |
