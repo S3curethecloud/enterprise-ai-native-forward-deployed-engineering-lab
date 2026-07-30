@@ -1,5 +1,16 @@
-"""Public Phase 7A tool-registry contracts."""
+"""Public Phase 7A registry and Phase 7B envelope contracts."""
 
+from incident_diagnostic_api.tools.contracts import (
+    EXPECTED_TOOL_ERROR_CATEGORIES,
+    EXPECTED_TOOL_ERROR_RETRYABILITY,
+    TOOL_ENVELOPE_VERSION,
+    ToolError,
+    ToolErrorCategory,
+    ToolErrorCode,
+    ToolRequest,
+    ToolResult,
+    ToolResultStatus,
+)
 from incident_diagnostic_api.tools.registry import (
     DEFAULT_TOOL_REGISTRY,
     TOOL_CONTRACT_VERSION,
@@ -17,14 +28,23 @@ from incident_diagnostic_api.tools.registry import (
 
 __all__ = [
     "DEFAULT_TOOL_REGISTRY",
+    "EXPECTED_TOOL_ERROR_CATEGORIES",
+    "EXPECTED_TOOL_ERROR_RETRYABILITY",
     "TOOL_CONTRACT_VERSION",
+    "TOOL_ENVELOPE_VERSION",
     "TOOL_REGISTRY_VERSION",
     "ToolApprovalRequirement",
     "ToolCapability",
     "ToolDefinition",
+    "ToolError",
+    "ToolErrorCategory",
+    "ToolErrorCode",
     "ToolIdempotencyRequirement",
     "ToolName",
     "ToolRegistry",
+    "ToolRequest",
+    "ToolResult",
+    "ToolResultStatus",
     "ToolRiskTier",
     "ToolSideEffect",
     "build_default_tool_registry",
