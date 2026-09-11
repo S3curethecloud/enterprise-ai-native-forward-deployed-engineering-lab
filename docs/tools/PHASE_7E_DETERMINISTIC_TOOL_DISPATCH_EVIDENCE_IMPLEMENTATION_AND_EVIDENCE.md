@@ -544,3 +544,160 @@ PHASE_7E_DETERMINISTIC_TOOL_DISPATCH_OUTCOME_CONSISTENCY_EVIDENCE_
 IMPLEMENTATION_R1_
 EXACT_COMMIT_CI_AND_INDEPENDENT_IMPLEMENTATION_ACCEPTANCE_REVIEW
 ```
+
+## 26. Post-Materialization Corrected Implementation Evidence
+
+The placeholders in Section 21 are historical pre-materialization placeholders. The authoritative post-materialization implementation lineage is now:
+
+```text
+ORIGINAL_IMPLEMENTATION_COMMIT=af5f32f7d6397405ba31f66068cf6036e7ffc50d
+ORIGINAL_IMPLEMENTATION_TREE=23bbb0cb2ed52b16c4ff50f91d3fb274a8500e44
+ORIGINAL_IMPLEMENTATION_PARENT=5f69482d06c07f6e58c8e097ca8f270c68bf1c49
+ORIGINAL_IMPLEMENTATION_CI_RUN=34648808597
+ORIGINAL_IMPLEMENTATION_CI_STATUS=COMPLETED
+ORIGINAL_IMPLEMENTATION_CI_CONCLUSION=FAILURE
+ORIGINAL_IMPLEMENTATION_CI_FAILURE_CLASS=RUFF_FORMAT_NONCONFORMANCE
+
+CORRECTED_IMPLEMENTATION_COMMIT=1deb0d83de122c77db9585d5815a8fb64d13d979
+CORRECTED_IMPLEMENTATION_TREE=02dd52694bb8b4d2973c7abc95ef8aa54afecab6
+CORRECTED_IMPLEMENTATION_PARENT=af5f32f7d6397405ba31f66068cf6036e7ffc50d
+CORRECTED_IMPLEMENTATION_CI_RUN=34656904707
+CORRECTED_IMPLEMENTATION_CI_HEAD_SHA=1deb0d83de122c77db9585d5815a8fb64d13d979
+CORRECTED_IMPLEMENTATION_CI_STATUS=COMPLETED
+CORRECTED_IMPLEMENTATION_CI_CONCLUSION=SUCCESS
+```
+
+The formatting correction changed only:
+
+```text
+src/incident_diagnostic_api/tools/evidence.py
+tests/tools/test_evidence.py
+```
+
+and introduced no semantic change.
+
+The corrected exact-commit CI established:
+
+```text
+DEPENDENCY_INTEGRITY=PASS
+RUFF_LINT=PASS
+RUFF_FORMAT=PASS
+STRICT_MYPY=PASS
+MYPY_SOURCE_FILE_COUNT=110
+COMPLETE_REPOSITORY_TEST_COUNT=1207
+COMPLETE_REPOSITORY_TESTS=PASS
+TOTAL_BRANCH_COVERAGE=93.90_PERCENT
+PYTHON_QUALITY_AND_CONTRACT_TESTS_JOB=SUCCESS
+LOCAL_CONTAINER_BUILD_AND_HEALTH_VERIFICATION_JOB=SUCCESS
+NO_HOST_PORTS=PASS
+INTERNAL_NETWORK_ISOLATION=PASS
+CONTAINER_RUNTIME_RESTRICTIONS=PASS
+HEALTH_VERIFICATION=PASS
+READINESS_VERIFICATION=PASS
+COVERAGE_ARTIFACT_ID=10285546847
+COVERAGE_ARTIFACT_SHA256=f09b56a5884eb592f8004c548610a2498b08a81a47b32cdbbe083d0a81ec09ea
+```
+
+## 27. Independent Acceptance Gap Remediation R1
+
+The independent corrected-implementation acceptance review withheld acceptance for three evidence-completeness gaps while finding the runtime semantics and authority boundaries sound.
+
+This bounded remediation changes only:
+
+```text
+tests/tools/test_evidence.py
+docs/tools/PHASE_7E_DETERMINISTIC_TOOL_DISPATCH_EVIDENCE_IMPLEMENTATION_AND_EVIDENCE.md
+```
+
+It does not modify production source code, exports, dispatcher semantics, mock semantics, registry semantics, tool contracts, CT-07, policy, approval, persistence, network, credential, provider, shell, or real-tool-execution surfaces.
+
+The test remediation adds exactly:
+
+```text
+1. repeated identical typed request/outcome/registry evaluation must return exactly equal ToolOutcomeEvidence values
+2. direct ToolOutcomeEvidence construction with 33 output_names entries must fail validation
+```
+
+These additions close the two missing minimum test obligations identified by the independent review:
+
+```text
+IA_1_DETERMINISM_TEST=REMEDIATED_IN_CANDIDATE
+IA_2_OUTPUT_NAME_CARDINALITY_TEST=REMEDIATED_IN_CANDIDATE
+```
+
+The current exact pre-remediation test collection derived from the fixed parametrization matrices is:
+
+```text
+PRE_REMEDIATION_FOCUSED_PHASE_7E_TEST_COUNT=93
+PRE_REMEDIATION_COMPLETE_PHASE_7_TOOL_TEST_COUNT=204
+```
+
+The bounded remediation adds exactly two non-parameterized Phase 7E cases, therefore the candidate collection is:
+
+```text
+REMEDIATION_CANDIDATE_FOCUSED_PHASE_7E_TEST_COUNT=95
+REMEDIATION_CANDIDATE_COMPLETE_PHASE_7_TOOL_TEST_COUNT=206
+```
+
+These candidate counts must remain consistent with the remediated test source and are subject to exact-commit CI before acceptance.
+
+## 28. Remediation Authority and Pending Exact-CI Evidence
+
+The remediation authority is limited to test-and-evidence completeness only.
+
+```text
+REMEDIATION_RUNTIME_SEMANTIC_CHANGE_AUTHORITY=NONE
+REMEDIATION_ARCHITECTURE_CHANGE_AUTHORITY=NONE
+REMEDIATION_EVIDENCE_PY_MUTATION_AUTHORITY=NONE
+REMEDIATION_TOOLS_INIT_MUTATION_AUTHORITY=NONE
+REMEDIATION_DISPATCHER_MUTATION_AUTHORITY=NONE
+REMEDIATION_MOCK_MUTATION_AUTHORITY=NONE
+REMEDIATION_REGISTRY_MUTATION_AUTHORITY=NONE
+REMEDIATION_CONTRACT_MUTATION_AUTHORITY=NONE
+REMEDIATION_POLICY_AUTHORITY=NONE
+REMEDIATION_APPROVAL_AUTHORITY=NONE
+REMEDIATION_NETWORK_AUTHORITY=NONE
+REMEDIATION_CREDENTIAL_AUTHORITY=NONE
+REMEDIATION_PERSISTENCE_AUTHORITY=NONE
+REMEDIATION_REAL_TOOL_EXECUTION_AUTHORITY=NONE
+```
+
+This document intentionally does not self-embed the remediation commit SHA/tree or its future CI run before those objects exist.
+
+```text
+REMEDIATION_COMMIT=VERIFY_AFTER_MATERIALIZATION
+REMEDIATION_TREE=VERIFY_AFTER_MATERIALIZATION
+REMEDIATION_PARENT=1deb0d83de122c77db9585d5815a8fb64d13d979
+REMEDIATION_EXACT_CI_RUN=VERIFY_AFTER_TRIGGER
+REMEDIATION_EXACT_CI_HEAD_SHA=MUST_EQUAL_REMEDIATION_COMMIT
+REMEDIATION_EXACT_CI_STATUS=VERIFY
+REMEDIATION_EXACT_CI_CONCLUSION=VERIFY
+```
+
+Successful remediation CI is necessary but does not itself close Phase 7E.
+
+## 29. Post-Remediation Gate Posture
+
+At remediation-candidate preparation time:
+
+```text
+PHASE_7D=CLOSED
+PHASE_7E_R3_ARCHITECTURE=ACCEPTED
+PHASE_7E_CORRECTED_RUNTIME_IMPLEMENTATION=UNCHANGED
+PHASE_7E_CORRECTED_IMPLEMENTATION_CI=PASS
+PHASE_7E_INDEPENDENT_IMPLEMENTATION_ACCEPTANCE=WITHHELD_PENDING_GAP_REMEDIATION
+PHASE_7E_REMEDIATION_CANDIDATE=PREPARED
+PHASE_7E_REMEDIATION_EXACT_CI=PENDING
+PHASE_7E_CLOSURE=NOT_AUTHORIZED
+PHASE_8_ADVANCEMENT_AUTHORITY=NONE
+```
+
+Only after the remediation commit passes exact-commit CI may the independent implementation acceptance review be repeated.
+
+```text
+NEXT_GATE=
+PHASE_7E_DETERMINISTIC_TOOL_DISPATCH_OUTCOME_CONSISTENCY_EVIDENCE_
+CORRECTED_IMPLEMENTATION_R1_
+GAP_REMEDIATION_R1_
+EXACT_COMMIT_CI_AND_REPEAT_INDEPENDENT_IMPLEMENTATION_ACCEPTANCE_REVIEW
+```

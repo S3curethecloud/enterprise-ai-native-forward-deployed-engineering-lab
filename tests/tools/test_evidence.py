@@ -91,6 +91,17 @@ def test_tool_outcome_evidence_version_is_explicit() -> None:
     assert TOOL_OUTCOME_EVIDENCE_VERSION == "7e.1"
 
 
+def test_builder_is_deterministic_for_identical_typed_inputs() -> None:
+    request = build_request(ToolName.JIRA_ISSUE_READ)
+    result = build_deterministic_mock_tool_result(request, completed_at=OUTCOME_AT)
+    registry = build_default_tool_registry()
+
+    first = build_deterministic_tool_outcome_evidence(request, result, registry=registry)
+    second = build_deterministic_tool_outcome_evidence(request, result, registry=registry)
+
+    assert first == second
+
+
 @pytest.mark.parametrize("tool_name", READ_ONLY_TOOLS)
 def test_every_read_only_tool_accepts_only_exact_phase7c_result(
     tool_name: ToolName,
@@ -466,6 +477,17 @@ def test_direct_contract_rejects_name_cardinality_expansion() -> None:
     evidence = build_deterministic_tool_outcome_evidence(request, result)
     payload: dict[str, Any] = evidence.model_dump()
     payload["argument_names"] = tuple(f"a{index}" for index in range(33))
+
+    with pytest.raises(ValidationError):
+        ToolOutcomeEvidence.model_validate(payload)
+
+
+def test_direct_contract_rejects_output_name_cardinality_expansion() -> None:
+    request = build_request(ToolName.JIRA_ISSUE_READ)
+    result = build_deterministic_mock_tool_result(request, completed_at=OUTCOME_AT)
+    evidence = build_deterministic_tool_outcome_evidence(request, result)
+    payload: dict[str, Any] = evidence.model_dump()
+    payload["output_names"] = tuple(f"output_{index}" for index in range(33))
 
     with pytest.raises(ValidationError):
         ToolOutcomeEvidence.model_validate(payload)
