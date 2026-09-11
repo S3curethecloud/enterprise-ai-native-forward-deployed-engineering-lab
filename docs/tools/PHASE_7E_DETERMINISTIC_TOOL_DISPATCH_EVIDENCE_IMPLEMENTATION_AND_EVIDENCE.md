@@ -629,14 +629,14 @@ The current exact pre-remediation test collection derived from the fixed paramet
 
 ```text
 PRE_REMEDIATION_FOCUSED_PHASE_7E_TEST_COUNT=93
-PRE_REMEDIATION_COMPLETE_PHASE_7_TOOL_TEST_COUNT=204
+PRE_REMEDIATION_COMPLETE_PHASE_7_TOOL_TEST_COUNT=203
 ```
 
 The bounded remediation adds exactly two non-parameterized Phase 7E cases, therefore the candidate collection is:
 
 ```text
 REMEDIATION_CANDIDATE_FOCUSED_PHASE_7E_TEST_COUNT=95
-REMEDIATION_CANDIDATE_COMPLETE_PHASE_7_TOOL_TEST_COUNT=206
+REMEDIATION_CANDIDATE_COMPLETE_PHASE_7_TOOL_TEST_COUNT=205
 ```
 
 These candidate counts must remain consistent with the remediated test source and are subject to exact-commit CI before acceptance.
