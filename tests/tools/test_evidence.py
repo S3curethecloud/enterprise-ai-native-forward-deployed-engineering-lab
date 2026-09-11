@@ -291,9 +291,7 @@ def test_tool_envelope_version_mismatch_is_defense_in_depth() -> None:
 def test_temporal_inversion_fails_closed_before_result_comparison() -> None:
     request = build_request(ToolName.JIRA_ISSUE_READ)
     result = build_deterministic_mock_tool_result(request, completed_at=OUTCOME_AT)
-    bypassed = result.model_copy(
-        update={"completed_at": REQUESTED_AT - timedelta(seconds=1)}
-    )
+    bypassed = result.model_copy(update={"completed_at": REQUESTED_AT - timedelta(seconds=1)})
 
     assert_evidence_error(
         ToolOutcomeEvidenceErrorCode.TEMPORAL_INVERSION,

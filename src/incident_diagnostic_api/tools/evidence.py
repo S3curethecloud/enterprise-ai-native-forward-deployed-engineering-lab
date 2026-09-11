@@ -307,9 +307,7 @@ def build_deterministic_tool_outcome_evidence(
     try:
         definition = registry.get(request.tool_name)
     except KeyError as exc:
-        raise _failure(
-            ToolOutcomeEvidenceErrorCode.REGISTRY_OUTCOME_CONTRADICTION
-        ) from exc
+        raise _failure(ToolOutcomeEvidenceErrorCode.REGISTRY_OUTCOME_CONTRADICTION) from exc
 
     _validate_registry_safety(
         authorization_required=definition.authorization_required,
@@ -327,16 +325,12 @@ def build_deterministic_tool_outcome_evidence(
 
     if definition.side_effect is ToolSideEffect.NONE:
         if not isinstance(outcome, ToolResult):
-            raise _failure(
-                ToolOutcomeEvidenceErrorCode.REGISTRY_OUTCOME_CONTRADICTION
-            )
+            raise _failure(ToolOutcomeEvidenceErrorCode.REGISTRY_OUTCOME_CONTRADICTION)
         result_status, output_names = _validate_result(request, outcome)
         outcome_kind = ToolOutcomeKind.RESULT
     else:
         if not isinstance(outcome, ToolError):
-            raise _failure(
-                ToolOutcomeEvidenceErrorCode.REGISTRY_OUTCOME_CONTRADICTION
-            )
+            raise _failure(ToolOutcomeEvidenceErrorCode.REGISTRY_OUTCOME_CONTRADICTION)
         error_code, error_category, retryable = _validate_error(outcome)
         outcome_kind = ToolOutcomeKind.ERROR
 
