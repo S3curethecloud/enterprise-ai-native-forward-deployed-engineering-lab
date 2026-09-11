@@ -1,4 +1,4 @@
-"""Public Phase 7 tool contracts, mocks, and fail-closed dispatcher."""
+"""Public Phase 7 tool contracts, mocks, dispatcher, and consistency evidence."""
 
 from incident_diagnostic_api.tools.contracts import (
     EXPECTED_TOOL_ERROR_CATEGORIES,
@@ -15,6 +15,15 @@ from incident_diagnostic_api.tools.dispatcher import (
     TOOL_DISPATCHER_VERSION,
     ToolDispatchOutcome,
     dispatch_deterministic_local_tool_request,
+)
+from incident_diagnostic_api.tools.evidence import (
+    TOOL_OUTCOME_EVIDENCE_VERSION,
+    ToolOutcomeConsistencyStatus,
+    ToolOutcomeEvidence,
+    ToolOutcomeEvidenceError,
+    ToolOutcomeEvidenceErrorCode,
+    ToolOutcomeKind,
+    build_deterministic_tool_outcome_evidence,
 )
 from incident_diagnostic_api.tools.mock import (
     MOCK_TOOL_RUNTIME_VERSION,
@@ -44,6 +53,7 @@ __all__ = [
     "TOOL_CONTRACT_VERSION",
     "TOOL_DISPATCHER_VERSION",
     "TOOL_ENVELOPE_VERSION",
+    "TOOL_OUTCOME_EVIDENCE_VERSION",
     "TOOL_REGISTRY_VERSION",
     "ToolApprovalRequirement",
     "ToolCapability",
@@ -54,6 +64,11 @@ __all__ = [
     "ToolErrorCode",
     "ToolIdempotencyRequirement",
     "ToolName",
+    "ToolOutcomeConsistencyStatus",
+    "ToolOutcomeEvidence",
+    "ToolOutcomeEvidenceError",
+    "ToolOutcomeEvidenceErrorCode",
+    "ToolOutcomeKind",
     "ToolRegistry",
     "ToolRequest",
     "ToolResult",
@@ -63,5 +78,6 @@ __all__ = [
     "build_default_tool_registry",
     "build_deterministic_mock_tool_error",
     "build_deterministic_mock_tool_result",
+    "build_deterministic_tool_outcome_evidence",
     "dispatch_deterministic_local_tool_request",
 ]
